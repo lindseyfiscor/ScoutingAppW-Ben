@@ -18,11 +18,11 @@
         
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="index.html">Home
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="#">Login</a>
               </li>
               <li class="nav-item">
@@ -33,11 +33,11 @@
         </nav>
         
         <div class="wrapper bg-secondary" style="min-height: 100%;">
-            <div class="col-12">
+            <div class="col-12 pt-5">
                 <div class="card col-6 offset-3 mt-5">
-                    <h3>Welcome back!</h3>
+                    <h3 class="mt-3">Welcome back!</h3>
                     <input class="form-control mt-4 mb-1" type="email" aria-label="Enter Username" placeholder="jane.doeling@email.com">
-                    <input class="form-control" type="password" aria-label="Enter Password" placeholder="myawesomelongpassword">
+                    <input class="form-control mb-2" type="password" aria-label="Enter Password" placeholder="myawesomelongpassword">
                     <button class="btn btn-primary btn-block mb-2" type="button">Sign In</button>
                     <hr>
                     <button class="btn btn-secondary btn-block mt-2 mb-5"  type="button">Register</button>
