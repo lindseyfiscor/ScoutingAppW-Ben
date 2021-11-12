@@ -37,9 +37,9 @@
                     <h3 class="mt-3">Welcome back!</h3>
                     <input class="form-control mt-4 mb-1" type="email" aria-label="Enter Username" placeholder="jane.doeling@email.com">
                     <input class="form-control mb-2" type="password" aria-label="Enter Password" placeholder="myawesomelongpassword">
-                    <button class="btn btn-primary btn-block mb-2" type="button">Sign In</button>
+                    <button class="btn btn-primary btn-block mb-1" type="button">Sign In</button>
                     <hr>
-                    <button class="btn btn-secondary btn-block mt-2 mb-5"  type="button">Register</button>
+                    <button class="btn btn-secondary btn-block mt-1 mb-4"  type="button">Register</button>
                 </div>
             </div>
         </div> 
