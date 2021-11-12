@@ -10,24 +10,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body >
-        <!--nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"> </a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="https://lindsey.swollenhippo.com">Home</a></li>
-                <a href="https://lindsey.swollenhippo.com/secondpage.html">Analysis By Team</a>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="#">Scout<span class="text-bold">FRC</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin.php">Admin</a>
+              </li>
             </ul>
-            </div>
-        </nav-->
+          </div>
+        </nav>
         
         <div class="wrapper bg-secondary">
             <div class="col-12">
-                <div class="col-5 bg-primary" style="min-height: 100%;"></div>
-                <div class="col-7 bg-danger" style="min-height: 100%;"></div>
+                <div class="card col-6 offset-3">
+                    <h3>Welcome back!</h3>
+                    <input class="form-control mt-4" type="email" aria-label="Enter Username" placeholder="jane.doeling@email.com">
+                    <input class="form-control" type="password" aria-label="Enter Password" placeholder="myawesomelongpassword">
+                    <button class="btn btn-primary btn-block mb-2">Sign In</button>
+                    <hr>
+                    <button class="btn btn-default btn-block mt-2 mb-3">Register</button>
+                </div>
             </div>
         </div> 
         <script src="js/lib/jquery-3.6.0.min.js"></script>
