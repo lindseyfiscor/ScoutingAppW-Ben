@@ -4,7 +4,7 @@
 ?>
 <html>
     <head>
-        <title>ScoutFRC - Login</title>
+        <title>ScoutFRC - Admin</title>
         <link rel="stylesheet" href="css/lib/cosmo.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
