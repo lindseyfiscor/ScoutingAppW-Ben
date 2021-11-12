@@ -32,15 +32,15 @@
           </div>
         </nav>
         
-        <div class="wrapper bg-secondary">
+        <div class="wrapper bg-secondary" style="min-height: 100%;">
             <div class="col-12">
-                <div class="card col-6 offset-3">
+                <div class="card col-6 offset-3 mt-5">
                     <h3>Welcome back!</h3>
-                    <input class="form-control mt-4" type="email" aria-label="Enter Username" placeholder="jane.doeling@email.com">
+                    <input class="form-control mt-4 mb-1" type="email" aria-label="Enter Username" placeholder="jane.doeling@email.com">
                     <input class="form-control" type="password" aria-label="Enter Password" placeholder="myawesomelongpassword">
                     <button class="btn btn-primary btn-block mb-2" type="button">Sign In</button>
                     <hr>
-                    <button class="btn btn-default btn-block mt-2 mb-3"  type="button">Register</button>
+                    <button class="btn btn-secondary btn-block mt-2 mb-5"  type="button">Register</button>
                 </div>
             </div>
         </div> 
