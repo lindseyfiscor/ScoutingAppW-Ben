@@ -47,7 +47,7 @@
                       The Robot Moves During the Match
                     </label>
                   </div>
-                  <div class="row">
+                  <div class="row d-flex justify-content-between">
                     <div class="form-group col-12 col-md-4 col-lg-3">
                       <h3 class="mt-3 text-center">Balls Scored Lower</h3>
                       <div class="row col-12 justify-content-center">
@@ -81,7 +81,34 @@
               <div class="card">
                 <div class="card-header">TeleOp</div>
                 <div class="card-body">
-                  
+                  <!-- Lindsey, I have added these copies of the Auto Data to make it easier for you to implement the questions on this section.  Make sure to update the h3 info title
+                       and to update the id of the items; especially the SPAN tags.  We will be creating a Javascript function (.getJSON) to add them to the database via a PHP webservice-->
+                  <div class="row d-flex justify-content-between">
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Lower</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInLowerMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Lower <span id="txtBallsLowerIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInLowerPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Top</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInTopMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Top <span id="txtBallsTopIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInTopPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Center</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInCenterMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Center <span id="txtBallsCenterIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInCenterPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -89,15 +116,69 @@
               <div class="card">
                 <div class="card-header">End Game</div>
                 <div class="card-body">
-                  
+                  <!-- Lindsey, I have added these copies of the Auto Data to make it easier for you to implement the questions on this section.  Make sure to update the h3 info title
+                       and to update the id of the items; especially the SPAN tags.  We will be creating a Javascript function (.getJSON) to add them to the database via a PHP webservice-->
+                  <div class="row d-flex justify-content-between">
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Lower</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInLowerMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Lower <span id="txtBallsLowerIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInLowerPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Top</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInTopMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Top <span id="txtBallsTopIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInTopPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Center</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInCenterMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Center <span id="txtBallsCenterIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInCenterPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class=" col-12 col-lg-10 offset-lg-1 mt-3">
               <div class="card">
+                <!-- Lindsey, I have added these copies of the Auto Data to make it easier for you to implement the questions on this section.  Make sure to update the h3 info title
+                     and to update the id of the items; especially the SPAN tags.  We will be creating a Javascript function (.getJSON) to add them to the database via a PHP webservice-->
                 <div class="card-header">More Data</div>
                 <div class="card-body">
-                  
+                  <div class="row d-flex justify-content-between">
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Lower</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInLowerMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Lower <span id="txtBallsLowerIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInLowerPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Top</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInTopMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Top <span id="txtBallsTopIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInTopPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-3">
+                      <h3 class="mt-3 text-center">Balls Scored Center</h3>
+                      <div class="row col-12 justify-content-center">
+                        <button id="btnBallsInCenterMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Scored In"><i class="fas fa-minus"></i></button>
+                        <h3 class="mr-3">Center <span id="txtBallsCenterIn" class="txtSum">0</span></h3>
+                        <button id="btnBallsInCenterPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
