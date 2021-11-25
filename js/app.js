@@ -5,8 +5,10 @@ $(document).on('click','#btnLogout', function() {
         text: 'Are you sure you want to logout?',
         showCancelButton: true,
         confirmButtonText: 'Yes'
-    }).then((result)=> {
-        window.location.href ="login.html";
+    }).then((result) =>{
+        if(result.isConfirmed){
+            window.location.href ="login.html";
+        }
     })
 })
 
