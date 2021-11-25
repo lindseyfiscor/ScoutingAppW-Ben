@@ -25,7 +25,7 @@
                 <a class="nav-link" href="#"><i class="fas fa-sign-in-alt mr-2"></i>Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="admin.php"><i class="fas fa-tools mr-2"></i>Admin</a>
+                <a class="nav-link" href="admin.html"><i class="fas fa-tools mr-2"></i>Admin</a>
               </li>
             </ul>
           </div>
