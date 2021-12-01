@@ -37,7 +37,7 @@
                     <tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td><button class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                    <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -47,6 +47,26 @@
         </div>
           
       </div> 
+      <div id="adminModals">
+        <div class="modal fade" id="modUserEdit" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <script src="https://kit.fontawesome.com/ee41ca2f02.js" crossorigin="anonymous"></script>
       <script src="js/lib/jquery-3.6.0.min.js"></script>
       <script src="js/lib/bootstrap.bundle.min.js"></script>
