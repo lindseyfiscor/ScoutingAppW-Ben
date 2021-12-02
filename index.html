@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>ScoutFRC</title>
-        <link rel="shortcut icon" type="image/png" href="images/logo.png"/>
+        <link rel="shortcut icon" type="image/png" href="images/logo_background.png"/>
         <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
               <div class="card">
                 <div class="card-header">Match Info</div>
                 <div class="card-body">
-                  <form>
+                  <div>
                     <div class="form-group mb-4">
                     <label for="txtMatchNumber">Match Number</label>
                     <input type="number" class="form-control" id="txtMatchNumber" placeholder="1">
@@ -54,7 +54,7 @@
                         <option value="R3">Red Alliance 3</option>
                     </select>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -89,8 +89,8 @@
                       </div>
                       
                   </div>
-                  -----------
-                  <form>
+                  <hr>
+                  <div>
                     <div class="form-group form-check-inline"><!--is first form-group supposed to be formgroup or form check?     Do i need div groups around each checkbox?-->
                       <input class="form-check-input" type="checkbox" id="chkAutoBallPickUpCenter" value="autoBallsCenter">
                       <label class="form-check-label" for="chkAutoBallPickUpCenter">Picks Up Balls From Shield Generator </label>
@@ -103,26 +103,23 @@
                       <input class="form-check-input" type="checkbox" id="chkAutoBallPickUpApposingAlliance" value="autoBallsApposingTrench">
                       <label class="form-check-label" for="chkAutoBallPickUpApposingAlliance">Picks Up Balls From Apposing Alliance Trench </label>
                     </div>
-                  </form>
-                  ---------------
-                  <div class="form-check">
+                  
+                  <hr>
+                  <div class="form-group form-check-inline">
                     <input class="form-check-input" type="checkbox" id="autoRobotMove" value="autoRobotMove">
                     <label class="form-check-label" for="autoRobotMove">
                       Robot Moves During Auto
                     </label>
                   </div>
-                  -----------
-                  <form>
+                  <hr>
+                  
                     Recieved Penalties During Auto:   
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radAutoPenalties" id="autoPenaltyYes" value="autoPenaltyYes">
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="autoPenaltyYes" value="autoPenaltyYes">
                       <label class="form-check-label" for="autoPenaltyYes">Yes</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radAutoPenalties" id="autoPenaltyNo" value="autoPenaltyNo">
-                      <label class="form-check-label" for="autoPenaltyNo">No</label>
-                    </div>
-                  </form>
+                    
+                  </div>
                 </div>
               </div>
             </div>
@@ -158,68 +155,68 @@
                       </div>
                     </div>
                   </div>
-                  ------------
-                  <div class="form-check">
+                  <hr>
+                  <div class="form-group form-check-inline">
                     <input class="form-check-input" type="checkbox" id="teleRobotUnderTrench" value="teleRobotUnderTrench">
                     <label class="form-check-label" for="teleRobotUnderTrench">
                       Robot Goes Under Trench During TeleOp
                     </label>
                   </div>
-                  -----------
-                  <div class="form-check">
+                  <hr>
+                  <div class="form-group form-check-inline">
                     <input class="form-check-input" type="checkbox" id="teleRobotPlayDefense" value="teleRobotPlayDefense">
                     <label class="form-check-label" for="teleRobotPlayDefense">
                       Robot Plays Defense
                     </label>
                   </div>
-                  -----------
-                  <form>
+                  <hr>
+                  <div>
                     Rotation Control:
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRotationControl" id="teleRotationControlYes" value="teleRotationControlYes">
                       <label class="form-check-label" for="teleRotationControlYes">Yes</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRotationControl" id="teleRotationControlFailed" value="teleRotationControlFailed">
                       <label class="form-check-label" for="teleRotationControlFailed">Failed</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRotationControl" id="teleRotationControlNoAttempt" value="teleRotationControlNoAttempt">
                       <label class="form-check-label" for="teleRotationControlNoAttempt">Did Not Attempt</label>
                     </div>
-                  </form>
-                  -----------
-                  <form>
+                  </div>
+                  <hr>
+                  <div>
                     Position Control:
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radPositionControl" id="telePositionControlYes" value="telePositionControlYes">
                       <label class="form-check-label" for="telePositionControlYes">Yes</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radPositionControl" id="telePositionControlFailed" value="telePositionControlFailed">
                       <label class="form-check-label" for="telePositionControlFailed">Failed</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radPositionControl" id="telePositionControlNoAttempt" value="telePositionControlNoAttempt">
                       <label class="form-check-label" for="telePositionControlNoAttempt">Did Not Attempt</label>
                     </div>
-                  </form>
-                  -----------
-                  <form>
+                  </div>
+                  <hr>
+                  <div>
                     Picked Up Balls From:
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="checkbox" id="teleBallsFromGround" value="teleBallsFromGound">
                       <label class="form-check-label" for="teleBallsFromGround">
                         Ground
                       </label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="checkbox" id="teleBallsFromFeeder" value="teleBallsFromFeeder">
                       <label class="form-check-label" for="teleBallsFromFeeder">
                         Feeder
                       </label>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -229,21 +226,21 @@
                 <div class="card-body">
                   <!-- Lindsey, I have added these copies of the Auto Data to make it easier for you to implement the questions on this section.  Make sure to update the h3 info title
                        and to update the id of the items; especially the SPAN tags.  We will be creating a Javascript function (.getJSON) to add them to the database via a PHP webservice-->
-                  <form>
+                  <div>
                     Climbed?
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="chkClimbedYes" value="chkClimbedYes">
-                      <label class="form-check-label" for="chkClimbedYes">Yes </label>
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="radio" id="radClimbedYes" value="radClimbedYes">
+                      <label class="form-check-label" for="radClimbedYes">Yes </label>
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="chkClimbedFailed" value="chkClimbedFailed">
-                      <label class="form-check-label" for="chkClimbedFailed">Failed </label>
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="radio" id="radClimbedFailed" value="radClimbedFailed">
+                      <label class="form-check-label" for="radClimbedFailed">Failed </label>
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="chkClimbedNoAttempt" value="chkClimbedNoAttempt">
-                      <label class="form-check-label" for="chkClimbedNoAttempt">No Attempt or Parked on Field </label>
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="radio" id="radClimbedNoAttempt" value="radClimbedNoAttempt">
+                      <label class="form-check-label" for="radClimbedNoAttempt">No Attempt or Parked on Field </label>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -253,76 +250,66 @@
                      and to update the id of the items; especially the SPAN tags.  We will be creating a Javascript function (.getJSON) to add them to the database via a PHP webservice-->
                 <div class="card-header">More Data</div>
                 <div class="card-body">
-                  <form>
+                  <div>
                     Energy Stage:
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radEnergyStage" id="radEnergyStageOne" value="radEnergyStageOne">
                       <label class="form-check-label" for="radEnergyStageOne">1</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radEnergyStage" id="radEnergyStageTwo" value="radEnergyStageTwo">
                       <label class="form-check-label" for="radEnergyStageTwo">2</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radEnergyStage" id="radEnergyStageThree" value="radEnergyStageThree">
                       <label class="form-check-label" for="radEnergyStageThree">3</label>
                     </div>
-                  </form>
-                  -----------
-                  <form>
+                  </div>
+                  <hr>
+                  <div>
                     Number of Ranking Points:
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRankingPoints" id="radRankingPointsOne" value="radRankingPointsOne">
                       <label class="form-check-label" for="radRankingPointsOne">1</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRankingPoints" id="radRankingPointsTwo" value="radRankingPointsTwo">
                       <label class="form-check-label" for="radRankingPointsTwo">2</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRankingPoints" id="radRankingPointsThree" value="radRankingPointsThree">
                       <label class="form-check-label" for="radRankingPointsThree">3</label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="radio" name="radRankingPoints" id="radRankingPointsFour" value="radRankingPointsFour">
                       <label class="form-check-label" for="radRankingPointsFour">4</label>
                     </div>
-                  </form>
-                  -----------
-                  <form>
-                    Showed Up to Match:
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radShowedUp" id="radShowedUpYes" value="radShowedUpYes">
-                      <label class="form-check-label" for="radShowedUpYes">Yes</label>
+                  </div>
+                  <hr>
+                  <div>
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="radShowedUp" value="radShowedUp">
                     </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radShowedUp" id="radShowedUpNo" value="radShowedUpNo">
-                      <label class="form-check-label" for="radShowedUpNo">No</label>
+                    Showed Up to Match
+                  </div>
+                  <hr>
+                  <div>
+                    <div class="form-group form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="radBricked" value="radBricked">
                     </div>
-                  </form>
-                  -----------
-                  <form>
-                    Bricked During Match:
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radBricked" id="radBrickedNo" value="radBrickedNo">
-                      <label class="form-check-label" for="radBrickedNo">No</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="radBricked" id="radBrickedYes" value="radBrickedYes">
-                      <label class="form-check-label" for="radShoweradBrickedYesdUpNo">Yes</label>
-                    </div>
-                  </form>
-                  -----------
-                  <form>
-                    <div class="form-check form-check-inline">
+                    Bricked During Match
+                  </div>
+                  <hr>
+                  <div>
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="checkbox" id="chkCards" value="chkCardsYellow">
                       <label class="form-check-label" for="chkCardsYellow">Yellow </label>
                     </div>
-                    <div class="form-check form-check-inline">
+                    <div class="form-group form-check-inline">
                       <input class="form-check-input" type="checkbox" id="chkCards" value="chkCardsRed">
                       <label class="form-check-label" for="chkCardsRed">Red </label>
                     </div>
-                  </form>
+                  </div>
                   <!--add alliance penalties recieved?-->
                 </div>
               </div>
@@ -332,7 +319,7 @@
                 <div class="card-header">Submit</div>
                 <div class="card-body">
                   
-                  <input class="btn btn-primary btn-outline-info" type="reset" value="Reset">Reset
+                  <input class="btn btn-primary btn-outline-info" type="reset" value="Reset">
                 </div>
               </div>
             </div>
