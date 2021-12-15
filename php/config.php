@@ -25,7 +25,7 @@
             $strErrorMessage = $strErrorMessage . 'TeamName must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($TeamNumber) < 1 || $TeamNumber == null || strlen($TeamNumber) > 4){
+        if(strlen($TeamNumber) < 1 || $TeamNumber == null || strlen($TeamNumber) > 4 || !isDigits($TeamNumber)){
             $strErrorMessage = $strErrorMessage . 'TeamNumber must be passed to web service | ';
             $blnError = true;
         }
@@ -33,10 +33,9 @@
             $strErrorMessage = $strErrorMessage . 'Street Address must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($ZIP) < 1|| $ZIP == null || strlen($ZIP) != 6){
+        if(strlen($ZIP) < 1|| $ZIP == null || strlen($ZIP) != 6 || !isDigits($ZIP)){
             $strErrorMessage = $strErrorMessage . 'ZIP Code must be passed to web service | ';
-            $blnError = true;
-            //Do I need to check if have alpha characters?
+            $blnError = true; 
         }
         if(strlen($State) < 1 || $State == null || strlen($State) > 2){
             $strErrorMessage = $strErrorMessage . 'State must be passed to web service and must be two digits long | ';
@@ -45,7 +44,31 @@
         if(strlen($ContactNumber) < 1 || $ContactNumber == null){
             $strErrorMessage = $strErrorMessage . 'Phone Number must be passed to web service with area code | ';
             $blnError = true;
-            // What checks should I add here?
+ 
+            function isValidContactNumber(string $ContactNumber, int $minDigits = 9, int $maxDigits = 14): bool {
+                if (preg_match('/^[+][0-9]/', $ContactNumber)) { //is the first character + followed by a digit
+                    $count = 1;
+                    $ContactNumber = str_replace(['+'], '', $ContactNumber, $count); //remove +
+                }
+                
+                //remove white space, dots, hyphens and brackets
+                $ContactNumber = str_replace([' ', '.', '-', '(', ')'], '', $ContactNumber); 
+            
+                //are we left with digits only?
+                return isDigits($ContactNumber, $minDigits, $maxDigits); 
+            }
+            
+            function normalizeContactNumber(string $ContactNumber): string {
+                //remove white space, dots, hyphens and brackets
+                $ContactNumber = str_replace([' ', '.', '-', '(', ')'], '', $ContactNumber);
+                return $ContactNumber;
+            }
+            
+            $tel = '+9112 345 6789';
+            if (isValidContactNumber($tel)) {
+                //normalize ContactNumber number if needed
+                echo normalizeContactNumberNumber($tel); //+91123456789
+            }
         }
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
@@ -55,11 +78,14 @@
             $strErrorMessage = $strErrorMessage . 'Last Name must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($Email) < 1 || $Email == null || ){
-            $strErrorMessage = $strErrorMessage . 'Last Name must be passed to web service | ';
+        if(strlen($Email) < 1 || $Email == null || !filter_var($Email, FILTER_VALIDATE_EMAIL)){
+            $strErrorMessage = $strErrorMessage . 'Email must be passed to web service | ';
             $blnError = true;
-            //need to parse the email and check the different parts
+            
         }
+
+        
+
         
 
         if($blnError == true){
