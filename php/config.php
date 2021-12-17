@@ -9,7 +9,32 @@
 
     $conScouting = new mysqli($host_name, $user_name, $password, $database);
 
-    function newTeam($TeamName,$TeamNumber$StreetAddress,$ZIP,$State,$ContactNumber,$FirstName,$LastName,$Email){
+    function isValidContactNumber($ContactNumber){
+        $minDigits = 10; 
+        $maxDigits = 18;
+        $count = 0;
+        if (preg_match('/^[+][0-9]/', $ContactNumber)) { //is the first character + followed by a digit
+            $count + 1;
+            $ContactNumber = str_replace(['+'], '', $ContactNumber, $count); //remove +
+        }
+        
+        //remove white space, dots, hyphens and brackets
+        $ContactNumber = preg_replace('/[^0-9]/','',$ContactNumber);
+        $count = $count + strlen($ContactNumber);
+        if($count >= $minDigits && $count <= $maxDigits){
+            return true;
+        } else{
+            return false;
+        }
+    }
+    
+    function normalizeContactNumber($ContactNumber) {
+        //remove white space, dots, hyphens and brackets
+        $ContactNumber = str_replace([' ', '.', '-', '(', ')'], '', $ContactNumber);
+        return $ContactNumber;
+    }
+
+    function newTeam($TeamName,$TeamNumber,$StreetAddress,$ZIP,$State,$ContactNumber,$FirstName,$LastName,$Email){
         $strErrorMessage = '';
         $blnError = false;
         $TeamName = trim($TeamName);
@@ -25,50 +50,30 @@
             $strErrorMessage = $strErrorMessage . 'TeamName must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($TeamNumber) < 1 || $TeamNumber == null || strlen($TeamNumber) > 4 || !isDigits($TeamNumber)){
-            $strErrorMessage = $strErrorMessage . 'TeamNumber must be passed to web service | ';
+        if(strlen($TeamNumber) != 4 || $TeamNumber == null || !is_numeric($TeamNumber)){
+            $strErrorMessage = $strErrorMessage . 'TeamNumber must be a numeric value passed to web service with four characters | ';
             $blnError = true;
         }
-        if(strlen($StreetAddress) < 1 || $StreetAddress == null){
+        if(strlen($StreetAddress) < 3 || $StreetAddress == null){
             $strErrorMessage = $strErrorMessage . 'Street Address must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($ZIP) < 1|| $ZIP == null || strlen($ZIP) != 6 || !isDigits($ZIP)){
-            $strErrorMessage = $strErrorMessage . 'ZIP Code must be passed to web service | ';
+        if(strlen($ZIP) > 10 || strlen($ZIP) < 5  || $ZIP == null ){
+            $strErrorMessage = $strErrorMessage . 'ZIP Code must be passed to web service and must be between 5 and 10 characters | ';
             $blnError = true; 
         }
-        if(strlen($State) < 1 || $State == null || strlen($State) > 2){
+        if(strlen($State) != 2 || $State == null){
             $strErrorMessage = $strErrorMessage . 'State must be passed to web service and must be two digits long | ';
             $blnError = true;
         }
-        if(strlen($ContactNumber) < 1 || $ContactNumber == null){
+        $blnPhoneError = false;
+
+
+        if(strlen($ContactNumber) < 10 || $ContactNumber == null || isValidContactNumber($ContactNumber) == false){
             $strErrorMessage = $strErrorMessage . 'Phone Number must be passed to web service with area code | ';
             $blnError = true;
- 
-            function isValidContactNumber(string $ContactNumber, int $minDigits = 9, int $maxDigits = 14): bool {
-                if (preg_match('/^[+][0-9]/', $ContactNumber)) { //is the first character + followed by a digit
-                    $count = 1;
-                    $ContactNumber = str_replace(['+'], '', $ContactNumber, $count); //remove +
-                }
-                
-                //remove white space, dots, hyphens and brackets
-                $ContactNumber = str_replace([' ', '.', '-', '(', ')'], '', $ContactNumber); 
-            
-                //are we left with digits only?
-                return isDigits($ContactNumber, $minDigits, $maxDigits); 
-            }
-            
-            function normalizeContactNumber(string $ContactNumber): string {
-                //remove white space, dots, hyphens and brackets
-                $ContactNumber = str_replace([' ', '.', '-', '(', ')'], '', $ContactNumber);
-                return $ContactNumber;
-            }
-            
-            $tel = '+9112 345 6789';
-            if (isValidContactNumber($tel)) {
-                //normalize ContactNumber number if needed
-                echo normalizeContactNumberNumber($tel); //+91123456789
-            }
+        } else {
+            $ContactNumber = normalizeContactNumber($ContactNumber);
         }
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
@@ -81,10 +86,8 @@
         if(strlen($Email) < 1 || $Email == null || !filter_var($Email, FILTER_VALIDATE_EMAIL)){
             $strErrorMessage = $strErrorMessage . 'Email must be passed to web service | ';
             $blnError = true;
-            
         }
-
-        
+     
 
         
 
@@ -117,7 +120,7 @@
                  $statCustodial = $conScouting->prepare($strQuery);
         
                  // Bind Parameters
-                 $statCustodial->bind_param('sssssssss', $strTeamID, $TeamName, $StreetAddress, $ZIP, $State, $ContactNumber, $Owner, $strStatus,$APIKey);
+                 $statCustodial->bind_param('sssssssss', $strTeamID, $TeamName, $StreetAddress, $ZIP, $State, $ContactNumber, $Owner, $strStatus, $APIKey);
                  
                  if($statCustodial->execute()){
                     if(newUser($Owner,$FirstName,$LastName,$Phone,$strTeamID,$Password) == '{"Outcome":"New User Created"}'){
