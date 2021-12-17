@@ -34,7 +34,61 @@
         return $ContactNumber;
     }
 
-    function newTeam($TeamName,$TeamNumber,$StreetAddress,$ZIP,$State,$ContactNumber,$FirstName,$LastName,$Email){
+    function sendVerificationEmail($strEmailAddress){
+        $emailTo = $strEmailAddress;
+        $emailSubject = "Verify New Account for ScoutFRC";
+        $emailHeaders = "MIME-Version: 1.0" . "\r\n";
+        $emailHeaders = $emailHeaders . "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $emailHeaders = $emailHeaders . 'From: <AccountVerification@lindsey.swollenhippo.com>' . "\r\n";
+        
+        $message = "<!DOCTYPE html><html lang=\"en\" class=\"\"><head><!DOCTYPE html><html lang=\"en\" class=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><head>
+        <title>Verify Account</title>
+        </head><body>
+        <div class=\"jumbotron\"><h1>Thank you for setting up an account</h1><p>Please click the link below to verify and activate your account. <br> <a href='http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "'>http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "</a></p></div>
+        </body>
+        </html>"; 
+        
+        mail($emailTo,$emailSubject,$message,$emailHeaders);
+    }
+
+    function newUser($Username,$FirstName,$LastName,$Phone,$TeamID,$Password){
+        global $conScouting;
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?,SYSDATE(),'NEW')";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ssssss', $Username, $FirstName, $LastName, $Phone, $TeamID, $Password);
+         if($statScouting->execute()){
+            sendVerificationEmail($Username);
+            return '{"Outcome":"New User Created"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statCustodial->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function newTeam($TeamName,$TeamNumber,$StreetAddress,$ZIP,$State,$ContactNumber,$FirstName,$LastName,$Email,$Phone,$Password){
         $strErrorMessage = '';
         $blnError = false;
         $TeamName = trim($TeamName);
@@ -66,15 +120,21 @@
             $strErrorMessage = $strErrorMessage . 'State must be passed to web service and must be two digits long | ';
             $blnError = true;
         }
-        $blnPhoneError = false;
-
 
         if(strlen($ContactNumber) < 10 || $ContactNumber == null || isValidContactNumber($ContactNumber) == false){
-            $strErrorMessage = $strErrorMessage . 'Phone Number must be passed to web service with area code | ';
+            $strErrorMessage = $strErrorMessage . 'Team Contact Number must be passed to web service with area code | ';
             $blnError = true;
         } else {
             $ContactNumber = normalizeContactNumber($ContactNumber);
         }
+
+        if(strlen($Phone) < 10 || $Phone == null || isValidContactNumber($Phone) == false){
+            $strErrorMessage = $strErrorMessage . 'OwnerPhone Number must be passed to web service with area code | ';
+            $blnError = true;
+        } else {
+            $Phone = normalizeContactNumber($Phone);
+        }
+
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
             $blnError = true;
@@ -85,6 +145,10 @@
         }
         if(strlen($Email) < 1 || $Email == null || !filter_var($Email, FILTER_VALIDATE_EMAIL)){
             $strErrorMessage = $strErrorMessage . 'Email must be passed to web service | ';
+            $blnError = true;
+        }
+        if(strlen($Password) < 1 ){
+            $strErrorMessage = $strErrorMessage . 'Password must be passed to web service | ';
             $blnError = true;
         }
      
@@ -118,7 +182,7 @@
                 }
               
                  $statCustodial = $conScouting->prepare($strQuery);
-        
+
                  // Bind Parameters
                  $statCustodial->bind_param('sssssssss', $TeamName, $TeamNumber, $StreetAddress, $ZIP, $State, $ContactNumber, $FirstName, $LastName, $Email, $strStatus, $APIKey);
                  
