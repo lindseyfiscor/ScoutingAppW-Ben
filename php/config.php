@@ -120,11 +120,11 @@
                  $statCustodial = $conScouting->prepare($strQuery);
         
                  // Bind Parameters
-                 $statCustodial->bind_param('sssssssss', $strTeamID, $TeamName, $StreetAddress, $ZIP, $State, $ContactNumber, $Owner, $strStatus, $APIKey);
+                 $statCustodial->bind_param('sssssssss', $TeamName, $TeamNumber, $StreetAddress, $ZIP, $State, $ContactNumber, $FirstName, $LastName, $Email, $strStatus, $APIKey);
                  
                  if($statCustodial->execute()){
-                    if(newUser($Owner,$FirstName,$LastName,$Phone,$strTeamID,$Password) == '{"Outcome":"New User Created"}'){
-                        return '{"Outcome":"'.$strTeamID.'"}';
+                    if(newUser($Owner,$FirstName,$LastName,$Phone,$TeamNumber,$Password) == '{"Outcome":"New User Created"}'){
+                        return '{"Outcome":"'.$TeamNumber.'"}';
                     } else {
                         return '{"Outcome":"Error"}';
                     }
