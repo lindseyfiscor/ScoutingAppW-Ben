@@ -51,9 +51,28 @@
         mail($emailTo,$emailSubject,$message,$emailHeaders);
     }
 
-    function newUser($Username,$FirstName,$LastName,$Phone,$TeamID,$Password){
+    function newUser($FirstName,$LastName,$Email,$ContactNumber,$Password){
+        if(strlen($FirstName) < 1 || $FirstName == null){
+            $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
+            $blnError = true;
+        }
+        if(strlen($LastName) < 1 || $LastName == null){
+            $strErrorMessage = $strErrorMessage . 'Lasr Name must be passed to web service | ';
+            $blnError = true;
+        }
+        if(strlen($Email) < 1 || $Email == null || !filter_var($Email, FILTER_VALIDATE_EMAIL)){
+            $strErrorMessage = $strErrorMessage . 'Email must be passed to web service | ';
+            $blnError = true;
+        }
+        if(strlen($Phne) < 10 || $ContactNumber == null || isValidContactNumber($ContactNumber) == false){
+            $strErrorMessage = $strErrorMessage . 'Team Contact Number must be passed to web service with area code | ';
+            $blnError = true;
+        } else {
+            $ContactNumber = normalizeContactNumber($ContactNumber);
+        }
+        //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?,SYSDATE(),'NEW')";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,SYSDATE(),'NEW')";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -74,9 +93,9 @@
 		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statScouting->bind_param('ssssss', $Username, $FirstName, $LastName, $Phone, $TeamID, $Password);
+		 $statScouting->bind_param('sssss', $FirstName, $LastName, $Email, $ContactNumber, $Password);
          if($statScouting->execute()){
-            sendVerificationEmail($Username);
+            sendVerificationEmail($Email);
             return '{"Outcome":"New User Created"}';
          } else {
             return '{"Outcome":"Error"}';
@@ -128,12 +147,12 @@
             $ContactNumber = normalizeContactNumber($ContactNumber);
         }
 
-        if(strlen($Phone) < 10 || $Phone == null || isValidContactNumber($Phone) == false){
-            $strErrorMessage = $strErrorMessage . 'OwnerPhone Number must be passed to web service with area code | ';
-            $blnError = true;
-        } else {
-            $Phone = normalizeContactNumber($Phone);
-        }
+        //if(strlen($Phone) < 10 || $Phone == null || isValidContactNumber($Phone) == false){
+        //    $strErrorMessage = $strErrorMessage . 'OwnerPhone Number must be passed to web service with area code | ';
+        //    $blnError = true;
+        //} else {
+        //    $Phone = normalizeContactNumber($Phone);
+        //}
 
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
