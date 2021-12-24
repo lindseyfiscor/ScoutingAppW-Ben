@@ -18,6 +18,9 @@
             <li class="nav-item">
               <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Data</a>
+            </li>
             <li class="nav-item active">
               <a class="nav-link" href="#"><i class="fas fa-tools mr-2"></i>Admin</a>
             </li>
@@ -27,18 +30,36 @@
           </ul>
         </div>
       </nav>
-      <div class="wrapper bg-secondary vh-100">
+      <div class="wrapper bg-secondary">
         <div class="pt-5">
           <div class=" col-12 col-lg-10 offset-lg-1 mt-3">
             <div class="card">
               <div class="card-header">User Administration</div>
               <div class="card-body">
-                <table class="table">
-                  <thead>
-                    <tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                <table class="table" id="teamData">
+                    <thead>
+                      <tr><th onclick="sortTableAlphabetical(0)">Name <i class="fas fa-arrows-alt-v"></i></th>
+                        <th onclick="sortTableAlphabetical(1)">Email <i class="fas fa-arrows-alt-v"></i> </th>
+                        <th>Phone</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Alex</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Amelie</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Amelia</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Adam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Henry</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Henri</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Sydney</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Zen</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Pheonix</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Liam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Bobby</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Devin</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Joe</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Tyler</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+
+                    
                   </tbody>
                 </table>
               </div>
