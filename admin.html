@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     </head>
     <body >
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -30,7 +31,7 @@
           </ul>
         </div>
       </nav>
-      <div class="wrapper bg-secondary">
+      <div class="wrapper bg-secondary vh-100">
         <div class="pt-5">
           <div class=" col-12 col-lg-10 offset-lg-1 mt-3">
             <div class="card">
@@ -38,8 +39,8 @@
               <div class="card-body">
                 <table class="table" id="teamData">
                     <thead>
-                      <tr><th onclick="sortTableAlphabetical(0)">Name <i class="fas fa-arrows-alt-v"></i></th>
-                        <th onclick="sortTableAlphabetical(1)">Email <i class="fas fa-arrows-alt-v"></i> </th>
+                      <tr><th>Name</th>
+                        <th>Email</th>
                         <th>Phone</th><th>Actions</th></tr>
                     </thead>
                     <tbody>
@@ -94,5 +95,6 @@
       <script src="js/lib/bootstrap.bundle.min.js"></script>
       <script src="js/app.js"></script>
       <script src="js/lib/sweetalert2.all.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     </body>
 </html>
