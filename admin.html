@@ -20,10 +20,19 @@
               <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Data</a>
+              <a class="nav-link" href="pit.html"><i class="fas fa-frog"></i>Pit Scouting</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#"><i class="fas fa-tools mr-2"></i>Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="teams.html"><i class="fas fa-tools mr-2"></i>Team Mangement</a>
             </li>
             <li class="nav-item float-right">
               <a class="nav-link" id="btnLogout"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
@@ -37,28 +46,31 @@
             <div class="card">
               <div class="card-header">User Administration</div>
               <div class="card-body">
+                
                   <table class="table tblData" id="teamData">
                     <thead>
                       <tr><th>Name</th>
                         <th>Email</th>
-                        <th>Phone</th><th>Actions</th></tr>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Access</th>
+                        <th>Actions</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Alex</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Amelie</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Amelia</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Adam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Henry</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Henri</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Sydney</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Zen</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Pheonix</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Liam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Bobby</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Devin</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Joe</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                      <tr><td>Tyler</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Lindsey Fiscor</td><td>lfiscor@gmail.com</td><td>(865)617-7990</td><td>Admin</td><td>Stand, Pit, Super</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Alex</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Admin</td><td>Stand, Pit</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Amelie</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Mentor</td><td>Stand, Pit</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Amelia</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit, Super</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Adam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Henry</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Sydney</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit, Super</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Zen</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Pheonix</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Liam</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Bobby</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Devin</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Joe</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit, Super</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
+                      <tr><td>Tyler</td><td>4265.business@gmail.com</td><td>(865)123-4567</td><td>Student</td><td>Stand, Pit, Super</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
 
                     
                   </tbody>
