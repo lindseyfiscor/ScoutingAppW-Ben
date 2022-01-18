@@ -34,6 +34,88 @@
         return $ContactNumber;
     }
 
+    function getTeamUsers($SessionID, $TeamID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT Email, FirstName, LastName, Role FROM tblUsers WHERE Team = ?";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('s', $TeamID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
+    function getUserRoles($SessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT RoleID, Description, Status FROM tblRoles";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
+
     function sendVerificationEmail($strEmailAddress){
         $emailTo = $strEmailAddress;
         $emailSubject = "Verify New Account for ScoutFRC";
@@ -101,7 +183,7 @@
             return '{"Outcome":"Error"}';
          }
 
-         // $result = $statCustodial->get_result();
+         // $result = $statScouting->get_result();
          
          // echo json_encode(($result->fetch_assoc()));
          $statScouting->close();
@@ -200,12 +282,12 @@
                     echo json_encode($arrError);
                 }
               
-                 $statCustodial = $conScouting->prepare($strQuery);
+                 $statScouting = $conScouting->prepare($strQuery);
 
                  // Bind Parameters
-                 $statCustodial->bind_param('sssssssss', $TeamName, $TeamNumber, $StreetAddress, $ZIP, $State, $ContactNumber, $FirstName, $LastName, $Email, $strStatus, $APIKey);
+                 $statScouting->bind_param('sssssssss', $TeamName, $TeamNumber, $StreetAddress, $ZIP, $State, $ContactNumber, $FirstName, $LastName, $Email, $strStatus, $APIKey);
                  
-                 if($statCustodial->execute()){
+                 if($statScouting->execute()){
                     if(newUser($Owner,$FirstName,$LastName,$Phone,$TeamNumber,$Password) == '{"Outcome":"New User Created"}'){
                         return '{"Outcome":"'.$TeamNumber.'"}';
                     } else {
@@ -216,10 +298,10 @@
                     return '{"Outcome":"Error"}';
                  }
         
-                 // $result = $statCustodial->get_result();
+                 // $result = $statScouting->get_result();
                  
                  // echo json_encode(($result->fetch_assoc()));
-                 $statCustodial->close();
+                 $statScouting->close();
             }
             catch (exception $ex) {
                 var_dump($ex);
