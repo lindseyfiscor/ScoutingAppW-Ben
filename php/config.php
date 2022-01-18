@@ -133,7 +133,7 @@
         mail($emailTo,$emailSubject,$message,$emailHeaders);
     }
 
-    function newUser($FirstName,$LastName,$Email,$ContactNumber,$Password){
+    function newUser($FirstName,$LastName,$Email,$Password,$Team,$Role){
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
             $blnError = true;
@@ -146,15 +146,9 @@
             $strErrorMessage = $strErrorMessage . 'Email must be passed to web service | ';
             $blnError = true;
         }
-        if(strlen($Phne) < 10 || $ContactNumber == null || isValidContactNumber($ContactNumber) == false){
-            $strErrorMessage = $strErrorMessage . 'Team Contact Number must be passed to web service with area code | ';
-            $blnError = true;
-        } else {
-            $ContactNumber = normalizeContactNumber($ContactNumber);
-        }
         //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,SYSDATE(),'NEW')";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -175,7 +169,7 @@
 		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statScouting->bind_param('sssss', $FirstName, $LastName, $Email, $ContactNumber, $Password);
+		 $statScouting->bind_param('ssssss', $Email, $FirstName, $LastName, $Password, $Team, $Role);
          if($statScouting->execute()){
             sendVerificationEmail($Email);
             return '{"Outcome":"New User Created"}';
@@ -189,12 +183,12 @@
          $statScouting->close();
     }
 
-    function newTeam($TeamName,$TeamNumber,$StreetAddress,$ZIP,$State,$ContactNumber,$FirstName,$LastName,$Email,$Phone,$Password){
+    function newTeam($TeamName,$TeamNumber,$City,$ZIP,$State,$Nation,$ContactNumber,$FirstName,$LastName,$Email,$Password){
         $strErrorMessage = '';
         $blnError = false;
         $TeamName = trim($TeamName);
         $TeamNumber= trim($TeamNumber);
-        $StreetAddress = trim($StreetAdress);
+        $City = trim($City);
         $ZIP = trim($ZIP);
         $State = trim($State);
         $ContactNumber = trim($ContactNumber);
@@ -209,8 +203,8 @@
             $strErrorMessage = $strErrorMessage . 'TeamNumber must be a numeric value passed to web service with four characters | ';
             $blnError = true;
         }
-        if(strlen($StreetAddress) < 3 || $StreetAddress == null){
-            $strErrorMessage = $strErrorMessage . 'Street Address must be passed to web service | ';
+        if(strlen($City) < 3 || $City == null){
+            $strErrorMessage = $strErrorMessage . 'City must be passed to web service | ';
             $blnError = true;
         }
         if(strlen($ZIP) > 10 || strlen($ZIP) < 5  || $ZIP == null ){
@@ -228,13 +222,6 @@
         } else {
             $ContactNumber = normalizeContactNumber($ContactNumber);
         }
-
-        //if(strlen($Phone) < 10 || $Phone == null || isValidContactNumber($Phone) == false){
-        //    $strErrorMessage = $strErrorMessage . 'OwnerPhone Number must be passed to web service with area code | ';
-        //    $blnError = true;
-        //} else {
-        //    $Phone = normalizeContactNumber($Phone);
-        //}
 
         if(strlen($FirstName) < 1 || $FirstName == null){
             $strErrorMessage = $strErrorMessage . 'First Name must be passed to web service | ';
@@ -254,8 +241,6 @@
         }
      
 
-        
-
         if($blnError == true){
             echo '{"Outcome":"Error:'.$strErrorMessage.'"}';
             return '{"Outcome":"Error:'.$strErrorMessage.'"}';
@@ -263,7 +248,7 @@
             global $conScouting;
             $strTeamID = guidv4();
             $strStatus = 'ACTIVE';
-            $strQuery = "INSERT INTO tblTeams VALUES (?,?,?,?,?,?,?,?,?,(SELECT TeamKey FROM tblTeamKeys WHERE TeamKey NOT IN (SELECT b.TeamKey FROM tblTeams b) LIMIT 1))";
+            $strQuery = "INSERT INTO tblTeams VALUES (?,?,?,?,?,?,?,?,(SELECT TeamKey FROM tblTeamKeys WHERE TeamKey NOT IN (SELECT b.TeamKey FROM tblTeams b) LIMIT 1))";
               // Check Connection
             try {
                 if ($conScouting->connect_errno) {
@@ -285,17 +270,17 @@
                  $statScouting = $conScouting->prepare($strQuery);
 
                  // Bind Parameters
-                 $statScouting->bind_param('sssssssss', $TeamName, $TeamNumber, $StreetAddress, $ZIP, $State, $ContactNumber, $FirstName, $LastName, $Email, $strStatus, $APIKey);
+                 $statScouting->bind_param('ssssssss', $strTeamID, $TeamName, $TeamNumber, $City, $State, $ZIP, $Nation, $ContactNumber);
                  
                  if($statScouting->execute()){
-                    if(newUser($Owner,$FirstName,$LastName,$Phone,$TeamNumber,$Password) == '{"Outcome":"New User Created"}'){
-                        return '{"Outcome":"'.$TeamNumber.'"}';
+                    if(newUser($FirstName,$LastName,$Owner,$Password,$TeamNumber,'C1692D0B-A418-47E2-BABC-A6BAF94384E4') == '{"Outcome":"New User Created"}'){
+                        return '{"Outcome":"'.$strTeamID.'"}';
                     } else {
-                        return '{"Outcome":"Error"}';
+                        return '{"Outcome":"Error Creating Team"}';
                     }
                     
                  } else {
-                    return '{"Outcome":"Error"}';
+                    return '{"Outcome":"Error Creating Team"}';
                  }
         
                  // $result = $statScouting->get_result();
@@ -310,7 +295,4 @@
         
         
     }
-
-    newTeam('','','','','','','','','','');
-
 ?>
