@@ -115,6 +115,80 @@
         
     }
 
+    function newUserWithCode($Username,$FirstName,$LastName,$Password,$TeamCode){
+        global $conScouting;
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ? AND Status = 'ACTIVE'),'62C6E982-01B5-41B7-8395-7B2745A6B097')";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statCustodial = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statCustodial->bind_param('sssss', $Username, $FirstName, $LastName, $Password, $TeamCode);
+         if($statCustodial->execute()){
+            sendVerificationEmail($Username);
+            return '{"Outcome":"New User Created"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statCustodial->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statCustodial->close();
+    }
+
+    function verifyUsernamePassword($strUsername,$strPassword){
+        global $conScouting;
+        $strQuery = "SELECT Email FROM tblUsers WHERE UPPER(Email) = UPPER(?) AND UserPassword= ? AND UserStatus = 'ACTIVE'";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+		 $statCustodial = $conScouting->prepare($strQuery);
+		 // Bind Parameters
+		 $statCustodial->bind_param('ss', $strUsername, $strPassword);
+         $statCustodial->execute();      
+         $statCustodial->bind_result($strEmail);
+         $statCustodial->fetch();
+         $intRows = $statCustodial->num_rows;
+         if($strEmail){
+            return 'true';
+         } else {
+            return 'false';
+         }
+         
+         $statCustodial->close();
+    }
+
 
     function sendVerificationEmail($strEmailAddress){
         $emailTo = $strEmailAddress;
@@ -294,5 +368,42 @@
         }
         
         
+    }
+
+    function createNewSession($Username){
+        global $conScouting;
+        $strSessionID = guidv4();
+        $strQuery = "INSERT INTO tblCurrentSessions VALUES (?,?,SYSDATE(),SYSDATE(),(SELECT Team FROM tblUsers WHERE Email = ?),(SELECT InternalTeams.TeamID FROM tblUsers LEFT JOIN tblTeams ON tblUsers.Team = tblTeams.TeamID LEFT JOIN InternalTeams ON tblTeams.InternalTeamOwnership = InternalTeams.TeamID WHERE Email = ?))";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statCustodial = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statCustodial->bind_param('ssss', $strSessionID,$Username,$Username,$Username);
+         if($statCustodial->execute()){
+            return '{"Outcome":"'.$strSessionID.'"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statCustodial->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statCustodial->close();
     }
 ?>

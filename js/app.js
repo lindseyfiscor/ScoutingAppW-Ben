@@ -36,3 +36,48 @@ $(document).on('click','.btnMinus', function() {
         $(this).siblings().find('.txtSum').text(intCurrentQty);
     }
 })
+
+$(document).on('click','#btnNewTeam', function() {
+    $.post('../php/newTeam.php', {
+        strTeamName = $('#txtTeamName').val(),
+        strTeamNumber = $('#txtTeamNumber').val(),
+        strCity = $('#txtCity').val(),
+        strZIP  = $('#txtZIP').val(),
+        strState  = $('#txtState').val(),
+        strNation  = $('#txtNation').val(),
+        strPhone = $('#txtPhone').val(),
+        strFirstName = $('#txtFirstName').val(),
+        strLastName = $('#txtLastName').val(),
+        strEmail = $('#txtEmail').val(),
+        strPassword = $('#txtPassword').val(),
+    },
+    function(){
+
+    });
+});
+
+$(document).on('click','#btnJoin', function() {
+    $.post('../php/newUser.php', {
+        strTeamCode = $('#txtAccessCode').val(),
+        strFirstName = $('#txtFirstName').val(),
+        strLastName = $('#txtLastName').val(),
+        $strUserName = $('#txtEmail').val(),
+        strPassword = $('#txtPassword').val(),
+    },
+    function(){
+
+    });
+});
+
+$(document).on('click','#btnLogin', function() {
+    $.post('../php/verifyUsernamePassword.php', {
+        strTeamCode = $('#txtAccessCode').val(),
+        strFirstName = $('#txtFirstName').val(),
+        strLastName = $('#txtLastName').val(),
+        $strUserName = $('#txtEmail').val(),
+        strPassword = $('#txtPassword').val(),
+    },
+    function(){
+
+    });
+});
