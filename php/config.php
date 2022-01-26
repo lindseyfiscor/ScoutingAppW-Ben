@@ -18,7 +18,7 @@
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set bits 6-7 to 10
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
-    
+
     function isValidContactNumber($ContactNumber){
         $minDigits = 10; 
         $maxDigits = 18;
@@ -124,10 +124,9 @@
         }
         
     }
-
-    function newUserWithCode($Username,$FirstName,$LastName,$Password,$TeamCode){
+    function newUserWithCode($strUsername,$FirstName,$LastName,$Password,$TeamCode){
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ? AND Status = 'ACTIVE'),'62C6E982-01B5-41B7-8395-7B2745A6B097')";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097')";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -148,9 +147,9 @@
 		 $statCustodial = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statCustodial->bind_param('sssss', $Username, $FirstName, $LastName, $Password, $TeamCode);
+		 $statCustodial->bind_param('sssss', $strUsername, $FirstName, $LastName, $Password, $TeamCode);
          if($statCustodial->execute()){
-            sendVerificationEmail($Username);
+            sendVerificationEmail($strUsername);
             return '{"Outcome":"New User Created"}';
          } else {
             return '{"Outcome":"Error"}';
@@ -232,7 +231,7 @@
         }
         //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?)";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -357,7 +356,7 @@
                  $statScouting->bind_param('ssssssss', $strTeamID, $TeamName, $TeamNumber, $City, $State, $ZIP, $Nation, $ContactNumber);
                  
                  if($statScouting->execute()){
-                    if(newUser($FirstName,$LastName,$Owner,$Password,$TeamNumber,'C1692D0B-A418-47E2-BABC-A6BAF94384E4') == '{"Outcome":"New User Created"}'){
+                    if(newUser($FirstName,$LastName,$Email,$Password,$strTeamID,'C1692D0B-A418-47E2-BABC-A6BAF94384E4') == '{"Outcome":"New User Created"}'){
                         return '{"Outcome":"'.$strTeamID.'"}';
                     } else {
                         return '{"Outcome":"Error Creating Team"}';

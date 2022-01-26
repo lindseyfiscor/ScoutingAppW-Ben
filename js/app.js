@@ -62,7 +62,7 @@ $(document).on('click','#btnJoin', function() {
         strTeamCode:$('#txtAccessCode').val(),
         strFirstName:$('#txtFirstName').val(),
         strLastName:$('#txtLastName').val(),
-        $strUserName:$('#txtEmail').val(),
+        strUserName:$('#txtEmail').val(),
         strPassword:$('#txtPassword').val(),
     },
     function(){
