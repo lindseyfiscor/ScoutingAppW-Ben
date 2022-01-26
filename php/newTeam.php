@@ -24,5 +24,18 @@
     $strEmail = strip_tags($strEmail);
     $strPassword = strip_tags($strPassword);
     
-    echo newTeam($strTeamName,$TeamNumber,$strCity,$strZIP,$strState,$strNation,$strPhone,$strFirstName,$strLastName,$strEmail,$strPassword);
+    var_dump($strTeamName);
+    var_dump($strTeamNumber);
+    var_dump($strCity);
+    var_dump($strZIP);
+    var_dump($strState);
+    var_dump($strNation);
+    var_dump($strPhone);
+    var_dump($strFirstName);
+    var_dump($strLastName);
+    var_dump($strEmail);
+    var_dump($strPassword);
+
+
+    //echo newTeam($strTeamName,$TeamNumber,$strCity,$strZIP,$strState,$strNation,$strPhone,$strFirstName,$strLastName,$strEmail,$strPassword);
 ?>

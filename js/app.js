@@ -1,7 +1,7 @@
 $(document).ready( function () {
-  $('.tblData').DataTable({
+  /*$('.tblData').DataTable({
         buttons: ['pageLength','colvis','copy','csv','excel','pdf','print']
-  });
+  }); */
 });
 
 $(document).on('click','.btnEditTeam', function() {
@@ -43,9 +43,9 @@ $(document).on('click','#btnNewTeam', function() {
         strTeamName:$('#txtTeamName').val(),
         strTeamNumber:$('#txtTeamNumber').val(),
         strCity:$('#txtCity').val(),
-        strZIP :$('#txtZIP').val(),
-        strState :$('#txtState').val(),
-        strNation :$('#txtNation').val(),
+        strZIP:$('#txtZIP').val(),
+        strState:$('#txtState').val(),
+        strNation:$('#txtNation').val(),
         strPhone:$('#txtPhone').val(),
         strFirstName:$('#txtFirstName').val(),
         strLastName:$('#txtLastName').val(),
@@ -59,11 +59,11 @@ $(document).on('click','#btnNewTeam', function() {
 
 $(document).on('click','#btnJoin', function() {
     $.post('../php/newUser.php', {
-        strTeamCode = $('#txtAccessCode').val(),
-        strFirstName = $('#txtFirstName').val(),
-        strLastName = $('#txtLastName').val(),
-        $strUserName = $('#txtEmail').val(),
-        strPassword = $('#txtPassword').val(),
+        strTeamCode:$('#txtAccessCode').val(),
+        strFirstName:$('#txtFirstName').val(),
+        strLastName:$('#txtLastName').val(),
+        $strUserName:$('#txtEmail').val(),
+        strPassword:$('#txtPassword').val(),
     },
     function(){
 
@@ -72,11 +72,11 @@ $(document).on('click','#btnJoin', function() {
 
 $(document).on('click','#btnLogin', function() {
     $.post('../php/verifyUsernamePassword.php', {
-        strTeamCode = $('#txtAccessCode').val(),
-        strFirstName = $('#txtFirstName').val(),
-        strLastName = $('#txtLastName').val(),
-        $strUserName = $('#txtEmail').val(),
-        strPassword = $('#txtPassword').val(),
+        strTeamCode:$('#txtAccessCode').val(),
+        strFirstName:$('#txtFirstName').val(),
+        strLastName:$('#txtLastName').val(),
+        $strUserName:$('#txtEmail').val(),
+        strPassword:$('#txtPassword').val(),
     },
     function(){
 
