@@ -1,16 +1,16 @@
 <?php
     require('config.php');
-    $strTeamName = $_GET['strTeamName'];
-    $strTeamNumber = $_GET['strTeamNumber'];
-    $strCity = $_GET['strCity'];
-    $strZIP  = $_GET['strState'];
-    $strState  = $_GET['strState'];
-    $strNation  = $_GET['strNation'];
-    $strPhone = $_GET['strPhone'];
-    $strFirstName = $_GET['strFirstName'];
-    $strLastName = $_GET['strLastName'];
-    $strEmail = $_GET['strEmail'];
-    $strPassword = $_GET['strPassword'];
+    $strTeamName = $_POST['strTeamName'];
+    $strTeamNumber = $_POST['strTeamNumber'];
+    $strCity = $_POST['strCity'];
+    $strZIP  = $_POST['strZIP'];
+    $strState  = $_POST['strState'];
+    $strNation  = $_POST['strNation'];
+    $strPhone = $_POST['strPhone'];
+    $strFirstName = $_POST['strFirstName'];
+    $strLastName = $_POST['strLastName'];
+    $strEmail = $_POST['strEmail'];
+    $strPassword = $_POST['strPassword'];
 
     $strTeamName = strip_tags($strTeamName);
     $strTeamNumber = strip_tags($strTeamNumber);
@@ -24,18 +24,8 @@
     $strEmail = strip_tags($strEmail);
     $strPassword = strip_tags($strPassword);
     
-    var_dump($strTeamName);
-    var_dump($strTeamNumber);
-    var_dump($strCity);
-    var_dump($strZIP);
-    var_dump($strState);
-    var_dump($strNation);
-    var_dump($strPhone);
-    var_dump($strFirstName);
-    var_dump($strLastName);
-    var_dump($strEmail);
-    var_dump($strPassword);
 
 
-    //echo newTeam($strTeamName,$TeamNumber,$strCity,$strZIP,$strState,$strNation,$strPhone,$strFirstName,$strLastName,$strEmail,$strPassword);
+
+    echo newTeam($strTeamName,$strTeamNumber,$strCity,$strZIP,$strState,$strNation,$strPhone,$strFirstName,$strLastName,$strEmail,$strPassword);
 ?>
