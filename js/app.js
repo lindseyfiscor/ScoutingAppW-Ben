@@ -38,18 +38,19 @@ $(document).on('click','.btnMinus', function() {
 })
 
 $(document).on('click','#btnNewTeam', function() {
+    console.log('btnNewTeam clicked');
     $.post('../php/newTeam.php', {
-        strTeamName = $('#txtTeamName').val(),
-        strTeamNumber = $('#txtTeamNumber').val(),
-        strCity = $('#txtCity').val(),
-        strZIP  = $('#txtZIP').val(),
-        strState  = $('#txtState').val(),
-        strNation  = $('#txtNation').val(),
-        strPhone = $('#txtPhone').val(),
-        strFirstName = $('#txtFirstName').val(),
-        strLastName = $('#txtLastName').val(),
-        strEmail = $('#txtEmail').val(),
-        strPassword = $('#txtPassword').val(),
+        strTeamName:$('#txtTeamName').val(),
+        strTeamNumber:$('#txtTeamNumber').val(),
+        strCity:$('#txtCity').val(),
+        strZIP :$('#txtZIP').val(),
+        strState :$('#txtState').val(),
+        strNation :$('#txtNation').val(),
+        strPhone:$('#txtPhone').val(),
+        strFirstName:$('#txtFirstName').val(),
+        strLastName:$('#txtLastName').val(),
+        strEmail:$('#txtEmail').val(),
+        strPassword:$('#txtPassword').val(),
     },
     function(){
 
