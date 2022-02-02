@@ -163,7 +163,7 @@
 
     function verifyUsernamePassword($strUsername,$strPassword){
         global $conScouting;
-        $strQuery = "SELECT Email FROM tblUsers WHERE UPPER(Email) = UPPER(?) AND UserPassword= ? AND UserStatus = 'ACTIVE'";
+        $strQuery = "SELECT Email FROM tblUsers WHERE UPPER(Email) = UPPER(?) AND UserPassword = ?";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -382,7 +382,7 @@
     function createNewSession($Username){
         global $conScouting;
         $strSessionID = guidv4();
-        $strQuery = "INSERT INTO tblCurrentSessions VALUES (?,?,SYSDATE(),SYSDATE(),(SELECT Team FROM tblUsers WHERE Email = ?),(SELECT InternalTeams.TeamID FROM tblUsers LEFT JOIN tblTeams ON tblUsers.Team = tblTeams.TeamID LEFT JOIN InternalTeams ON tblTeams.InternalTeamOwnership = InternalTeams.TeamID WHERE Email = ?))";
+        $strQuery = "INSERT INTO tblCurrentSessions VALUES (?,?,SYSDATE(),SYSDATE(),(SELECT Team FROM tblUsers WHERE Email = ?))";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -403,7 +403,7 @@
 		 $statCustodial = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statCustodial->bind_param('ssss', $strSessionID,$Username,$Username,$Username);
+		 $statCustodial->bind_param('sss', $strSessionID,$Username,$Username);
          if($statCustodial->execute()){
             return '{"Outcome":"'.$strSessionID.'"}';
          } else {

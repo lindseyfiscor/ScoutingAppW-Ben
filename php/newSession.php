@@ -1,7 +1,7 @@
 <?php
     require('config.php'); 
-    $strUsername = $_GET['strUsername'];
-    $strPassword = $_GET['strPassword'];
+    $strUsername = $_POST['strUsername'];
+    $strPassword = $_POST['strPassword'];
 
     $strUsername = strip_tags($strUsername);
     $strPassword = strip_tags($strPassword);
@@ -11,4 +11,5 @@
     } else {
         echo '{"Outcome":"Login Failed"}';
     }  
+    
 ?>
