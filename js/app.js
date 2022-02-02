@@ -115,11 +115,7 @@ $(document).on('click','#btnSignIn',function(){
             }) 
         } else {
             sessionStorage.setItem('ScoutFRCSessionID',objNewSessionResponse.Outcome);
-            Swal.fire({
-                icon: 'success',
-                title: 'Login Complete',
-                html: '<h3>Great Job!</h3>'
-            })
+            window.location.replace('index.html');
         }
     })
 })
