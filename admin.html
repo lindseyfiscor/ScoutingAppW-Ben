@@ -149,5 +149,10 @@
       <script src="js/app.js"></script>
       <script src="js/lib/sweetalert2.all.min.js"></script>
       <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+      <script>
+        if(!sessionStorage.getItem('ScoutFRCSessionID')){
+          window.location.replace("login.html");
+        }
+      </script>
     </body>
 </html>
