@@ -83,7 +83,6 @@ $(document).on('click','#btnLogin', function() {
 
     });
 });
-
 $(document).on('click','#btnSignIn',function(){
     var objNewSessionResponse;
     let blnError = false;
