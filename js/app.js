@@ -120,4 +120,4 @@ $(document).on('click','#btnSignIn',function(){
     })
 })
 
-$('#teamData').datatable();
+$('#teamData').DataTable();
