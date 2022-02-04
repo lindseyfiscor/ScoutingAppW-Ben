@@ -17,22 +17,22 @@
     $blnMoreThan16 = $_POST['blnMoreThan16'];
     $blnMoreWin = $_POST['blnMoreWin'];
 
-    $strTeamName = strip_tags($strUserSessionID);
+    $strUserSessionID = strip_tags($strUserSessionID);
     $intMatch = strip_tags($intMatch);
-    $intTeamScouting = strip_tags();
-    $strScoutingPosition = strip_tags();
-    $strTarmacStartingPosition = strip_tags();
-    $blnAutoTarmacTaxi = strip_tags();
-    $intAutoUpperHub = strip_tags();
-    $intAutoLowerHub = strip_tags();
-    $intTeleOpUpperHub = strip_tags();
-    $intTeleOpLowerHub = strip_tags();
-    $blnTeleOpShootsBalls = strip_tags();
-    $blnTeleOpPlaysDefense = strip_tags();
-    $strEndGameClimbing = strip_tags();
-    $blnMoreQuintet = strip_tags();
-    $blnMoreThan16 = strip_tags();
-    $blnMoreWin = strip_tags();
+    $intTeamScouting = strip_tags($intTeamScouting);
+    $strScoutingPosition = strip_tags($strScoutingPosition);
+    $strTarmacStartingPosition = strip_tags($strTarmacStartingPosition);
+    $blnAutoTarmacTaxi = strip_tags($blnAutoTarmacTaxi);
+    $intAutoUpperHub = strip_tags($intAutoUpperHub);
+    $intAutoLowerHub = strip_tags($intAutoLowerHub);
+    $intTeleOpUpperHub = strip_tags($intTeleOpUpperHub);
+    $intTeleOpLowerHub = strip_tags($intTeleOpLowerHub);
+    $blnTeleOpShootsBalls = strip_tags($blnTeleOpShootsBalls);
+    $blnTeleOpPlaysDefense = strip_tags($blnTeleOpPlaysDefense);
+    $strEndGameClimbing = strip_tags($strEndGameClimbing);
+    $blnMoreQuintet = strip_tags($blnMoreQuintet);
+    $blnMoreThan16 = strip_tags($blnMoreThan16);
+    $blnMoreWin = strip_tags($blnMoreWin);
   
     echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin);
 ?>

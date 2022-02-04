@@ -71,12 +71,72 @@ $(document).on('click','#btnJoin', function() {
     });
 });
 
+$(document).on('click','#btnSubmitObservation', function() {
+    let blnAutoTarmacTaxi;
+    if($('#autoTaxiYes:checked').val()){
+        blnAutoTarmacTaxi = 1;
+    } else {
+        blnAutoTarmacTaxi = 0;
+    }
+    let blnTeleOpShootsBalls;
+    if($('#teleRobotShootOpposite').val()){
+        blnTeleOpShootsBalls = 1;
+    } else {
+        blnTeleOpShootsBalls = 0;
+    }
+    let blnTeleOpPlaysDefense;
+    if($('#teleRobotShootOpposite').val()){
+        blnTeleOpPlaysDefense = 1;
+    } else {
+        blnTeleOpPlaysDefense = 0;
+    }
+    let blnMoreQuintet;
+    if($('#moreQuintetInAuto').val()){
+        blnMoreQuintet = 1;
+    } else {
+        blnMoreQuintet = 0;
+    }
+    let blnMoreThan16;
+    if($('#more16ClimbPts').val()){
+        blnMoreThan16 = 1;
+    } else {
+        blnMoreThan16 = 0;
+    }
+    let blnMoreWin;
+    if($('#moreWinMatch').val()){
+        blnMoreWin = 1;
+    } else {
+        blnMoreWin = 0;
+    }
+    
+    $.post('../php/newObservation.php', {
+        strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
+        intMatch:$('#txtMatchNumber').val(),
+        intTeamScouting:$('#txtTeamNumScounting').val(),
+        strScoutingPosition:$('#dpdwTeamPosition').val(),
+        strTarmacStartingPosition:$('input[name=radTarmacPlace]:checked').val(),
+        blnAutoTarmacTaxi:blnAutoTarmacTaxi,
+        intAutoUpperHub:$('#txtAutoBallsInUpper').text(),
+        intAutoLowerHub:$('#txtAutoBallsInLower').text(),
+        intTeleOpUpperHub:$('#txtTeleBallsInUpper').text(),
+        intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
+        blnTeleOpShootsBalls:blnTeleOpShootsBalls,
+        blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
+        strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
+        blnMoreQuintet:blnMoreQuintet,
+        blnMoreThan16:blnMoreThan16,
+        blnMoreWin:blnMoreWin
+    }, function(result){
+        console.log(result)
+    })
+})
+
 $(document).on('click','#btnLogin', function() {
     $.post('../php/verifyUsernamePassword.php', {
         strTeamCode:$('#txtAccessCode').val(),
         strFirstName:$('#txtFirstName').val(),
         strLastName:$('#txtLastName').val(),
-        $strUserName:$('#txtEmail').val(),
+        strUserName:$('#txtEmail').val(),
         strPassword:$('#txtPassword').val(),
     },
     function(){
