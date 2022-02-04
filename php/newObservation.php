@@ -34,20 +34,7 @@
     $blnMoreThan16 = strip_tags($blnMoreThan16);
     $blnMoreWin = strip_tags($blnMoreWin);
 
-    var_dump($strUserSessionID);
-    var_dump($intMatch);
-    var_dump($intTeamScouting);
-    var_dump($strScoutingPosition);
-    var_dump($strTarmacStartingPosition);
-    var_dump($blnAutoTarmacTaxi);
-    var_dump($intAutoUpperHub);
-    var_dump($intAutoLowerHub);
-    var_dump($blnTeleOpShootsBalls);
-    var_dump($blnTeleOpPlaysDefense);
-    var_dump($strEndGameClimbing);
-    var_dump($blnMoreQuintet);
-    var_dump($blnMoreThan16);
-    var_dump($blnMoreWin);
+    
   
     echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin);
 ?>

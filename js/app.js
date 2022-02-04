@@ -74,39 +74,39 @@ $(document).on('click','#btnJoin', function() {
 $(document).on('click','#btnSubmitObservation', function() {
     let blnAutoTarmacTaxi;
     if($('#autoTaxiYes:checked').val()){
-        blnAutoTarmacTaxi = 1;
+        blnAutoTarmacTaxi = true;
     } else {
-        blnAutoTarmacTaxi = 0;
+        blnAutoTarmacTaxi = false;
     }
     let blnTeleOpShootsBalls;
     if($('#teleRobotShootOpposite').val()){
-        blnTeleOpShootsBalls = 1;
+        blnTeleOpShootsBalls = true;
     } else {
-        blnTeleOpShootsBalls = 0;
+        blnTeleOpShootsBalls = false;
     }
     let blnTeleOpPlaysDefense;
     if($('#teleRobotShootOpposite').val()){
-        blnTeleOpPlaysDefense = 1;
+        blnTeleOpPlaysDefense = true;
     } else {
-        blnTeleOpPlaysDefense = 0;
+        blnTeleOpPlaysDefense = false;
     }
     let blnMoreQuintet;
     if($('#moreQuintetInAuto').val()){
-        blnMoreQuintet = 1;
+        blnMoreQuintet = true;
     } else {
-        blnMoreQuintet = 0;
+        blnMoreQuintet = false;
     }
     let blnMoreThan16;
     if($('#more16ClimbPts').val()){
-        blnMoreThan16 = 1;
+        blnMoreThan16 = true;
     } else {
-        blnMoreThan16 = 0;
+        blnMoreThan16 = false;
     }
     let blnMoreWin;
     if($('#moreWinMatch').val()){
-        blnMoreWin = 1;
+        blnMoreWin = true;
     } else {
-        blnMoreWin = 0;
+        blnMoreWin = false;
     }
     
     $.post('../php/newObservation.php', {
@@ -178,4 +178,36 @@ $(document).on('click','#btnSignIn',function(){
             window.location.replace('index.html');
         }
     })
+})
+
+$(document).on('click','.btn-more-match-info',function(){
+    let strObservationID = $(this).attr('data-observationid');
+    $.each(arrObjObservation,function(i,observation){
+        if(observation.ObservationID == strObservationID){
+            $('#txtModObservationDetailsMatch').text(observation.Match);
+            $('#txtModObservationDetailsWin').text(observation.MoreWin);
+            if(observation.MoreWin == "true") {
+                $('#txtModObservationDetailsWin').addClass('text-danger');
+                $('#txtModObservationDetailsWin').addClass('text-success');
+            } else {
+                $('#txtModObservationDetailsWin').addClass('text-success');
+                $('#txtModObservationDetailsWin').addClass('text-danger');
+            }
+            $('#txtModObservationTeam').text(observation.TeamScouting);
+            //$('#txtModObservationDetailsRankingPoints').text(observation.Match);
+            $('#txtModObservationDetailsDriverPosition').text(observation.ScoutingPosition);
+            $('#txtModObservationDetailsTarmacPosition').text(observation.TarmacStartingPosition);
+            $('#txtModObservationDetailsClimbing').text(observation.EndGameClimbing);
+            $('#txtModObservationDetailsQuintet').text(observation.MoreQuintet);
+            $('#txtModObservationDetailsTaxi').text(observation.AutoTarmacTaxi);
+            $('#txtModObservationDetailsAutoUpperHub').text(observation.AutoUpperHub);
+            $('#txtModObservationDetailsAutoLowerHub').text(observation.AutoLowerHub);
+            $('#txtModObservationDetailsBalls').text(observation.TeleOpShootsBalls);
+            $('#txtModObservationDetailsDefense').text(observation.TeleOpPlaysDefense);
+            $('#txtModObservationDetailsTeleOpUpperHub').text(observation.TeleOpUpperHub);
+            $('#txtModObservationDetailsTeleOpLowerHub').text(observation.TeleOpLowerHub);
+            
+        }
+    })
+    
 })

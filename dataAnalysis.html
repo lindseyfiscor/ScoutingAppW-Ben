@@ -51,7 +51,6 @@
                     <div class="card-header">Data Analysis</div>
                         <div class="card-body">
                             <div style="overflow-x:auto;">
-                                
                                   <table class="table tblData" id="teamData">
                                     <thead>
                                         <tr><th>Match #</th>
@@ -62,17 +61,7 @@
                                             <!--<th>Auto Lower</th><th>Auto Top</th><th>Auto Center</th><th>Picked Up Balls</th><th>Movement in Auto?</th><th>Auto Penalties?</th><th>TeleOp Lower</th><th>TeleOp Top</th><th>TeleOp Center</th><th>Goes under Trench?</th><th>Plays Defense?</th><th>Rotation Control</th><th>Position Control</th><th style="width:200px">TeleOp Picked Up Balls from?</th><th>Climbed?</th><th>End Energy Stage</th><th>Number of Ranking Points Recieved</th><th>Showed Up?</th><th>Bricked?</th><th>Penalty Cards?</th>-->
                                     </thead>
                                     <tbody>
-                                      <tr><td>4</td><td>4265</td><td>Yes</td><td>Blue 2</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>4</td><td>1234</td><td>No</td><td>Blue 3</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>3</td><td>3140</td><td>No</td><td>Red 2</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>4</td><td>4576</td><td>Yes</td><td>Red 1</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>7</td><td>4265</td><td>No</td><td>Blue 3</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>2</td><td>16</td><td>Yes</td><td>Blue 2</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>9</td><td>3140</td><td>Yes</td><td>Blue 1</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>4</td><td>1466</td><td>Yes</td><td>Red 3</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>5</td><td>16</td><td>No</td><td>Red 2</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                      <tr><td>10</td><td>4576</td><td>Yes</td><td>Blue 2</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>View</button></td></tr>
-                                
+                                      
                                   </tbody>
                                 </table>
                             </div>
@@ -83,46 +72,46 @@
       </div>
 
       <div id="dataModals">
-        <div class="modal fade" id="modUserEdit" aria-labelledby="More Data" aria-hidden="true">
+        <div class="modal fade" id="modObservationDetails" aria-labelledby="More Data" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">4265 Secret City Wildbots</h4>
+                <h4 class="modal-title"><span id="txtModObservationTeam"></span></h4>
                 
               </div>
               <div class="modal-body">
                   <div class="flex-container">
-                    <div>Match # 4</div>
-                    <div>Win: Yes</div>
-                    <div># Ranking Points: 2</div>
+                    <h3>Match #<span id="txtModObservationDetailsMatch"></span></h3>
+                    <div class="ml-2"><i class="fas fa-trophy text-primary text-bold mr-2"></i>Win: <span id="txtModObservationDetailsWin"></span></div>
+                    <div class="ml-2"><i class="fas fa-hashtag text-primary text-bold mr-2"></i>Ranking Points: <span id="txtModObservationDetailsRankingPoints"></span></div>
                   </div>
                   <div class="flex-container">
-                    <div>Driver Position: R3</div>
-                    <div>Tarmac Position: TR4</div>
+                    <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Driver Position: <span id="txtModObservationDetailsDriverPosition"></span></div>
+                    <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Tarmac Position: <span id="txtModObservationDetailsTarmacPosition"></span></div>
                   </div>
                   <div class="flex-container">
-                    <div>Climbing: Failed</div>
+                    <div class="ml-2"><i class="fas fa-mountain text-primary text-bold mr-2"></i>Climbing: <span id="txtModObservationDetailsClimbing"></span></div>
                   </div><p>
                   <div>
-                    <h5><u>Auto</u></h5>
+                    <h3 class="mt-4">Auto</h3>
                     <div class="flex-container">
-                      <div>Quintet: Yes</div>
-                      <div>Taxi: Yes</div>
+                      <div class="ml-2"><i class="fas fa-hat-cowboy text-primary text-bold mr-2"></i>Quintet: <span id="txtModObservationDetailsQuintet"></span></div>
+                      <div class="ml-2"><i class="fas fa-taxi text-primary text-bold mr-2"></i>Taxi: <span id="txtModObservationDetailsTaxi"></span></div>
                     </div>
                     <div class="flex-container">
-                      <div>Upper Hub: 05</div>
-                      <div>Lower Hub: 00</div>
+                      <div class="ml-2"><i class="fas fa-arrow-circle-up text-primary text-bold mr-2"></i>Upper Hub: <span id="txtModObservationDetailsAutoUpperHub"></span></div>
+                      <div class="ml-2"><i class="fas fa-arrow-circle-down text-primary text-bold mr-2"></i>Lower Hub: <span id="txtModObservationDetailsAutoLowerHub"></span></div>
                     </div>
                   </div>
                   <div>
-                    <h5><u>TeleOp</u></h5>
+                    <h3 class="mt-4">TeleOp</h3>
                     <div class="flex-container">
-                      <div>Only Alliance Color Balls: Yes</div>
-                      <div>Played Defense: No</div>
+                      <div class="ml-2"><i class="fas fa-baseball-ball text-primary text-bold mr-2"></i>Only Alliance Color Balls: <span id="txtModObservationDetailsBalls"></span></div>
+                      <div class="ml-2"><i class="fas fa-shield-alt text-primary text-bold mr-2"></i>Played Defense: <span id="txtModObservationDetailsDefense"></span></div>
                     </div>
                     <div class="flex-container">
-                      <div>Upper Hub: 05</div>
-                      <div>Lower Hub: 05</div>
+                      <div class="ml-2"><i class="fas fa-arrow-circle-up text-purple text-bold mr-2"></i>Upper Hub: <span id="txtModObservationDetailsTeleOpUpperHub"></span></div>
+                      <div class="ml-2"><i class="fas fa-arrow-circle-down text-purple text-bold mr-2"></i>Lower Hub: <span id="txtModObservationDetailsTeleOpLowerHub"></span></div>
                     </div>
                   </div>
               </div>
@@ -141,5 +130,28 @@
       <script src="js/lib/sweetalert2.all.min.js"></script>
       <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
       <script src="js/app.js"></script>
+      <script>
+       var arrObjObservation;
+       if(!sessionStorage.getItem('ScoutFRCSessionID')){
+            window.location.replace('login.html');
+        } else {
+            $.getJSON('php/verifySession.php?strSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'), function(result){
+                let objVerifyResponse = result;
+                if(objVerifyResponse.Outcome == 'InValid'){
+                    sessionStorage.removeItem('ScoutFRCSessionID');
+                    window.location.replace('login.html');
+                } else {
+                  $.getJSON('php/getTeamObservations.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
+                   arrObjObservation = result;
+                    $.each(result,function(i,observation){
+                      let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.MoreWin + '</td><td>' + observation.ScoutingPosition + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                      $('#teamData').append(strTableRowHTML);
+                    })
+                    $('#teamData').DataTable();
+                  })
+                }
+            })
+        }
+      </script>
     </body>
 </html>

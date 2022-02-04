@@ -20,33 +20,37 @@
     }
 
     function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin){
-        global $conScouting;
-        $strObservationID = guidv4();
-        $strQuery = 'INSERT INTO tblObservations VALUES ("?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
-        if ($conScouting->connect_errno) {
-            $blnError = "true";
-            $strErrorMessage = $conScouting->connect_error;
-            $arrError = array('error' => $strErrorMessage);
-            echo json_encode($arrError);
-            exit();
+        try{
+            global $conScouting;
+            $strObservationID = guidv4();
+            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+        
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+
+            $statScouting = $conScouting->prepare($strQuery);
+            // Bind Parameters
+            $statScouting->bind_param('sssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID);
+            if($statScouting->execute()){
+                return '{"Outcome":"'.$strObservationID.'"}';
+            } else {
+                return '{"Outcome":"Error"}';
+            }
+        } catch (exception $e) {
+            echo 'Error: '.$e;
         }
-      
-        if ($conScouting->ping()) {
-        } else {
-            $blnError = "true";
-            $strErrorMessage = $conScouting->error;
-            $arrError = array('error' => $strErrorMessage);
-            echo json_encode($arrError);
-        }
-      
-		 $statScouting = $conScouting->prepare($strQuery);
-        // Bind Parameters
-        $statScouting->bind_param('siissiiiiiiisiiis', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID);
-        if($statScouting->execute()){
-            return '{"Outcome":"'.$strObservationID.'"}';
-         } else {
-            return '{"Outcome":"Error"}';
-         }
     }
 
     function verifySession($strUserSessionID){
