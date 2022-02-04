@@ -179,5 +179,3 @@ $(document).on('click','#btnSignIn',function(){
         }
     })
 })
-
-$('#teamData').DataTable();
