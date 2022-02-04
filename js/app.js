@@ -112,7 +112,7 @@ $(document).on('click','#btnSubmitObservation', function() {
     $.post('../php/newObservation.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
         intMatch:$('#txtMatchNumber').val(),
-        intTeamScouting:$('#txtTeamNumScounting').val(),
+        intTeamScouting:$('#txtTeamNumScouting').val(),
         strScoutingPosition:$('#dpdwTeamPosition').val(),
         strTarmacStartingPosition:$('input[name=radTarmacPlace]:checked').val(),
         blnAutoTarmacTaxi:blnAutoTarmacTaxi,

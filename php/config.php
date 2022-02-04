@@ -41,7 +41,7 @@
       
 		 $statScouting = $conScouting->prepare($strQuery);
         // Bind Parameters
-        $statScouting->bind_param('siisssiiiisssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID);
+        $statScouting->bind_param('siissiiiiiiisiiis', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID);
         if($statScouting->execute()){
             return '{"Outcome":"'.$strObservationID.'"}';
          } else {
