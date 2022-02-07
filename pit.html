@@ -6,15 +6,33 @@
         <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          input[type=text] {
+            width: 500px;
+          }
+          input[type=number] {
+            width: 250px;
+          }
+          
+          select {
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+            border-radius: 3px;
+          }
+        </style>
     </head>
     <body class="bg-secondary">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <a class="navbar-brand" href="index.html">Scout<span class="text-bold">FRC</span></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-Target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <i class="fas fa-hippo"></i>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
           </button>
         
-          <div class="collapse navbar-collapse">
+          <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
                 <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
@@ -56,7 +74,7 @@
                                   Yes
                                 </label>
                             </div>-->
-                          <label for="radClimbing">Robot Shape</label>
+                          <div><label for="radClimbing">Robot Shape</label>
                               <div class="form-group form-check-inline">
                                   <input class="form-check-input" type="radio" name="pitRobotShape" id="pitRobotShapeSquare" value="Sq">
                                   <label class="form-check-label" for="pitRobotShapeSquare">Square</label>
@@ -73,7 +91,21 @@
                                 <input class="form-check-input" type="radio" name="pitRobotShape" id="pitRobotShapeCircle" value="Cr">
                                 <label class="form-check-label" for="pitRobotShapeCircle">Circle</label>
                             </div>
-                          </label>
+                          </div>
+                          <div class="form-inline">
+                            <label for="pitRobotHeight">Starting Robot Height:     </label>
+                            <input type="number" class="form-control" id="pitRobotHeight">
+                          </div>
+                          Is Robot Height Extendable: <div class="form-group form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pitExtendYes" value="pitExtendYes">
+                            <label class="form-check-label" for="pitExtendYes">Yes</label>
+                          </div>
+                          
+                          
+                          Drivetrain type:
+                          <div class="form-group form-check-inline">
+                              <input class="form-check-input" type="text" id="pitDrivetrain">     
+                          </div> <br>
                             <div class="form-group col-12 col-md-6 col-lg-4">
                                 <h3 class="mt-3 text-center"># Motors Drivetrain</h3>
                                 <div class="row col-12 justify-content-center"> 
@@ -82,15 +114,68 @@
                                     <button id="pitBtnNumDriveMotors" class="btn btn-success btnPlus" aria-label="Add Balls"><i class="fas fa-plus"></i></button>
                                 </div>
                             </div> 
-                            wheels                            
-                            Floor Pickup:
-                            <div class="form-group form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="pitFloorPickup" value="pitFloorPickup">
-                                <label class="form-check-label" for="pitFloorPickup">
-                                  Yes
-                                </label>
-                            </div> <br>
-                            If they have floor pickup, is it:
+                            <div class="form-group col-12 col-md-6 col-lg-4">
+                              <h3 class="mt-3 text-center"># Wheels Drivetrain</h3>
+                              <div class="row col-12 justify-content-center"> 
+                                  <button id="pitBtnNumDriveWheels" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls"><i class="fas fa-minus"></i></button>
+                                  <h3 class="mr-3"> <span id="txtPitBtnNumDriveWheels" class="txtSum">0</span></h3>
+                                  <button id="pitBtnNumDriveWheels" class="btn btn-success btnPlus" aria-label="Add Balls"><i class="fas fa-plus"></i></button>
+                              </div>
+                          </div>  
+                          <div class="form-group">
+                            <label for="dpdwWheelType">Drivetrain Wheel Type</label>
+                            <select class="form-control" id="dpdwWheelType">
+                                <option value="CH">Choose</option> 
+                                <option value="ME">Mecanum</option>
+                                <option value="CO">Colson</option>
+                                <option value="OM">Omni</option>
+                                <option value="SB">Saw Blade</option>
+                                <option value="PN">Pneumatic</option>
+                                <option value="TR">Traction</option>
+                                <option value="KP">KoP</option>
+                                <option value="SL">Slick</option>
+                                <option value="AM">AndyMark/VEX Pro</option>
+                                <option value="OT">Other</option>
+                            </select>
+                          </div>   
+                          <div class="form-group">
+                            <label for="dpdwMotorType">DriveTrain Motor Type</label>
+                            <select class="form-control" id="dpdwMotorType">
+                                <option value="CH">CH</option>
+                                <option value="FA">Falcon</option> 
+                                <option value="TA">Talon</option>
+                                <option value="BA">Bag</option>
+                                <option value="NE">Neo</option>
+                                <option value="CI">CIM</option>
+                                <option value="OT">Other</option>
+                            </select>
+                          </div>                        
+                            <div class="form-group col-12 col-md-6 col-lg-4">
+                              <label for="pitRadBallCollection"></label>Ball Collection:<br>
+                                  <div class="form-group form-check-inline">
+                                      <input class="form-check-input" type="radio" name="pitRadBallCollection" id="pitRadBallCollectionFloor" value="FL">
+                                      <label class="form-check-label" for="pitRadBallCollectionFloor">Floor Pickup</label>
+                                  </div>
+                                  <div class="form-group form-check-inline">
+                                      <input class="form-check-input" type="radio" name="pitRadBallCollection" id="pitRadBallCollectionFeeder" value="FE">
+                                      <label class="form-check-label" for="pitRadBallCollectionFeeder">Feeder Station</label>
+                                  </div>
+                                  <div class="form-group form-check-inline">
+                                      <input class="form-check-input" type="radio" name="pitRadBallCollection" id="pitRadBallCollectionBoth" value="BO">
+                                      <label class="form-check-label" for="pitRadBallCollectionBoth">Both</label>
+                                  </div>
+                                  <div class="form-group form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pitRadBallCollection" id="pitRadBallCollectionNeither" value="NA">
+                                    <label class="form-check-label" for="pitRadBallCollectionNeither">Neither</label>
+                                  </div>
+                                  <div class="form-group form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pitRadBallCollection" id="pitRadBallCollectionCantTell" value="CT">
+                                    <label class="form-check-label" for="pitRadBallCollectionCantTell">Can't tell/ Robot is in disarray</label>
+                                  </div>
+                              </div>
+                            
+                            
+                            If they have floor pickup, is it: <br>
                             <div class="form-group form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="pitOverBumper" value="pitOverBumper">
                                 <label class="form-check-label" for="pitOverBumper">
@@ -103,14 +188,23 @@
                                   Through Bumper
                                 </label>
                             </div> <br>
-
-                            Feeder Station:
                             <div class="form-group form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="pitFeederStation" value="pitFeederStation">
-                                <label class="form-check-label" for="pitFeederStation">
-                                  Yes
-                                </label>
-                            </div> <br>
+                              <input class="form-check-input" type="checkbox" id="pitExtendable" value="pitExtendable">
+                              <label class="form-check-label" for="pitExtendable">
+                                Extendable
+                              </label>
+                          </div><br>
+                          <div class="form-group form-check-inline">
+                              <input class="form-check-input" type="checkbox" id="pitInternal" value="pitInternal">
+                              <label class="form-check-label" for="pitInternal">
+                                Internal
+                              </label>
+                          </div> <br>
+                          Has Shooter: <div class="form-group form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="pitHasShooterYes" value="pitHasShooterYes">
+                            <label class="form-check-label" for="pitHasShooterYes">Yes</label>
+                          </div><br>
+                          
                             Robot can do:
                             <div class="form-group form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="pitUpperHab" value="pitUpperHab">
@@ -124,10 +218,32 @@
                                   Lower Hab
                                 </label>
                             </div> <br>
-                            Drivetrain type
+                            <div class="form-group">
+                              <label for="dpdwShooterType">Shooter Type</label>
+                              <select class="form-control" id="dpdwShooterType">
+                                  <option value="CH">Choose</option>
+                                  <option value="NA">No Shooter</option>
+                                  <option value="CO">Cowl</option> 
+                                  <option value="DC">Double Canister</option>
+                                  <option value="CA">Catapult</option>
+                                  <option value="SN">Snake</option>
+                                  <option value="OT">Other</option>
+                              </select>
+                            </div>
+                            If have shooter, special Features:
                             <div class="form-group form-check-inline">
-                                <input class="form-check-input" type="text" id="pitDrivetrain" value="swerve, butterfly, tank, etc">     
-                            </div> <br>
+                                <input class="form-check-input" type="checkbox" id="pitTurretYes" value="pitTurretYes">
+                                <label class="form-check-label" for="pitTurretYes">
+                                  Turret
+                                </label>
+                            </div>
+                            <div class="form-group form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="pitLLYes" value="pitLLYes">
+                                <label class="form-check-label" for="pitLLYes">
+                                  LimeLight
+                                </label>
+                            </div> <br> 
+
                             <label for="radClimbing">Max Number of Balls Can Hold</label>
                                 <div class="form-group form-check-inline">
                                     <input class="form-check-input" type="radio" name="pitMaxBalls" id="pitMaxBallsZero" value="pitMaxBallsZero">
@@ -142,17 +258,22 @@
                                     <label class="form-check-label" for="pitMaxBallsTwo">2</label>
                                 </div>
                             </label>
+
+                            <div>
+                              <label for="superTextBox">Follow up to the above</label> <br>
+                              <textarea id="superTextBox" name="superTextBox" rows="4" cols="50">Things of note, good and bad</textarea>
+                          </div>
                         </div>
                     </div>
                 </div>
+
                 <div class=" col-12 col-lg-10 offset-lg-1 mt-3">
                     <div class="card">
                         <div class="card-header">Submit</div>
                         <div class="card-body">
                             <div class="col-12 d-flex flex-row justify-content-around">
-                                <button type="button" class="btn btn-primary mb-3 col-5 col-md-5 col-lg-4">Submit</button>     
-                                     
-                                <button type="button" class="btn btn-secondary mb-3 col-5 col-md-5 col-lg-4">Reset</button>
+                                <button type="button" id="btnSubmitPit"class="btn btn-primary mb-3 col-5 col-md-5 col-lg-4">Submit</button>     
+                                <button type="button" id="btnResetObservationForm" class="btn btn-secondary mb-3 col-5 col-md-5 col-lg-4">Reset</button>
                               </div>
                         </div>
                     </div>
@@ -162,7 +283,7 @@
         <script src="https://kit.fontawesome.com/ee41ca2f02.js" crossorigin="anonymous"></script>
         <script src="js/lib/jquery-3.6.0.min.js"></script>
         <script src="js/lib/bootstrap.bundle.min.js"></script>
-        <script src="js/app.js"></script>
         <script src="js/lib/sweetalert2.all.min.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
