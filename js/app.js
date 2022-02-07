@@ -131,6 +131,97 @@ $(document).ready( function () {
       })
       window.location.reload();
   })
+
+  $(document).on('click','#btnSubmitPit', function() {
+    let blnRobotHeightExtend;
+    if($('#pitExtendYes:checked').val()){
+        blnRobotHeightExtend = true;
+    } else {
+        blnRobotHeightExtend = false;
+    }
+    let blnOverBumper;
+    if($('#pitOverBumper').val()){
+        blnOverBumper = true;
+    } else {
+        blnOverBumper = false;
+    }
+    let blnThroughBumper;
+    if($('#pitThroughBumper').val()){
+        blnThroughBumper = true;
+    } else {
+        blnThroughBumper = false;
+    }
+    let blnIntakeExtendable;
+    if($('#pitExtendable').val()){
+        blnIntakeExtendable = true;
+    } else {
+        blnIntakeExtendable = false;
+    }
+    let blnIntakeInternal;
+    if($('#pitInternal').val()){
+        blnIntakeInternal = true;
+    } else {
+        blnIntakeInternal = false;
+    }
+    let blnHasShooter;
+    if($('#pitHasShooterYes').val()){
+        blnHasShooter = true;
+    } else {
+        blnHasShooter = false;
+    }
+    let blnUpperHab;
+    if($('#pitUpperHab').val()){
+        blnUpperHab = true;
+    } else {
+        blnUpperHab = false;
+    }
+    let blnLowerHab;
+    if($('#pitLowerHab').val()){
+        blnLowerHab = true;
+    } else {
+        blnLowerHab = false;
+    }
+    let blnTurret;
+    if($('#pitTurretYes').val()){
+        blnTurret = true;
+    } else {
+        blnTurret = false;
+    }
+    let blnLimeLight;
+    if($('#pitLLYes').val()){
+        blnLimeLight = true;
+    } else {
+        blnLimeLight = false;
+    }
+    
+    $.post('../php/newPitCollect.php', {
+        strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
+        strRobotShape:$('input[name=pitRobotShape]:checked').val(),
+        intHeight:$("#pitRobotHeight").val(),
+        blnRobotHeightExtend:blnRobotHeightExtend,
+        strRobotDriveTrain:$('#pitDrivetrain').text(), //.text() right?
+        intDriveTrainMotors:$('#txtPitBtnNumDriveMotors').text(),
+        intDriveTrainWheels:$('#txtPitBtnNumDriveWheels').text(),
+        strDriveWheelType:$('#dpdwWheelType').val(),
+        strDriveMotorType:$('#dpdwMotorType').val(),
+        strBallCollection:$('input[name=pitRadBallCollection]:checked').val(),
+        blnOverBumper:blnOverBumper,
+        blnThroughBumper:blnThroughBumper,
+        blnIntakeExtendable:blnIntakeExtendable,
+        blnIntakeInternal:blnIntakeInternal,
+        blnHasShooter:blnHasShooter,
+        blnUpperHab:blnUpperHab,
+        blnLowerHab:blnLowerHab,
+        strShooterType:$('#dpdwShooterType').val(),
+        blnTurret:blnTurret,
+        blnLimeLight:blnLimeLight,
+        strBallCapacity:$('input[name=pitMaxBalls]:checked').val(),
+        strNotes:$('#pitSuperTextBox').text(),
+    }, function(result){
+        console.log(result)
+    })
+    window.location.reload();
+})
   
   $(document).on('click','#btnResetObservationForm', function() {
     window.location.reload();
