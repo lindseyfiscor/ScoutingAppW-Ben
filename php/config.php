@@ -53,6 +53,40 @@
         }
     }
 
+    function addPitCollect($strUserSessionID,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes){
+        try{
+            global $conScouting;
+            $strObservationID = guidv4(); //new to change strObservationID to strPitID?
+            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+        
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+
+            $statScouting = $conScouting->prepare($strQuery);
+            // Bind Parameters
+            $statScouting->bind_param('sssssssssssssssssssssss', $strObservationID,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes,$strUserSessionID);
+            if($statScouting->execute()){
+                return '{"Outcome":"'.$strObservationID.'"}';
+            } else {
+                return '{"Outcome":"Error"}';
+            }
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
     function verifySession($strUserSessionID){
         global $conScouting;
         $strQuery = "SELECT SessionID FROM tblCurrentSessions WHERE SessionID = ? AND StartTime >= NOW() - INTERVAL 12 HOUR";
