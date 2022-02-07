@@ -196,10 +196,11 @@ $(document).ready( function () {
     
     $.post('../php/newPitCollect.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
+        intPitTeamNum:$('#pitTeamNum').val(),
         strRobotShape:$('input[name=pitRobotShape]:checked').val(),
         intHeight:$("#pitRobotHeight").val(),
         blnRobotHeightExtend:blnRobotHeightExtend,
-        strRobotDriveTrain:$('#pitDrivetrain').text(), //.text() right?
+        strRobotDriveTrain:$('#dpdwDriveTrainType').val,
         intDriveTrainMotors:$('#txtPitBtnNumDriveMotors').text(),
         intDriveTrainWheels:$('#txtPitBtnNumDriveWheels').text(),
         strDriveWheelType:$('#dpdwWheelType').val(),
@@ -210,13 +211,23 @@ $(document).ready( function () {
         blnIntakeExtendable:blnIntakeExtendable,
         blnIntakeInternal:blnIntakeInternal,
         blnHasShooter:blnHasShooter,
-        blnUpperHab:blnUpperHab,
-        blnLowerHab:blnLowerHab,
         strShooterType:$('#dpdwShooterType').val(),
         blnTurret:blnTurret,
         blnLimeLight:blnLimeLight,
         strBallCapacity:$('input[name=pitMaxBalls]:checked').val(),
-        strNotes:$('#pitSuperTextBox').text(),
+        strNotes:$('#pitTextBox').text(),
+    }, function(result){
+        console.log(result)
+    })
+    window.location.reload();
+})
+
+$(document).on('click','#btnSubmitSuperScout', function() {
+    
+    $.post('../php/newSuper.php', {
+        strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
+        intSuperMatch:$('#superMatchNumber').val(),
+        strSuperNotes:$('#superTextBox').text(),
     }, function(result){
         console.log(result)
     })
