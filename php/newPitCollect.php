@@ -1,6 +1,7 @@
 <?php
     require('config.php');
     $strUserSessionID = $_POST['strUserSessionID'];
+    $intPitTeamNum = $_POST['intPitTeamNum'];
     $strRobotShape = $_POST['strRobotShape'];
     $intHeight = $_POST['intHeight'];
     $blnRobotHeightExtend = $_POST['blnRobotHeightExtend'];
@@ -15,8 +16,6 @@
     $blnIntakeExtendable = $_POST['blnIntakeExtendable'];
     $blnIntakeInternal = $_POST['blnIntakeInternal'];
     $blnHasShooter = $_POST['blnHasShooter'];
-    $blnUpperHab = $_POST['blnUpperHab'];
-    $blnLowerHab = $_POST['blnLowerHab'];
     $strShooterType = $_POST['strShooterType'];
     $blnTurret = $_POST['blnTurret'];
     $blnLimeLight = $_POST['blnLimeLight'];
@@ -25,6 +24,7 @@
 
 
     $strUserSessionID = strip_tags($strUserSessionID);
+    $intPitTeamNum = strip_tags($intPitTeamNum);
     $strRobotShape = strip_tags($strRobotShape);
     $intHeight = strip_tags($intHeight);
     $blnRobotHeightExtend = strip_tags($blnRobotHeightExtend);
@@ -39,14 +39,12 @@
     $blnIntakeExtendable = strip_tags($blnIntakeExtendable);
     $blnIntakeInternal = strip_tags($blnIntakeInternal);
     $blnHasShooter = strip_tags($blnHasShooter);
-    $blnUpperHab = strip_tags($blnUpperHab);
-    $blnLowerHab = strip_tags($blnLowerHab);
     $strShooterType = strip_tags($strShooterType);
     $blnTurret = strip_tags($blnTurret);
     $blnLimeLight = strip_tags($blnLimeLight);
     $strBallCapacity = strip_tags($strBallCapacity);
     $strNotes = strip_tags($strNotes);
 
-    echo addObservation($strUserSessionID,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes);
+    echo addObservation($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes);
 
 ?>

@@ -53,11 +53,11 @@
         }
     }
 
-    function addPitCollect($strUserSessionID,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes){
+    function addPitCollect($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes){
         try{
             global $conScouting;
             $strObservationID = guidv4(); //new to change strObservationID to strPitID?
-            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -76,7 +76,41 @@
 
             $statScouting = $conScouting->prepare($strQuery);
             // Bind Parameters
-            $statScouting->bind_param('sssssssssssssssssssssss', $strObservationID,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes,$strUserSessionID);
+            $statScouting->bind_param('ssssssssssssssssssssss', $strObservationID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes,$strUserSessionID);
+            if($statScouting->execute()){
+                return '{"Outcome":"'.$strObservationID.'"}';
+            } else {
+                return '{"Outcome":"Error"}';
+            }
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
+    function addSuper($strUserSessionID,$intSuperMatch,$strSuperNotes){
+        try{
+            global $conScouting;
+            $strObservationID = guidv4(); //new to change strObservationID to strSuperID?
+            $strQuery = 'INSERT INTO tblSuper VALUES (?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+        
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+
+            $statScouting = $conScouting->prepare($strQuery);
+            // Bind Parameters
+            $statScouting->bind_param('ssss', $strObservationID,$intSuperMatch,$strSuperNotes,$strUserSessionID);
             if($statScouting->execute()){
                 return '{"Outcome":"'.$strObservationID.'"}';
             } else {
