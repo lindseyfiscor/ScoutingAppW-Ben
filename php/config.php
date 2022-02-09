@@ -195,6 +195,78 @@
         
         $statScouting->close();
     }
+
+    function getTeamKey($strUserSessionID){
+        global $conScouting;
+        $strQuery = "SELECT TeamKey FROM tblTeams WHERE TeamID = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID =?)";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('s', $strUserSessionID);
+         $statScouting->execute();      
+         $result = $statScouting->get_result();
+        $myArray = array();
+
+        while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $myArray[] = $row;
+        }
+        echo json_encode($myArray);
+        
+        $statScouting->close();
+    }
+
+    function getTeamObservations($strUserSessionID){
+        global $conScouting;
+        $strQuery = "SELECT * FROM tblObservations WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?))";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('s', $strUserSessionID);
+         $statScouting->execute();      
+         $result = $statScouting->get_result();
+        $myArray = array();
+
+        while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                $myArray[] = $row;
+        }
+        echo json_encode($myArray);
+        
+        $statScouting->close();
+    }
     
     function isValidContactNumber($ContactNumber){
         $minDigits = 10; 
@@ -301,6 +373,7 @@
         }
         
     }
+    
     function newUserWithCode($strUsername,$FirstName,$LastName,$Password,$TeamCode){
         global $conScouting;
         $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097')";

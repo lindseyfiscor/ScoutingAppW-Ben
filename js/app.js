@@ -215,9 +215,26 @@ $(document).ready( function () {
         blnTurret:blnTurret,
         blnLimeLight:blnLimeLight,
         strBallCapacity:$('input[name=pitMaxBalls]:checked').val(),
-        strNotes:$('#pitTextBox').text(),
+        strNotes:$('#pitTextBox').text()
     }, function(result){
-        console.log(result)
+        let objResult = JSON.parse(result);
+        if(objResult.Outcome != 'Error'){
+            Swal.fire({
+                postion: 'top-end',
+                icon: 'success',
+                title: 'Pit observation recorded',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                //Reset form
+            })
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Pit observation not recorded',
+                html: '<p>Please check your form and try again</p>'
+            })
+        }
     })
     window.location.reload();
 })
@@ -227,9 +244,27 @@ $(document).on('click','#btnSubmitSuperScout', function() {
     $.post('../php/newSuper.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
         intSuperMatch:$('#superMatchNumber').val(),
-        strSuperNotes:$('#superTextBox').text(),
+        strSuperNotes:$('#superTextBox').text()
     }, function(result){
-        console.log(result)
+        let objResult = JSON.parse(result);
+        if(objResult.Outcome != 'Error'){
+            Swal.fire({
+                postion: 'top-end',
+                icon: 'success',
+                title: 'Super observation recorded',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                $('#superMatchNumber').val('');
+                $('#superTextBox').text('');
+            })
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Super not recorded',
+                html: '<p>Please check your form and try again</p>'
+            })
+        }
     })
     window.location.reload();
 })
