@@ -1,0 +1,184 @@
+<html>
+    <head>
+        <title>ScoutFRC - Data Analysis</title>
+        <link rel="shortcut icon" type="image/png" href="images/logo.png"/>
+        <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    </head>
+    <body >
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.html">Scout<span class="text-bold">FRC</span></a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <i class="fas fa-hippo"></i>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#"><i class="fas fa-tools mr-2"></i>Pit Data</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin.html"><i class="fas fa-tools mr-2"></i>Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="teams.html"><i class="fas fa-tools mr-2"></i>Team Mangement</a>
+              </li>
+            <li class="nav-item float-right">
+              <a class="nav-link" id="btnLogout"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="wrapper bg-secondary vh-100">
+        <div class="pt-5">
+            <div class=" col-12 col-lg-10 offset-lg-1 mt-3">
+                <div class="card">
+                    <div class="card-header">Teams</div>
+                        <div class="card-body">
+                            <div style="overflow-x:auto;">
+                                  <table class="table tblData" id="teamInfoData">
+                                    <thead>
+                                        <tr><th>Team #</th>
+                                        <th>Team Name</th>
+                                        <th>% Wins</th>
+                                        <th>More Team Stats</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                   </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="teamssModal">
+            <div class="modal fade" id="modUserEdit" aria-labelledby="Team Info" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">4265 Secret City Wildbots</h5> 
+                  </div>
+                  <div class="modal-body">
+                    stats from individual teams here and info from pit scouting about them<br>
+                    <div>
+                      <h4><u><b>Integrated Match Data</b></u></h4>
+                        <div>
+
+                          <div><h5>Auto:</h5>
+                            <div class="flex-container">
+                              <div>Any Quintets: Yes</div>
+                              <div>Number of Quintets: XX</div>
+                              <div>Taxied at Least Once: Yes</div>
+                            </div>
+                            <div class="flex-container">
+                              <div>Average Upper Hub: 05</div>
+                              <div>Average Lower Hub: 00</div>
+                            </div>
+                          </div>
+                          <div><h5>TeleOp:</h5>
+                            <div class="flex-container">
+                              <!--div>Only Alliance Color Balls: Yes</div-->
+                              <div>Played Defense At All: No</div>
+                            </div>
+                            <div class="flex-container">
+                              <div>Average Upper Hub: 05</div>
+                              <div>Max Upper: 20</div>
+                              <div>Min Upper: 02</div>
+                            </div>
+                            <div class="flex-container">
+                              <div>Average Lower Hub: 05</div>
+                              <div>Max Lower: 20</div>
+                              <div>Min Lower: 02</div>
+                            </div>
+                          </div>
+                          <div><h5>Climbing</h5>
+                            <div>Did Not Attempt: 00</div>
+                            <div>Failed: 00</div>
+                            <div>Lower Bar: 00</div>
+                            <div>Middle Bar: 00</div>
+                            <div>High Bar: 00</div>
+                            <div>Traversal Bar: 00</div>
+                          </div>
+                          <div><h5># times at each Tarmac Start Point</h5>
+                            <div class="flex-container">
+                              <div>TR1: 00</div>
+                              <div>TR2: 00</div>
+                              <div>TR3: 00</div>
+                            </div>
+                            <div class="flex-container">
+                              <div>TB1: 00</div>
+                              <div>TB2: 00</div>
+                              <div>TB3: 00</div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    pics
+                    <br>
+                    <img src="images/4265_Robot.png" alt="robot" width="150" height="150">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          
+          <script src="https://kit.fontawesome.com/ee41ca2f02.js" crossorigin="anonymous"></script>
+          <script src="js/lib/jquery-3.6.0.min.js"></script>
+          <script src="js/lib/bootstrap.bundle.min.js"></script>
+          <script src="js/lib/sweetalert2.all.min.js"></script>
+          <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+          <script src="js/app.js"></script>
+          <script>
+            $('#teamInfoData').DataTable();
+            var arrObjObservation;
+            if(!sessionStorage.getItem('ScoutFRCSessionID')){
+                 window.location.replace('login.html');
+             } else {
+                 $.getJSON('php/verifySession.php?strSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'), function(result){
+                     let objVerifyResponse = result;
+                     if(objVerifyResponse.Outcome == 'InValid'){
+                         sessionStorage.removeItem('ScoutFRCSessionID');
+                         window.location.replace('login.html');
+                     } else {
+                       $.getJSON('php/getPitCollect.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
+                        arrObjObservation = result;
+                         $.each(result,function(i,pit){
+                           let strTableRowHTML = '<tr><td>' + pit.intPitTeamNum + '</td><td>' + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                           $('#teamInfoData').append(strTableRowHTML);
+                         })
+                         $('#teamInfoData').DataTable();
+                       })
+                     }
+                 })
+             }
+           </script>
+        </body>
+    </html>
