@@ -223,14 +223,13 @@ $(document).ready( function () {
     } else {
         blnLimeLight = false;
     }
-    
     $.post('../php/newPitCollect.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
         intPitTeamNum:$('#pitTeamNum').val(),
         strRobotShape:$('input[name=pitRobotShape]:checked').val(),
         intHeight:$("#pitRobotHeight").val(),
         blnRobotHeightExtend:blnRobotHeightExtend,
-        strRobotDriveTrain:$('#dpdwDriveTrainType').val,
+        strRobotDriveTrain:$('#dpdwDriveTrainType').val(),
         intDriveTrainMotors:$('#txtPitBtnNumDriveMotors').text(),
         intDriveTrainWheels:$('#txtPitBtnNumDriveWheels').text(),
         strDriveWheelType:$('#dpdwWheelType').val(),
@@ -277,7 +276,7 @@ $(document).ready( function () {
                     //boolean
                     $('#pitMaxBalls').val('');
                     $('#pitTextBox').val('');
-            })
+            }) 
         }else {
             Swal.fire({
                 icon: 'error',
@@ -286,7 +285,6 @@ $(document).ready( function () {
             })
         }
     })
-    window.location.reload();
 })
 
 $(document).on('click','#btnSubmitSuperScout', function() {
@@ -402,4 +400,9 @@ $(document).on('click','#btnSubmitSuperScout', function() {
           }
       })
       
+  })
+
+  $(document).on('click','.btnViewPitDetails',function(){
+      let strTeamNumber = $(this).attr('data-teamnumber');
+      console.log('You clicked Team Number: ' + strTeamNumber);
   })

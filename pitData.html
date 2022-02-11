@@ -10,7 +10,7 @@
     <body >
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.html">Scout<span class="text-bold">FRC</span></a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <button type="button" class="navbar-toggle d-md-none" data-toggle="collapse" data-target="#myNavbar">
             <i class="fas fa-hippo"></i>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -59,10 +59,12 @@
                             <div style="overflow-x:auto;">
                                   <table class="table tblData" id="teamInfoData">
                                     <thead>
-                                        <tr><th>Team #</th>
-                                        <th>Team Name</th>
-                                        <th>% Wins</th>
-                                        <th>More Team Stats</th></tr>
+                                        <tr>
+                                          <th>Team #</th>
+                                          <th>Team Name</th>
+                                          <th>Last Scout Date</th>
+                                          <th></th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         
@@ -170,11 +172,20 @@
                      } else {
                        $.getJSON('php/getPitCollect.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
                         arrObjObservation = result;
-                         $.each(result,function(i,pit){
-                           let strTableRowHTML = '<tr><td>' + pit.intPitTeamNum + '</td><td>' + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
-                           $('#teamInfoData').append(strTableRowHTML);
-                         })
-                         $('#teamInfoData').DataTable();
+                        let strLastTeamNumber = '';
+                        if(arrObjObservation.length > 0){
+                            
+                            $('#teamInfoData tbody').empty();
+                            $.each(result,function(i,pit){
+                              if(pit.PitTeamNumber != strLastTeamNumber){
+                                let strTableRowHTML = '<tr><td>' + pit.PitTeamNumber + '</td><td>Team Name</td><td>' + pit.EntryDateTime + '</td><td><button class="btn btn-primary btnViewPitDetails" data-teamnumber="' + pit.PitTeamNumber + '"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                                $('#teamInfoData tbody').append(strTableRowHTML);
+                              }
+                              strLastTeamNumber = pit.PitTeamNumber;
+                          })
+                          $('#teamInfoData').DataTable();
+                        }
+                         
                        })
                      }
                  })

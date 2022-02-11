@@ -149,11 +149,15 @@
                 } else {
                   $.getJSON('php/getTeamObservations.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
                    arrObjObservation = result;
-                    $.each(result,function(i,observation){
-                      let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.MoreWin + '</td><td>' + observation.ScoutingPosition + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
-                      $('#teamData').append(strTableRowHTML);
-                    })
-                    $('#teamData').DataTable();
+                    if(arrObjObservation.length > 0){
+                        $('#teamData tbody').empty();
+                        $.each(result,function(i,observation){
+                          let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.MoreWin + '</td><td>' + observation.ScoutingPosition + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                          $('#teamData tbody').append(strTableRowHTML);
+                        })
+                        $('#teamData').DataTable();
+                    }
+                    
                   })
                 }
             })

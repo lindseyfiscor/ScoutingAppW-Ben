@@ -3,5 +3,5 @@
     $strUserSessionID = $_GET['strUserSessionID'];
     $strUserSessionID = strip_tags($strUserSessionID);
   
-    echo getPitCollect($strUserSessionID);
+    echo getTeamPitData($strUserSessionID);
 ?>

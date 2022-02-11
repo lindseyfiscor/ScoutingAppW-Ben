@@ -45,6 +45,6 @@
     $strBallCapacity = strip_tags($strBallCapacity);
     $strNotes = strip_tags($strNotes);
 
-    echo addObservation($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes);
+    echo addPitCollect($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$blnUpperHab,$blnLowerHab,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes);
 
 ?>
