@@ -58,7 +58,8 @@
                                     <thead>
                                         <tr><th>Team #</th>
                                         <th>Team Name</th>
-                                        <th>% Wins</th></tr>
+                                        <th>% Wins</th>
+                                        <th>More Team Stats</th></tr>
                                     </thead>
                                     <tbody>
                                         
@@ -153,6 +154,7 @@
           <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
           <script src="js/app.js"></script>
           <script>
+            $('#teamData').DataTable();
             var arrObjObservation;
             if(!sessionStorage.getItem('ScoutFRCSessionID')){
                  window.location.replace('login.html');
@@ -163,10 +165,10 @@
                          sessionStorage.removeItem('ScoutFRCSessionID');
                          window.location.replace('login.html');
                      } else {
-                       $.getJSON('php/getTeamObservations.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
+                       $.getJSON('php/getPitCollect.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
                         arrObjObservation = result;
-                         $.each(result,function(i,observation){
-                           let strTableRowHTML = '<tr><td>' + observation.TeamScouting + '</td><td>' + observation.MoreWin + '</td><td>' + observation.ScoutingPosition + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                         $.each(result,function(i,pit){
+                           let strTableRowHTML = '<tr><td>' + pit.intPitTeamNum + '</td><td>' + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
                            $('#teamData').append(strTableRowHTML);
                          })
                          $('#teamData').DataTable();
