@@ -127,9 +127,39 @@ $(document).ready( function () {
           blnMoreThan16:blnMoreThan16,
           blnMoreWin:blnMoreWin
       }, function(result){
-          console.log(result)
-      })
-      window.location.reload();
+            let objResult = JSON.parse(result);
+            if(objResult.Outcome != 'Error'){
+                Swal.fire({
+                    postion: 'top-end',
+                    icon: 'success',
+                    title: 'Super observation recorded',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    $('#txtMatchNumber').val('');
+                    $('#txtTeamNumScouting').text('');
+                    $('#dpdwTeamPosition').val('');
+                    $('#radTarmacPlace').val('');
+                    // How do booleans? $('#superMatchNumber').val('');
+                    $('#txtAutoBallsInUpper').val('');
+                    $('#txtAutoBallsInLower').val('');
+                    $('#txtTeleBallsInUpper').val('');
+                    $('#txtTeleBallsInLower').val('');
+                    //boolean
+                    //boolean
+                    $('#radClimbing').val('');
+                    //boolean
+                    //boolean
+                    //boolean
+                })
+            }else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Super not recorded',
+                    html: '<p>Please check your form and try again</p>'
+                })
+            }
+        })
   })
 
   $(document).on('click','#btnSubmitPit', function() {
@@ -226,7 +256,27 @@ $(document).ready( function () {
                 showConfirmButton: false,
                 timer: 1500
             }).then((result) => {
-                //Reset form
+                $('#superMatchNumber').val('');
+                    $('#pitTeamNum').val('');
+                    $('#pitRobotShape').val('');
+                    $('#pitRobotHeight').val('');
+                    //boolean
+                    $('#dpdwDriveTrainType').val('');
+                    $('#txtPitBtnNumDriveMotors').val('');
+                    $('#txtPitBtnNumDriveWheels').val('');
+                    $('#dpdwWheelType').val('');
+                    $('#dpdwMotorType').val('');
+                    $('#pitRadBallCollection').val('');
+                    //boolean
+                    //boolean
+                    //boolean
+                    //boolean
+                    //boolean
+                    $('#dpdwShooterType').val('');
+                    //boolean
+                    //boolean
+                    $('#pitMaxBalls').val('');
+                    $('#pitTextBox').val('');
             })
         }else {
             Swal.fire({
@@ -266,7 +316,6 @@ $(document).on('click','#btnSubmitSuperScout', function() {
             })
         }
     })
-    window.location.reload();
 })
   
   $(document).on('click','#btnResetObservationForm', function() {

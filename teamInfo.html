@@ -10,9 +10,12 @@
     <body >
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="index.html">Scout<span class="text-bold">FRC</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <i class="fas fa-hippo"></i>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
       
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
@@ -20,10 +23,10 @@
               <a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="pit.html"><i class="fas fa-frog"></i>Pit Scouting</a>
+                <a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="superScouting.html"><i class="fas fa-hippo"></i>Super Scouting</a>
+              <a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a>
@@ -55,18 +58,10 @@
                                     <thead>
                                         <tr><th>Team #</th>
                                         <th>Team Name</th>
-                                        <th>% Wins</th>
-                                        <th>Location</th></tr>
+                                        <th>% Wins</th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
-                                        <tr><td>4265</td><td>Secret City Wildbots</td><td>80 %</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-eye mr-2"></i>Info</button></td></tr>
+                                        
                                     </tbody>
                                    </table>
                             </div>
@@ -157,5 +152,28 @@
           <script src="js/lib/sweetalert2.all.min.js"></script>
           <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
           <script src="js/app.js"></script>
+          <script>
+            var arrObjObservation;
+            if(!sessionStorage.getItem('ScoutFRCSessionID')){
+                 window.location.replace('login.html');
+             } else {
+                 $.getJSON('php/verifySession.php?strSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'), function(result){
+                     let objVerifyResponse = result;
+                     if(objVerifyResponse.Outcome == 'InValid'){
+                         sessionStorage.removeItem('ScoutFRCSessionID');
+                         window.location.replace('login.html');
+                     } else {
+                       $.getJSON('php/getTeamObservations.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
+                        arrObjObservation = result;
+                         $.each(result,function(i,observation){
+                           let strTableRowHTML = '<tr><td>' + observation.TeamScouting + '</td><td>' + observation.MoreWin + '</td><td>' + observation.ScoutingPosition + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                           $('#teamData').append(strTableRowHTML);
+                         })
+                         $('#teamData').DataTable();
+                       })
+                     }
+                 })
+             }
+           </script>
         </body>
     </html>
