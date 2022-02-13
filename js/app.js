@@ -54,7 +54,15 @@ $(document).ready( function () {
           strPassword:$('#txtPassword').val(),
       },
       function(){
-  
+        let objResult = JSON.parse(result);
+        if(objResult.Outcome != 'Error'){
+            Swal.fire({
+                postion: 'top-end',
+                icon: 'success',
+                title: 'New Team Created',
+                showConfirmButton: false,
+                timer: 1500
+            })
       });
   });
   
