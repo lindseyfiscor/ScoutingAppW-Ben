@@ -82,7 +82,8 @@ $(document).ready( function () {
                 html: '<p>Please check your form and try again</p>'
             })
         }
-  });
+    });
+})
   
   $(document).on('click','#btnJoin', function() {
       $.post('../php/newUser.php', {
@@ -431,4 +432,4 @@ $(document).on('click','#btnSubmitSuperScout', function() {
   $(document).on('click','.btnViewPitDetails',function(){
       let strTeamNumber = $(this).attr('data-teamnumber');
       console.log('You clicked Team Number: ' + strTeamNumber);
-  }
+  })

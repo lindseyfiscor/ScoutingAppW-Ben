@@ -336,7 +336,7 @@
 
     function verifyAccess($strUserSessionID,$strRoleID){
         global $conScouting;
-        $strQuery = "SELECT * FROM tblUsers WHERE Role =? AND Email =?";
+        $strQuery = "SELECT * FROM tblUsers WHERE tblUsers.Role = ? AND tblUsers.Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -358,7 +358,7 @@
 
 		 // Bind Parameters
 		 $statScouting->bind_param('ss', $strRoleID, $strUserSessionID);
-         $statScouting->execute();      
+         $statScouting->execute();    
          $statScouting->bind_result($strSessionID);
          $statScouting->fetch();
          $intRows = $statScouting->num_rows;
