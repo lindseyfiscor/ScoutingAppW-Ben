@@ -334,6 +334,90 @@
         
     }
 
+    function verifyAccess($strUserSessionID,$strRoleID){
+        global $conScouting;
+        $strQuery = "SELECT * FROM tblUsers WHERE Role =? AND Email =?";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ss', $strRoleID, $strUserSessionID);
+         $statScouting->execute();      
+         $statScouting->bind_result($strSessionID);
+         $statScouting->fetch();
+         $intRows = $statScouting->num_rows;
+         if($strSessionID){
+            return true;
+         } else {
+            return false;
+         }
+         // $result = $statCustodial->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function getTeams($SessionID){
+        if(verifyAccess($SessionID,'d8057ce3-048a-451b-b629-e627d48c2ab2') == false){
+            return '{"Outcome":"No Access"}';
+        } else {
+            try{
+                global $conScouting;
+                $strQuery = "SELECT * FROM tblTeams LEFT JOIN tblUsers ON tblTeams.TeamID = tblUsers.Team WHERE tblUsers.Role = 'C1692D0B-A418-47E2-BABC-A6BAF94384E4'";
+                  // Check Connection
+                if ($conScouting->connect_errno) {
+                    $blnError = "true";
+                    $strErrorMessage = $conScouting->connect_error;
+                    $arrError = array('error' => $strErrorMessage);
+                    echo json_encode($arrError);
+                    exit();
+                }
+              
+                if ($conScouting->ping()) {
+                } else {
+                    $blnError = "true";
+                    $strErrorMessage = $conScouting->error;
+                    $arrError = array('error' => $strErrorMessage);
+                    echo json_encode($arrError);
+                }
+              
+                 $statScouting = $conScouting->prepare($strQuery);
+        
+                 // Bind Parameters
+                 $statScouting->execute();      
+                 $result = $statScouting->get_result();
+                 $myArray = array();
+        
+                 while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                         $myArray[] = $row;
+                 }
+                 echo json_encode($myArray);
+                    
+                 $statScouting->close();
+            } catch (exception $e) {
+                echo 'Error: '.$e;
+            }
+        }
+        
+        
+    }
+
     function getUserRoles($SessionID){
         try{
             global $conScouting;
