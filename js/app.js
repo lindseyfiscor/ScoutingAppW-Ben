@@ -59,11 +59,29 @@ $(document).ready( function () {
             Swal.fire({
                 postion: 'top-end',
                 icon: 'success',
-                title: 'New Team Created',
+                title: 'Pit observation recorded',
                 showConfirmButton: false,
                 timer: 1500
+            }).then((result) => {
+                $('#txtTeamName').val('');
+                    $('#txtTeamNumber').val('');
+                    $('#txtCity').val('');
+                    $('#txtZIP').val('');
+                    $('#txtState').val('');
+                    $('#txtNation').val('');
+                    $('#txtPhone').val('');
+                    $('#txtFirstName').val('');
+                    $('#txtLastName').val('');
+                    $('#txtEmail').val('');
+                    $('#txtPassword').val('');
+            }) 
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Pit observation not recorded',
+                html: '<p>Please check your form and try again</p>'
             })
-      });
+        }
   });
   
   $(document).on('click','#btnJoin', function() {
@@ -413,4 +431,4 @@ $(document).on('click','#btnSubmitSuperScout', function() {
   $(document).on('click','.btnViewPitDetails',function(){
       let strTeamNumber = $(this).attr('data-teamnumber');
       console.log('You clicked Team Number: ' + strTeamNumber);
-  })
+  }
