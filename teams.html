@@ -67,17 +67,11 @@
                                             <th>State</th>
                                             <th>ZIP</th>
                                             <th>City</th>
-                                            <th>Edit Info</th></tr>
+                                            <th>Edit Info</th>
+                                          </tr>
                                     </thead>
                                     <tbody>
-                                    <tr><td>4265</td><td>Secret City Wildbots</td><td>Lindsey Fiscor</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37830</td><td>Oak Ridge</td><td><button class="btn btn-primary btn-sm btnEditTeam" data-toggle="modal" data-target="#modUserEdit" data-teamid="TeamID"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>3140</td><td>Flagship</td><td>Person</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37932</td><td>Knoxville</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>4576</td><td>Red Nation Robotics</td><td>Person</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37902</td><td>Kingsport</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>3824</td><td>HVA RoHAWKtics</td><td>person</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37932</td><td>Hardin Valley</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>3966</td><td>L&N STEMpunks</td><td>Person</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37902</td><td>Knoxville</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>16</td><td>Bomb Squad</td><td>Person</td><td>(865)123-4567</td><td>US</td><td>AR</td><td>72653</td><td>Mountain Home</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>1466</td><td>Webb Robotics</td><td>Person</td><td>(865)123-4567</td><td>US</td><td>TN</td><td>37932</td><td>Knoxville</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>
-                                    <tr><td>2614</td><td>MARS</td><td>Peoples</td><td>(865)123-4567</td><td>US</td><td>WV</td><td>26505</td><td>Morgan Town</td><td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>    
+                                      
                                     </tbody>
                                 </table>
                                 
@@ -193,7 +187,22 @@
           <script src="js/app.js"></script>
           <script>
             if(!sessionStorage.getItem('ScoutFRCSessionID')){
-              window.location.replace("login.html");
+              window.location.href = "login.html";
+            } else {
+              $.getJSON('php/verifySession.php?strSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'), function(result){
+                     let objVerifyResponse = result;
+                     if(objVerifyResponse.Outcome == 'InValid'){
+                         sessionStorage.removeItem('ScoutFRCSessionID');
+                         window.location.replace('login.html');
+                     } else {
+                       $.getJSON('php/getTeams.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
+                        $.each(result,function(i,team){
+                          let strHTML = '<tr data-teamid="' + team.TeamID + '"><td>' + team.TeamNumber + '</td><td>' + team.TeamName+ '</td><td>' + team.FirstName+ ' ' + team.LastName+ '</td><td><a href="tel:' + team.TeamName+ '">' + team.PhoneNumber+ '</a></td><td>' + team.Nation + '</td><td>' + team.State + '</td><td>' + team.ZIP + '</td><td>' + team.City + '</td><td><button class="btn btn-primary btn-sm btnEditTeam" data-toggle="modal" data-target="#modUserEdit" data-teamid="' + team.TeamID + '"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>';
+                          $('#teamData tbody').append(strHTML);
+                        })
+                       })
+                     }
+                 })
             }
           </script>
     </body>
