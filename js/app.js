@@ -26,8 +26,10 @@ $(document).ready( function () {
   
   $(document).on('click','.btnPlus', function() {
       let intCurrentQty = parseInt($(this).siblings().find('.txtSum').text());
-      intCurrentQty +=1;
-      $(this).siblings().find('.txtSum').text(intCurrentQty);
+      if(intCurrentQty <= 100){
+        intCurrentQty +=1;
+        $(this).siblings().find('.txtSum').text(intCurrentQty);
+    }
   })
   
   $(document).on('click','.btnMinus', function() {
@@ -143,10 +145,10 @@ $(document).ready( function () {
           strScoutingPosition:$('#dpdwTeamPosition').val(),
           strTarmacStartingPosition:$('input[name=radTarmacPlace]:checked').val(),
           blnAutoTarmacTaxi:blnAutoTarmacTaxi,
-          intAutoUpperHub:$('#txtAutoBallsInUpper').text(),
-          intAutoLowerHub:$('#txtAutoBallsInLower').text(),
-          intTeleOpUpperHub:$('#txtTeleBallsInUpper').text(),
-          intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
+          intAutoUpperHub:$('#txtAutoBallsInUpper').val(),
+          intAutoLowerHub:$('#txtAutoBallsInLower').val(),
+          intTeleOpUpperHub:$('#txtTeleBallsInUpper').val(),
+          intTeleOpLowerHub:$('#txtTeleBallsInLower').val(),
           blnTeleOpShootsBalls:blnTeleOpShootsBalls,
           blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
           strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
@@ -164,17 +166,17 @@ $(document).ready( function () {
                     timer: 1500
                 }).then((result) => {
                     $('#txtMatchNumber').val('');
-                    $('#txtTeamNumScouting').text('');
+                    $('#txtTeamNumScouting').val('');
                     $('#dpdwTeamPosition').val('');
-                    $('#radTarmacPlace').val('');
-                    // How do booleans? $('#superMatchNumber').val('');
+                    $("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
+                       $('#autoTaxiYes').val('');
                     $('#txtAutoBallsInUpper').val('');
                     $('#txtAutoBallsInLower').val('');
                     $('#txtTeleBallsInUpper').val('');
                     $('#txtTeleBallsInLower').val('');
                     //boolean
                     //boolean
-                    $('#radClimbing').val('');
+                    $("input:radio[name=radClimbing]:checked")[0].checked = false;
                     //boolean
                     //boolean
                     //boolean

@@ -17,7 +17,7 @@
               <span class="icon-bar"></span>
             </button>
         
-          <div class="collapse navbar-collapse">
+          <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
                 <a class="nav-link" href="#"><i class="fas fa-home mr-2"></i>Home</a>
@@ -81,7 +81,7 @@
                                             <div class="row col-12 justify-content-center">
                                                 <div class="col-6 row justify-content-center border-right pl-0">
                                                     <div class="custom-control custom-radio  ml-3">
-                                                        <input type="radio" id="radTarmacPlaceTB1" name="radTarmacPlace" class="custom-control-input" value="TB1" checked="">
+                                                        <input type="radio" id="radTarmacPlaceTB1" name="radTarmacPlace" class="custom-control-input" value="TB1">
                                                         <label class="custom-control-label" for="radTarmacPlaceTB1">Tarmac Blue 1</label>
                                                       </div>
                                                       <div class="custom-control custom-radio ml-3">
@@ -206,7 +206,7 @@
                                 <label for="radClimbing">Climbing</label> <br>
                                 <div class="form-group">
                                     <div class="custom-control custom-radio">
-                                      <input type="radio" id="radClimbingDNA" name="radClimbing" class="custom-control-input" value="DA" checked="">
+                                      <input type="radio" id="radClimbingDNA" name="radClimbing" class="custom-control-input" value="DA">
                                       <label class="custom-control-label" for="radClimbingDNA">Did Not Attempt</label>
                                     </div>
                                     <div class="custom-control custom-radio">
@@ -290,6 +290,6 @@
             if(!sessionStorage.getItem('ScoutFRCSessionID')){
               window.location.replace("login.html");
             }
-          </script>
+        </script>
     </body>
 </html>
