@@ -198,7 +198,7 @@
 
     function getTeamObservations($strUserSessionID){
         global $conScouting;
-        $strQuery = "SELECT * FROM tblObservations WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?))";
+        $strQuery = "SELECT * FROM tblObservations WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) ORDER BY tblObservations.Match, tblObservations.TeamScouting ASC";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";

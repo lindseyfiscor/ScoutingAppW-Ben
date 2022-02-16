@@ -2,6 +2,13 @@ $(document).ready( function () {
     /*$('.tblData').DataTable({
           buttons: ['pageLength','colvis','copy','csv','excel','pdf','print']
     }); */
+
+    document.getElementById('txtPassword').addEventListener('keyup', function(event){
+        if (event.keyCode === 13){
+            event.preventDefault();
+            $('#btnSignIn').click();
+        }
+    })
   });
   
   $(document).on('click','.btnEditTeam', function() {
@@ -167,13 +174,13 @@ $(document).ready( function () {
                 }).then((result) => {
                     $('#txtMatchNumber').val('');
                     $('#txtTeamNumScouting').val('');
-                    $('#dpdwTeamPosition').val('');
+                    $('#dpdwTeamPosition').val('B1').trigger('change');
                     $("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
-                       $('#autoTaxiYes').val('');
-                    $('#txtAutoBallsInUpper').val('');
-                    $('#txtAutoBallsInLower').val('');
-                    $('#txtTeleBallsInUpper').val('');
-                    $('#txtTeleBallsInLower').val('');
+                    $('#autoTaxiYes').val('');
+                    $('#txtAutoBallsInUpper').text('0');
+                    $('#txtAutoBallsInLower').text('0');
+                    $('#txtTeleBallsInUpper').text('0');
+                    $('#txtTeleBallsInLower').text('0');
                     //boolean
                     //boolean
                     $("input:radio[name=radClimbing]:checked")[0].checked = false;
