@@ -181,12 +181,12 @@ $(document).ready( function () {
                     $('#txtAutoBallsInLower').text('0');
                     $('#txtTeleBallsInUpper').text('0');
                     $('#txtTeleBallsInLower').text('0');
-                    //boolean
-                    //boolean
+                    $('#teleRobotShootOpposite').val('');
+                    $('#teleRobotPlayDefense').val('');
                     $("input:radio[name=radClimbing]:checked")[0].checked = false;
-                    //boolean
-                    //boolean
-                    //boolean
+                    $('#moreQuintetInAuto').val('');
+                    $('#more16ClimbPts').val('');
+                    $('#moreWinMatch').val('');
                 })
             }else {
                 Swal.fire({
@@ -197,6 +197,24 @@ $(document).ready( function () {
             }
         })
   })
+
+  $(document).on('click','#btnResetObservationForm', function() {
+    $('#txtMatchNumber').val('');
+                    $('#txtTeamNumScouting').val('');
+                    $('#dpdwTeamPosition').val('B1').trigger('change');
+                    $("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
+                    $('#autoTaxiYes').val('');
+                    $('#txtAutoBallsInUpper').text('0');
+                    $('#txtAutoBallsInLower').text('0');
+                    $('#txtTeleBallsInUpper').text('0');
+                    $('#txtTeleBallsInLower').text('0');
+                    $('#teleRobotShootOpposite').val('');
+                    $('#teleRobotPlayDefense').val('');
+                    $("input:radio[name=radClimbing]:checked")[0].checked = false;
+                    $('#moreQuintetInAuto').val('');
+                    $('#more16ClimbPts').val('');
+                    $('#moreWinMatch').val('');
+})
 
   $(document).on('click','#btnSubmitPit', function() {
     let blnRobotHeightExtend;
@@ -291,26 +309,25 @@ $(document).ready( function () {
                 showConfirmButton: false,
                 timer: 1500
             }).then((result) => {
-                $('#superMatchNumber').val('');
                     $('#pitTeamNum').val('');
-                    $('#pitRobotShape').val('');
+                    $("input:radio[name=pitRobotShape]:checked")[0].checked = false;
                     $('#pitRobotHeight').val('');
-                    //boolean
-                    $('#dpdwDriveTrainType').val('');
-                    $('#txtPitBtnNumDriveMotors').val('');
-                    $('#txtPitBtnNumDriveWheels').val('');
-                    $('#dpdwWheelType').val('');
-                    $('#dpdwMotorType').val('');
-                    $('#pitRadBallCollection').val('');
-                    //boolean
-                    //boolean
-                    //boolean
-                    //boolean
-                    //boolean
-                    $('#dpdwShooterType').val('');
-                    //boolean
-                    //boolean
-                    $('#pitMaxBalls').val('');
+                    $('#swRobotHeightExtend').val('');
+                    $('#dpdwDriveTrainType').val('B1').trigger('change');
+                    $('#txtPitBtnNumDriveMotors').text('0');
+                    $('#txtPitBtnNumDriveWheels').text('0');
+                    $('#dpdwWheelType').val('CH').trigger('change');
+                    $('#dpdwMotorType').val('CH').trigger('change');
+                    $("input:radio[name=pitRadBallCollection]:checked")[0].checked = false;
+                    $('#swRobotIntakeExtend').val('');
+                    $('#swRobotIntakeThrough').val('');
+                    $('#swRobotIntakeExtend').val('');
+                    $('#swRobotInternal').val('');
+                    $('#swHasShooter').val('');
+                    $('#dpdwShooterType').val('CH').trigger('change');
+                    $('#swTurret').val('');
+                    $('#swLL').val('');
+                    $("input:radio[name=pitMaxBalls]:checked")[0].checked = false;
                     $('#pitTextBox').val('');
             }) 
         }else {
@@ -321,6 +338,29 @@ $(document).ready( function () {
             })
         }
     })
+})
+
+$(document).on('click','#btnResetPitForm', function() {
+    $('#pitTeamNum').val('');
+                    $("input:radio[name=pitRobotShape]:checked")[0].checked = false;
+                    $('#pitRobotHeight').val('');
+                    $('#swRobotHeightExtend').val('');
+                    $('#dpdwDriveTrainType').val('B1').trigger('change');
+                    $('#txtPitBtnNumDriveMotors').text('0');
+                    $('#txtPitBtnNumDriveWheels').text('0');
+                    $('#dpdwWheelType').val('CH').trigger('change');
+                    $('#dpdwMotorType').val('CH').trigger('change');
+                    $("input:radio[name=pitRadBallCollection]:checked")[0].checked = false;
+                    $('#swRobotIntakeExtend').val('');
+                    $('#swRobotIntakeThrough').val('');
+                    $('#swRobotIntakeExtend').val('');
+                    $('#swRobotInternal').val('');
+                    $('#swHasShooter').val('');
+                    $('#dpdwShooterType').val('CH').trigger('change');
+                    $('#swTurret').val('');
+                    $('#swLL').val('');
+                    $("input:radio[name=pitMaxBalls]:checked")[0].checked = false;
+                    $('#pitTextBox').val('');
 })
 
 $(document).on('click','#btnSubmitSuperScout', function() {
@@ -351,11 +391,11 @@ $(document).on('click','#btnSubmitSuperScout', function() {
         }
     })
 })
-  
-  $(document).on('click','#btnResetObservationForm', function() {
-    window.location.reload();
-  
-  })
+
+$(document).on('click','#btnResetSuperForm', function() {
+    $('#superMatchNumber').val('');
+                $('#superTextBox').text('');
+})  
   
   $(document).on('click','#btnLogin', function() {
       $.post('../php/verifyUsernamePassword.php', {
