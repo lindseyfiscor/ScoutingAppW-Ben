@@ -3,12 +3,7 @@ $(document).ready( function () {
           buttons: ['pageLength','colvis','copy','csv','excel','pdf','print']
     }); */
 
-    document.getElementById('txtPassword').addEventListener('keyup', function(event){
-        if (event.keyCode === 13){
-            event.preventDefault();
-            $('#btnSignIn').click();
-        }
-    })
+    
   });
   
   $(document).on('click','.btnEditTeam', function() {
@@ -48,51 +43,50 @@ $(document).ready( function () {
   })
   
   $(document).on('click','#btnNewTeam', function() {
-      console.log('btnNewTeam clicked');
-      $.post('../php/newTeam.php', {
-          strTeamName:$('#txtTeamName').val(),
-          strTeamNumber:$('#txtTeamNumber').val(),
-          strCity:$('#txtCity').val(),
-          strZIP:$('#txtZIP').val(),
-          strState:$('#txtState').val(),
-          strNation:$('#txtNation').val(),
-          strPhone:$('#txtPhone').val(),
-          strFirstName:$('#txtFirstName').val(),
-          strLastName:$('#txtLastName').val(),
-          strEmail:$('#txtEmail').val(),
-          strPassword:$('#txtPassword').val(),
-      },
-      function(){
-        let objResult = JSON.parse(result);
-        if(objResult.Outcome != 'Error'){
-            Swal.fire({
-                postion: 'top-end',
-                icon: 'success',
-                title: 'Pit observation recorded',
-                showConfirmButton: false,
-                timer: 1500
-            }).then((result) => {
-                $('#txtTeamName').val('');
-                    $('#txtTeamNumber').val('');
-                    $('#txtCity').val('');
-                    $('#txtZIP').val('');
-                    $('#txtState').val('');
-                    $('#txtNation').val('');
-                    $('#txtPhone').val('');
-                    $('#txtFirstName').val('');
-                    $('#txtLastName').val('');
-                    $('#txtEmail').val('');
-                    $('#txtPassword').val('');
-            }) 
-        }else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Pit observation not recorded',
-                html: '<p>Please check your form and try again</p>'
+      Swal.fire({
+          icon: 'question',
+          title: "Are you sure you want to create a new team?",
+          showConfirmButton: true,
+          showCancelButton: true
+      }).then((result)=> {
+          if(result.isConfirmed){
+            $.post('../php/newTeam.php', {
+                strTeamName:$('#txtTeamName').val(),
+                strTeamNumber:$('#txtTeamNumber').val(),
+                strCity:$('#txtCity').val(),
+                strZIP:$('#txtZIP').val(),
+                strState:$('#txtState').val(),
+                strNation:$('#txtNation').val(),
+                strPhone:$('#txtPhone').val(),
+                strFirstName:$('#txtFirstName').val(),
+                strLastName:$('#txtLastName').val(),
+                strEmail:$('#txtEmail').val(),
+                strPassword:$('#txtPassword').val(),
+            },function(result){
+              let objResult = JSON.parse(result);
+              if(objResult.Outcome == 'Error'){
+                  Swal.fire({
+                      postion: 'top-end',
+                      icon: 'error',
+                      title: 'New Team Was Not Created',
+                      showConfirmButton: false,
+                      timer: 1500
+                  })
+              }else {
+                  Swal.fire({
+                    postion: 'top-end',
+                    icon: 'success',
+                    title: 'New Team Created',
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then((result) => {
+                    window.location.href = 'login.html';
+                }) 
+              }
             })
         }
-    });
-})
+      })
+  });
   
   $(document).on('click','#btnJoin', function() {
       $.post('../php/newUser.php', {
@@ -108,42 +102,18 @@ $(document).ready( function () {
   });
   
   $(document).on('click','#btnSubmitObservation', function() {
-      let blnAutoTarmacTaxi;
-      if($('#autoTaxiYes:checked').val()){
-          blnAutoTarmacTaxi = true;
-      } else {
-          blnAutoTarmacTaxi = false;
-      }
-      let blnTeleOpShootsBalls;
-      if($('#teleRobotShootOpposite').val()){
-          blnTeleOpShootsBalls = true;
-      } else {
-          blnTeleOpShootsBalls = false;
-      }
-      let blnTeleOpPlaysDefense;
-      if($('#teleRobotShootOpposite').val()){
-          blnTeleOpPlaysDefense = true;
-      } else {
-          blnTeleOpPlaysDefense = false;
-      }
-      let blnMoreQuintet;
-      if($('#moreQuintetInAuto').val()){
-          blnMoreQuintet = true;
-      } else {
-          blnMoreQuintet = false;
-      }
-      let blnMoreThan16;
-      if($('#more16ClimbPts').val()){
-          blnMoreThan16 = true;
-      } else {
-          blnMoreThan16 = false;
-      }
-      let blnMoreWin;
-      if($('#moreWinMatch').val()){
-          blnMoreWin = true;
-      } else {
-          blnMoreWin = false;
-      }
+      let blnAutoTarmacTaxi = $("input:checkbox[id=autoTaxiYes]")[0].checked;;
+      
+      let blnTeleOpShootsBalls = $("input:checkbox[id=teleRobotShootOpposite]")[0].checked;
+      
+      let blnTeleOpPlaysDefense = $("input:checkbox[id=teleRobotShootOpposite]")[0].checked;
+     
+      let blnMoreQuintet = $("input:checkbox[id=moreQuintetInAuto]")[0].checked;
+      
+      let blnMoreThan16 = $("input:checkbox[id=more16ClimbPts]")[0].checked;
+      
+      let blnMoreWin = $("input:checkbox[id=moreWinMatch]")[0].checked;
+      
       
       $.post('../php/newObservation.php', {
           strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
@@ -481,4 +451,20 @@ $(document).on('click','#btnResetSuperForm', function() {
   $(document).on('click','.btnViewPitDetails',function(){
       let strTeamNumber = $(this).attr('data-teamnumber');
       console.log('You clicked Team Number: ' + strTeamNumber);
+  })
+
+  $(document).on('click','#btnTeamKey',function(){
+    $.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:'2a2f2543-9e4d-41e0-856e-9a04556c8347'},function(result){
+        if(result.length > 0){
+            $.each(result, function(i,teamkey){
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Your TeamKey Is',
+                    html: '<h3>' + teamkey.TeamKey + '</h3>'
+                })
+               
+            })
+        }
+    })  
+    
   })

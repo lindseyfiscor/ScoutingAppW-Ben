@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="css/lib/bootstrap.min.css">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/r-2.2.9/datatables.min.css"/>
     </head>
     <body >
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -150,10 +150,17 @@
           <script src="js/lib/jquery-3.6.0.min.js"></script>
           <script src="js/lib/bootstrap.bundle.min.js"></script>
           <script src="js/lib/sweetalert2.all.min.js"></script>
-          <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+          <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+          <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/r-2.2.9/datatables.min.js"></script>
           <script src="js/app.js"></script>
           <script>
-            $('#teamInfoData').DataTable();
+            $('#teamInfoData').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv','excel', 'pdf'
+                            ]
+                        });
             var arrObjObservation;
             if(!sessionStorage.getItem('ScoutFRCSessionID')){
                  window.location.replace('login.html');
@@ -170,7 +177,12 @@
                            let strTableRowHTML = '<tr><td>' + pit.intPitTeamNum + '</td><td>' + '</td><td><button class="btn btn-primary btn-sm btn-more-match-info" data-observationid="' + observation.ObservationID + '" data-toggle="modal" data-target="#modObservationDetails"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
                            $('#teamInfoData').append(strTableRowHTML);
                          })
-                         $('#teamInfoData').DataTable();
+                         $('#teamInfoData').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv','excel', 'pdf'
+                            ]
+                        });
                        })
                      }
                  })

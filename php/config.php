@@ -154,7 +154,7 @@
          } else {
             return '{"Outcome":"InValid"}';
          }
-         // $result = $statCustodial->get_result();
+         // $result = $statScouting->get_result();
          
          // echo json_encode(($result->fetch_assoc()));
          $statScouting->close();
@@ -194,6 +194,42 @@
         echo json_encode($myArray);
         
         $statScouting->close();
+    }
+
+    function getTeamKeyByUsername($strUsername){
+        global $conScouting;
+        $strQuery = "SELECT TeamKey FROM tblUsers LEFT JOIN tblTeams ON tblUsers.Team = tblTeams.TeamID WHERE Email = ?";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+		 // Bind Parameters
+		 $statScouting->bind_param('s', $strUsername);
+         $statScouting->execute();      
+         $statScouting->bind_result($strTeamKey);
+         $statScouting->fetch();
+         if($strTeamKey){
+            return '{"Outcome":"'.$strTeamKey.'"}';
+         } else {
+            return '{"Outcome":"Key Not Found"}';
+         }
+         
+         $statScouting->close();
     }
 
     function getTeamObservations($strUserSessionID){
@@ -367,7 +403,7 @@
          } else {
             return false;
          }
-         // $result = $statCustodial->get_result();
+         // $result = $statScouting->get_result();
          
          // echo json_encode(($result->fetch_assoc()));
          $statScouting->close();
@@ -478,21 +514,21 @@
             echo json_encode($arrError);
         }
       
-		 $statCustodial = $conScouting->prepare($strQuery);
+		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statCustodial->bind_param('sssss', $strUsername, $FirstName, $LastName, $Password, $TeamCode);
-         if($statCustodial->execute()){
+		 $statScouting->bind_param('sssss', $strUsername, $FirstName, $LastName, $Password, $TeamCode);
+         if($statScouting->execute()){
             sendVerificationEmail($strUsername);
             return '{"Outcome":"New User Created"}';
          } else {
             return '{"Outcome":"Error"}';
          }
 
-         // $result = $statCustodial->get_result();
+         // $result = $statScouting->get_result();
          
          // echo json_encode(($result->fetch_assoc()));
-         $statCustodial->close();
+         $statScouting->close();
     }
 
     function verifyUsernamePassword($strUsername,$strPassword){
@@ -516,20 +552,20 @@
             exit();
         }
       
-		 $statCustodial = $conScouting->prepare($strQuery);
+		 $statScouting = $conScouting->prepare($strQuery);
 		 // Bind Parameters
-		 $statCustodial->bind_param('ss', $strUsername, $strPassword);
-         $statCustodial->execute();      
-         $statCustodial->bind_result($strEmail);
-         $statCustodial->fetch();
-         $intRows = $statCustodial->num_rows;
+		 $statScouting->bind_param('ss', $strUsername, $strPassword);
+         $statScouting->execute();      
+         $statScouting->bind_result($strEmail);
+         $statScouting->fetch();
+         $intRows = $statScouting->num_rows;
          if($strEmail){
             return 'true';
          } else {
             return 'false';
          }
          
-         $statCustodial->close();
+         $statScouting->close();
     }
 
 
@@ -734,19 +770,19 @@
             echo json_encode($arrError);
         }
       
-		 $statCustodial = $conScouting->prepare($strQuery);
+		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statCustodial->bind_param('sss', $strSessionID,$Username,$Username);
-         if($statCustodial->execute()){
+		 $statScouting->bind_param('sss', $strSessionID,$Username,$Username);
+         if($statScouting->execute()){
             return '{"Outcome":"'.$strSessionID.'"}';
          } else {
             return '{"Outcome":"Error"}';
          }
 
-         // $result = $statCustodial->get_result();
+         // $result = $statScouting->get_result();
          
          // echo json_encode(($result->fetch_assoc()));
-         $statCustodial->close();
+         $statScouting->close();
     }
 ?>

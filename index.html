@@ -9,7 +9,7 @@
     </head>
     <body class="bg-secondary">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="index.html">Scout<span class="text-bold">FRC</span></a>
+            <a class="navbar-brand" id="btnTeamKey">Scout<span class="text-bold">FRC</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="txtTeamNumScouting">Team You Are Scouting</label>
-                                    <input type="number" class="form-control" id="txtTeamNumScouting">
+                                    <input type="number" class="form-control" id="txtTeamNumScouting" maxlength="4">
                                 </div>
                                 <div class="form-group">
                                     <label for="dpdwTeamPosition">Team Scouting Position</label>
@@ -286,7 +286,7 @@
         <script>
             if(!sessionStorage.getItem('ScoutFRCSessionID')){
               window.location.replace("login.html");
-            }
+            } 
         </script>
     </body>
 </html>
