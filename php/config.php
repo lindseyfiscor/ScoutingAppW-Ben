@@ -121,6 +121,38 @@
         }
     }
 
+    function deleteAllSuperRecords($strUserSessionID){
+        try{
+            global $conScouting;
+            $strQuery = 'DELETE FROM tblSuper';
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+        
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+
+            $statScouting = $conScouting->prepare($strQuery);
+            // Bind Parameters
+            if($statScouting->execute()){
+                return '{"Outcome":"Records Deleted"}';
+            } else {
+                return '{"Outcome":"Error"}';
+            }
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
     function verifySession($strUserSessionID){
         global $conScouting;
         $strQuery = "SELECT SessionID FROM tblCurrentSessions WHERE SessionID = ? AND StartTime >= NOW() - INTERVAL 12 HOUR";
@@ -370,6 +402,129 @@
         
     }
 
+    function getTeamUsersForManagement($SessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblUsers.Email, tblUsers.FirstName, tblUsers.LastName, tblRoles.Description  FROM tblUsers LEFT JOIN tblRoles ON tblUsers.Role = tblRoles.RoleID WHERE tblUsers.Team = (SELECT TeamID FROM tblCurrentSessions LEFT JOIN tblUsers ON tblCurrentSessions.UserID = tblUsers.Email LEFT JOIN tblRoles ON tblUsers.Role = tblRoles.RoleID WHERE SessionID = ? AND (tblRoles.Description = 'Team Owner' OR tblRoles.Description = 'Super Admin'))";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('s', $SessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
+    function getUserRolesBySessionID($SessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblRoles.Description FROM tblCurrentSessions LEFT JOIN tblUsers ON tblCurrentSessions.UserID = tblUsers.Email LEFT JOIN tblRoles ON tblUsers.Role = tblRoles.RoleID WHERE SessionID = ? UNION SELECT tblUsers.AccessTo AS Description FROM tblCurrentSessions LEFT JOIN tblUsers ON tblCurrentSessions.UserID = tblUsers.Email WHERE SessionID = ?";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('ss', $SessionID, $SessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
+    function getUserAccessToBySessionID($SessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblUsers.AccessTo FROM tblCurrentSessions LEFT JOIN tblUsers ON tblCurrentSessions.UserID = tblUsers.Email WHERE SessionID = ?";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('s', $SessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
     function verifyAccess($strUserSessionID,$strRoleID){
         global $conScouting;
         $strQuery = "SELECT * FROM tblUsers WHERE tblUsers.Role = ? AND tblUsers.Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)";
@@ -496,7 +651,7 @@
     
     function newUserWithCode($strUsername,$FirstName,$LastName,$Password,$TeamCode){
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097')";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097'),'Scouting'";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -601,7 +756,7 @@
         }
         //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?)";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,?,?,'Scouting')";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -626,6 +781,84 @@
          if($statScouting->execute()){
             sendVerificationEmail($Email);
             return '{"Outcome":"New User Created"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statScouting->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function updateUserRoles($Email,$Role){
+        
+        //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
+        global $conScouting;
+        $strQuery = "UPDATE tblUsers SET Role = ? WHERE Email = ?";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ss', $Role, $Email);
+         if($statScouting->execute()){
+            sendVerificationEmail($Email);
+            return '{"Outcome":"User Updated"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statScouting->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function updateUserAccessTo($Email,$AccessTo){
+        
+        //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
+        global $conScouting;
+        $strQuery = "UPDATE tblUsers SET AccessTo = ? WHERE Email = ?";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ss', $AccessTo, $Email);
+         if($statScouting->execute()){
+            sendVerificationEmail($Email);
+            return '{"Outcome":"User Updated"}';
          } else {
             return '{"Outcome":"Error"}';
          }
