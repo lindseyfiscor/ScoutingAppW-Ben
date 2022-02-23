@@ -89,30 +89,64 @@ $(document).ready( function () {
   });
   
   $(document).on('click','#btnJoin', function() {
-      $.post('../php/newUser.php', {
-          strTeamCode:$('#txtAccessCode').val(),
-          strFirstName:$('#txtFirstName').val(),
-          strLastName:$('#txtLastName').val(),
-          strUserName:$('#txtEmail').val(),
-          strPassword:$('#txtPassword').val(),
-      },
-      function(){
-  
-      });
+    Swal.fire({
+        icon: 'question',
+        title: "Are you sure you want to create a new user?",
+        showConfirmButton: true,
+        showCancelButton: true
+    }).then((result)=> {
+        if(result.isConfirmed){
+            $.post('../php/newUser.php', {
+                strTeamCode:$('#txtAccessCode').val(),
+                strFirstName:$('#txtFirstName').val(),
+                strLastName:$('#txtLastName').val(),
+                strUserName:$('#txtEmail').val(),
+                strPassword:$('#txtPassword').val(),
+            },function(result){
+            let objResult = JSON.parse(result);
+            if(objResult.Outcome == 'Error'){
+                Swal.fire({
+                    postion: 'top-end',
+                    icon: 'error',
+                    title: 'New User Was Not Created',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }else {
+                Swal.fire({
+                  postion: 'top-end',
+                  icon: 'success',
+                  title: 'New User Created',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then((result) => {
+                  window.location.href = 'login.html';
+              }) 
+            }
+          })
+      }
+    })
   });
   
   $(document).on('click','#btnSubmitObservation', function() {
-      let blnAutoTarmacTaxi = $("input:checkbox[id=autoTaxiYes]")[0].checked;;
+      //let blnAutoTarmacTaxi = $("input:checkbox[id=autoTaxiYes]")[0].checked;;
+      let blnAutoTarmacTaxi;
+      if ($("#autoTaxiYes:checked").length == 1) {blnAutoTarmacTaxi = "True";} else {blnAutoTarmacTaxi = "True";};
       
-      let blnTeleOpShootsBalls = $("input:checkbox[id=teleRobotShootOpposite]")[0].checked;
+      let blnTeleOpShootsBalls;
+      if ($("input[type=checkbox]").prop(":checked")) {blnTeleOpShootsBalls = 1;} else {blnTeleOpShootsBalls = 0;};
       
-      let blnTeleOpPlaysDefense = $("input:checkbox[id=teleRobotShootOpposite]")[0].checked;
+      let blnTeleOpPlaysDefense;
+      if ($("input[type=checkbox]").prop(":checked")) {blnTeleOpPlaysDefense = 1;} else {blnTeleOpPlaysDefense = 0;};
      
-      let blnMoreQuintet = $("input:checkbox[id=moreQuintetInAuto]")[0].checked;
+      let blnMoreQuintet;
+      if ($("input[type=checkbox]").prop(":checked")) {blnMoreQuintet = 1;} else {blnMoreQuintet = 0;};
       
-      let blnMoreThan16 = $("input:checkbox[id=more16ClimbPts]")[0].checked;
+      let blnMoreThan16;
+      if ($("input[type=checkbox]").prop(":checked")) {blnMoreThan16 = 1;} else {blnMoreThan16 = 0;};
       
-      let blnMoreWin = $("input:checkbox[id=moreWinMatch]")[0].checked;
+      let blnMoreWin;
+      if ($("input[type=checkbox]").prop(":checked")) {blnMoreWin = 1;} else {blnMoreWin = 0;};
       
       
       $.post('../php/newObservation.php', {
@@ -138,22 +172,23 @@ $(document).ready( function () {
                 Swal.fire({
                     postion: 'top-end',
                     icon: 'success',
-                    title: 'Super observation recorded',
+                    title: 'Stand observation recorded',
                     showConfirmButton: false,
                     timer: 1500
                 }).then((result) => {
                     $('#txtMatchNumber').val('');
                     $('#txtTeamNumScouting').val('');
                     $('#dpdwTeamPosition').val('B1').trigger('change');
-                    $("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
+                    //$("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
                     $("input:checkbox[id=autoTaxiYes]:checked")[0].checked = false;
+                    //if ($("input:checkbox[id=autoTaxiYes]").prop(":checked")) {alert("Check box in Checked");} else {alert("Check box in unChecked");("input:checkbox[id=autoTaxiYes]")[0].checked = false;};
                     $('#txtAutoBallsInUpper').text('0');
                     $('#txtAutoBallsInLower').text('0');
                     $('#txtTeleBallsInUpper').text('0');
                     $('#txtTeleBallsInLower').text('0');
                     $("input:checkbox[id=teleRobotShootOpposite]:checked")[0].checked = false;
                     $("input:checkbox[id=teleRobotPlayDefense]:checked")[0].checked = false;
-                    $("input:radio[name=radClimbing]:checked")[0].checked = false;
+                    //$("input:radio[name=radClimbing]:checked")[0].checked = false;
                     $("input:checkbox[id=moreQuintetInAuto]:checked")[0].checked = false;
                     $("input:checkbox[id=more16ClimbPts]:checked")[0].checked = false;
                     $("input:checkbox[id=moreWinMatch]:checked")[0].checked = false;
@@ -161,7 +196,7 @@ $(document).ready( function () {
             }else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Super not recorded',
+                    title: 'Stand not recorded',
                     html: '<p>Please check your form and try again</p>'
                 })
             }

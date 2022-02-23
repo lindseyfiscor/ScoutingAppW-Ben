@@ -12,5 +12,6 @@
     $strLastName = strip_tags($strLastName);
     $strPassword = strip_tags($strPassword);
     $strTeamCode = strip_tags($strTeamCode);
+    
     echo newUserWithCode($strUserName,$strFirstName,$strLastName,$strPassword,$strTeamCode);
 ?>
