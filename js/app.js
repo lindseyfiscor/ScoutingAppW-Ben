@@ -174,19 +174,19 @@ $(document).on('click','#btnSubmitObservation', function() {
     if ($("#autoTaxiYes:checked").length == 1) {blnAutoTarmacTaxi = "True";} else {blnAutoTarmacTaxi = "True";};
     
     let blnTeleOpShootsBalls;
-    if ($("input[type=checkbox]").prop(":checked")) {blnTeleOpShootsBalls = 1;} else {blnTeleOpShootsBalls = 0;};
+    if ($("#teleRobotShootOpposite").prop(":checked")) {blnTeleOpShootsBalls = "True";} else {blnTeleOpShootsBalls = "False";};
     
     let blnTeleOpPlaysDefense;
-    if ($("input[type=checkbox]").prop(":checked")) {blnTeleOpPlaysDefense = 1;} else {blnTeleOpPlaysDefense = 0;};
+    if ($("#teleRobotPlayDefense").prop(":checked")) {blnTeleOpPlaysDefense = "True";} else {blnTeleOpPlaysDefense = "False";};
     
     let blnMoreQuintet;
-    if ($("input[type=checkbox]").prop(":checked")) {blnMoreQuintet = 1;} else {blnMoreQuintet = 0;};
+    if ($("#moreQuintetInAuto").prop(":checked")) {blnMoreQuintet = "True";} else {blnMoreQuintet = "False";};
     
     let blnMoreThan16;
-    if ($("input[type=checkbox]").prop(":checked")) {blnMoreThan16 = 1;} else {blnMoreThan16 = 0;};
+    if ($("#more16ClimbPts").prop(":checked")) {blnMoreThan16 = "True";} else {blnMoreThan16 = "False";};
     
     let blnMoreWin;
-    if ($("input[type=checkbox]").prop(":checked")) {blnMoreWin = 1;} else {blnMoreWin = 0;};
+    if ($("#moreWinMatch").prop(":checked")) {blnMoreWin = "True";} else {blnMoreWin = "False";};
     
     
     $.post('../php/newObservation.php', {

@@ -90,7 +90,7 @@
     function addSuper($strUserSessionID,$intSuperMatch,$strSuperNotes){
         try{
             global $conScouting;
-            $strObservationID = guidv4(); //new to change strObservationID to strSuperID?
+            $strObservationID = guidv4();
             $strQuery = 'INSERT INTO tblSuper VALUES (?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
