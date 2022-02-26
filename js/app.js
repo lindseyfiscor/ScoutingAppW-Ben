@@ -54,11 +54,11 @@ function buildNavigation(){
             $('#navMatch').addClass('active');
         } else if(strLocation == '/teamInfo.html'){
             $('#navTeam').addClass('active');
-        } else if(strLocation == '/navPitData.html'){
+        } else if(strLocation == '/pitData.html'){
             $('#navPitData').addClass('active');
-        } else if(strLocation == '/navAdmin.html'){
+        } else if(strLocation == '/admin.html'){
             $('#navAdmin').addClass('active');
-        } else if(strLocation == '/navMgmt.html'){
+        } else if(strLocation == '/teams.html'){
             $('#navMgmt').addClass('active');
         }
     })
@@ -187,11 +187,6 @@ Swal.fire({
 });
 
 $(document).on('click','#btnSubmitObservation', function() {
-<<<<<<< HEAD
-    //let blnAutoTarmacTaxi = $("input:checkbox[id=autoTaxiYes]")[0].checked;;
-
-=======
->>>>>>> 899af946da7f9d48eb888f820670d6dd611340f6
     let blnAutoTarmacTaxi;
     if ($("#autoTaxiYes").prop("checked")) {
         blnAutoTarmacTaxi = "True";
@@ -264,6 +259,7 @@ $(document).on('click','#btnSubmitObservation', function() {
             }).then((result) => {
                 $('#txtMatchNumber').val('');
                 $('#txtTeamNumScouting').val('');
+                $('#dpdwTeamPosition').val('B1').trigger('change');
                 $("#autoTaxiYes").prop('checked',false);
                 $('.custom-control-input').prop('checked',false)
                 $('#txtAutoBallsInUpper').text('0');
@@ -276,7 +272,6 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $("#moreQuintetInAuto").prop('checked',false);
                 $("#more16ClimbPts").prop('checked',false);
                 $("#moreWinMatch").prop('checked',false);
-                $('#dpdwTeamPosition').val('B1').trigger('change');
             })
         }else {
             Swal.fire({
@@ -291,6 +286,7 @@ $(document).on('click','#btnSubmitObservation', function() {
   $(document).on('click','#btnResetObservationForm', function() {
     $('#txtMatchNumber').val('');
     $('#txtTeamNumScouting').val('');
+    $('#dpdwTeamPosition').val('B1').trigger('change');
     $("#autoTaxiYes").prop('checked',false);
     $('.custom-control-input').prop('checked',false)
     $('#txtAutoBallsInUpper').text('0');
@@ -303,7 +299,6 @@ $(document).on('click','#btnSubmitObservation', function() {
     $("#moreQuintetInAuto").prop('checked',false);
     $("#more16ClimbPts").prop('checked',false);
     $("#moreWinMatch").prop('checked',false);
-    $('#dpdwTeamPosition').val('B1').trigger('change');
 })
 
   $(document).on('click','#btnSubmitPit', function() {
@@ -424,6 +419,7 @@ $(document).on('click','#btnSubmitObservation', function() {
                     $('#dpdwDriveTrainType').val('CH').trigger('change');
                     $('#dpdwWheelType').val('CH').trigger('change');
                     $('#dpdwMotorType').val('CH').trigger('change');
+                    $('#dpdwShooterType').val('CH').trigger('change');
                     $('#pitTextBox').val('');
             }) 
         }else {
@@ -609,9 +605,15 @@ $(document).on('click','#btnUpdateUser',function(){
 $(document).on('click','.btnEditUser',function(){
     let strEmail = $(this).attr('data-email');
     $('#spanEmail').text(strEmail);
-<<<<<<< HEAD
+    $.each(result,function(i,user){
+        $('#teamData tbody').append('<tr><td>' + user.FirstName + ' ' + user.LastName + '</td><td>' + user.Email + '</td><td>' + user.Description + '</td><td><button class="btn btn-primary btn-sm btnEditUser" data-email="' + user.Email + '" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>');
+        $('#txtModPitFirstName').text(user.FirstName);
+        $('#txtModPitLastName').text(user.LastName);
+        $('#txtModPitDescription').text(user.Description);
+        $('#firstName').text(strEmail);
+    })
+    
 })
-
 
 $(document).on('click','#btnRetrieveData',function(){
     let strAPIKey = $('#txtAPIKey').val();
@@ -672,6 +674,4 @@ $(document).on('click','#btnRetrieveData',function(){
          }
          
     })
-=======
->>>>>>> 899af946da7f9d48eb888f820670d6dd611340f6
 })

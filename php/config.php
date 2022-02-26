@@ -844,6 +844,41 @@
          $statScouting->close();
     }
 
+    function pullUserInfo($strUserSessionID,$Email){
+        global $conScouting;
+        $strQuery = "SELECT Email, FirstName, LastName, Role, Team, AccessTo FROM tblUsers WHERE UPPER(Email) = UPPER(?) AND Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?) AND ((SELECT COUNT(Email) FROM tblUsers WHERE (Role = 'C1692D0B-A418-47E2-BABC-A6BAF94384E4' OR Role = 'd8057ce3-048a-451b-b629-e627d48c2ab2') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ? )) > 0)";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+		 // Bind Parameters
+		 $statScouting->bind_param('sss', $Email, $strUserSessionID, $strUserSessionID);
+         $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            $myArray[] = $row;
+        }
+        echo json_encode($myArray);
+         
+        $statScouting->close();
+    }
 
     function sendVerificationEmail($strEmailAddress){
         $emailTo = $strEmailAddress;
