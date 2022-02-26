@@ -23,29 +23,47 @@ function buildNavigation(){
         console.log(arrRoles);
         let strNavHTML = '';
         if(arrRoles.includes('Scouting')){
-            strNavHTML += '<li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-home mr-2"></i>Home</a></li>';
+            strNavHTML += '<li class="nav-item" id="navHome"><a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>';
         }
         if(arrRoles.includes('Pit')){
-            strNavHTML += '<li class="nav-item"><a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a></li>';
+            strNavHTML += '<li class="nav-item" id="navPit"><a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a></li>';
         }
         if(arrRoles.includes('Super')){
-            strNavHTML += '<li class="nav-item"><a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a></li>';
+            strNavHTML += '<li class="nav-item" id="navSuper"><a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a></li>';
         }
-        strNavHTML += '<li class="nav-item"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
-        strNavHTML += '<li class="nav-item"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
-        strNavHTML += '<li class="nav-item"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
+        strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
+        strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
+        strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
         if(arrRoles.includes('Team Owner') || arrRoles.includes('Super Admin')){
-            strNavHTML += '<li class="nav-item"><a class="nav-link" href="admin.html"><i class="fas fa-tools mr-2"></i>Admin</a></li>';
+            strNavHTML += '<li class="nav-item" id="navAdmin"><a class="nav-link" href="admin.html"><i class="fas fa-tools mr-2"></i>Admin</a></li>';
         }
         if(arrRoles.includes('Super Admin')){
-            strNavHTML += '<li class="nav-item"><a class="nav-link" href="teams.html"><i class="fas fa-tools mr-2"></i>Team Mangement</a></li>';
+            strNavHTML += '<li class="nav-item" id="navMgmt"><a class="nav-link" href="teams.html"><i class="fas fa-tools mr-2"></i>Team Mangement</a></li>';
         }
         strNavHTML += '<li class="nav-item float-right"><a class="nav-link" id="btnLogout"><i class="fas fa-sign-in-alt mr-2"></i>Logout</a></li>';
         $('#divNavbar').append(strNavHTML);
+
+        let strLocation = window.location.pathname;
+        if(strLocation == '/' || strLocation == '/index.html'){
+            $('#navHome').addClass('active');
+        } else if(strLocation == '/pit.html'){
+            $('#navPit').addClass('active');
+        } else if(strLocation == '/superScouting.html'){
+            $('#navSuper').addClass('active');
+        } else if(strLocation == '/dataAnalysis.html'){
+            $('#navMatch').addClass('active');
+        } else if(strLocation == '/teamInfo.html'){
+            $('#navTeam').addClass('active');
+        } else if(strLocation == '/navPitData.html'){
+            $('#navPitData').addClass('active');
+        } else if(strLocation == '/navAdmin.html'){
+            $('#navAdmin').addClass('active');
+        } else if(strLocation == '/navMgmt.html'){
+            $('#navMgmt').addClass('active');
+        }
     })
 }
     
-
 $(document).on('click','.btnEditTeam', function() {
 let strTeamID = $(this).attr('data-teamid');
 console.log(strTeamID);
@@ -170,23 +188,48 @@ Swal.fire({
 
 $(document).on('click','#btnSubmitObservation', function() {
     //let blnAutoTarmacTaxi = $("input:checkbox[id=autoTaxiYes]")[0].checked;;
+
     let blnAutoTarmacTaxi;
-    if ($("#autoTaxiYes:checked").length == 1) {blnAutoTarmacTaxi = "True";} else {blnAutoTarmacTaxi = "True";};
+    if ($("#autoTaxiYes").prop("checked")) {
+        blnAutoTarmacTaxi = "True";
+    } else {
+        blnAutoTarmacTaxi = "False";
+    };
     
     let blnTeleOpShootsBalls;
-    if ($("#teleRobotShootOpposite").prop(":checked")) {blnTeleOpShootsBalls = "True";} else {blnTeleOpShootsBalls = "False";};
+    if ($("#teleRobotShootOpposite").prop("checked")) {
+        blnTeleOpShootsBalls = "True";
+    } else {
+        blnTeleOpShootsBalls = "False";
+    };
     
     let blnTeleOpPlaysDefense;
-    if ($("#teleRobotPlayDefense").prop(":checked")) {blnTeleOpPlaysDefense = "True";} else {blnTeleOpPlaysDefense = "False";};
+    if ($("#teleRobotPlayDefense").prop("checked")) {
+        blnTeleOpPlaysDefense = "True";
+    } else {
+        blnTeleOpPlaysDefense = "False";
+    };
     
     let blnMoreQuintet;
-    if ($("#moreQuintetInAuto").prop(":checked")) {blnMoreQuintet = "True";} else {blnMoreQuintet = "False";};
+    if ($("#moreQuintetInAuto").prop("checked")) {
+        blnMoreQuintet = "True";
+    } else {
+        blnMoreQuintet = "False";
+    };
     
     let blnMoreThan16;
-    if ($("#more16ClimbPts").prop(":checked")) {blnMoreThan16 = "True";} else {blnMoreThan16 = "False";};
+    if ($("#more16ClimbPts").prop("checked")) {
+        blnMoreThan16 = "True";
+    } else {
+        blnMoreThan16 = "False";
+    };
     
     let blnMoreWin;
-    if ($("#moreWinMatch").prop(":checked")) {blnMoreWin = "True";} else {blnMoreWin = "False";};
+    if ($("#moreWinMatch").prop("checked")) {
+        blnMoreWin = "True";
+    } else {
+        blnMoreWin = "False";
+    };
     
     
     $.post('../php/newObservation.php', {
@@ -196,10 +239,10 @@ $(document).on('click','#btnSubmitObservation', function() {
         strScoutingPosition:$('#dpdwTeamPosition').val(),
         strTarmacStartingPosition:$('input[name=radTarmacPlace]:checked').val(),
         blnAutoTarmacTaxi:blnAutoTarmacTaxi,
-        intAutoUpperHub:$('#txtAutoBallsInUpper').val(),
-        intAutoLowerHub:$('#txtAutoBallsInLower').val(),
-        intTeleOpUpperHub:$('#txtTeleBallsInUpper').val(),
-        intTeleOpLowerHub:$('#txtTeleBallsInLower').val(),
+        intAutoUpperHub:$('#txtAutoBallsInUpper').text(),
+        intAutoLowerHub:$('#txtAutoBallsInLower').text(),
+        intTeleOpUpperHub:$('#txtTeleBallsInUpper').text(),
+        intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
         blnTeleOpShootsBalls:blnTeleOpShootsBalls,
         blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
         strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
@@ -218,20 +261,19 @@ $(document).on('click','#btnSubmitObservation', function() {
             }).then((result) => {
                 $('#txtMatchNumber').val('');
                 $('#txtTeamNumScouting').val('');
-                $('#dpdwTeamPosition').val('B1').trigger('change');
-                //$("input:radio[name=radTarmacPlace]:checked")[0].checked = false;
-                $("input:checkbox[id=autoTaxiYes]:checked")[0].checked = false;
-                //if ($("input:checkbox[id=autoTaxiYes]").prop(":checked")) {alert("Check box in Checked");} else {alert("Check box in unChecked");("input:checkbox[id=autoTaxiYes]")[0].checked = false;};
+                $("#autoTaxiYes").prop('checked',false);
+                $('.custom-control-input').prop('checked',false)
                 $('#txtAutoBallsInUpper').text('0');
                 $('#txtAutoBallsInLower').text('0');
                 $('#txtTeleBallsInUpper').text('0');
                 $('#txtTeleBallsInLower').text('0');
-                $("input:checkbox[id=teleRobotShootOpposite]:checked")[0].checked = false;
-                $("input:checkbox[id=teleRobotPlayDefense]:checked")[0].checked = false;
-                //$("input:radio[name=radClimbing]:checked")[0].checked = false;
-                $("input:checkbox[id=moreQuintetInAuto]:checked")[0].checked = false;
-                $("input:checkbox[id=more16ClimbPts]:checked")[0].checked = false;
-                $("input:checkbox[id=moreWinMatch]:checked")[0].checked = false;
+                $("#teleRobotShootOpposite").prop('checked',false);
+                $("#teleRobotPlayDefense").prop('checked',false);
+                $("#radClimbing]").prop('checked',false);
+                $("#moreQuintetInAuto").prop('checked',false);
+                $("#more16ClimbPts").prop('checked',false);
+                $("#moreWinMatch").prop('checked',false);
+                $('#dpdwTeamPosition').val('B1').trigger('change');
             })
         }else {
             Swal.fire({
@@ -543,4 +585,84 @@ $.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionI
     }
 })  
 
+})
+
+function fillRoles(){
+    $.getJSON('../php/getUserRolesOptions.php',{strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID')},function(result){
+        $.each(result, function(i,role){
+            $('#admRoles').append('<option value="' + role.RoleID + '">' + role.Description + '</option>');
+        })
+    })
+}
+
+$(document).on('click','#btnUpdateUser',function(){
+    let strRole = $('#admRoles').val();
+    let strAbleTo = $('#cboAbleToScout').val().join(',');
+})
+
+$(document).on('click','.btnEditUser',function(){
+    let strEmail = $(this).attr('data-email');
+    $('#spanEmail').text(strEmail);
+})
+
+
+$(document).on('click','#btnRetrieveData',function(){
+    let strAPIKey = $('#txtAPIKey').val();
+    let strTeamCode = $('#txtTeamCode').val();
+    $.getJSON('php/getObservationDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+        arrObjObservation = result;
+         if(arrObjObservation.length > 0){
+             $('#teamDataDownload tbody').empty();
+             var strCurrent = '';
+             $.each(result,function(i,observation){
+                 let strTableRowHTML = '<tr><td>' + observation.ObservationID + '</td><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                 $('#teamDataDownload tbody').append(strTableRowHTML);
+             })
+             $('#teamDataDownload').DataTable({
+                 dom: 'Bfrtip',
+                 buttons: [
+                     'copy', 'csv','excel', 'pdf'
+                 ]
+             });
+         }
+         
+    })
+
+    $.getJSON('php/getSuperDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+        arrObjObservation = result;
+         if(arrObjObservation.length > 0){
+             $('#teamDataDownloadSuper tbody').empty();
+             var strCurrent = '';
+             $.each(result,function(i,observation){
+                 let strTableRowHTML = '<tr><td>' + observation.EnteredBy + '</td><td>' + observation.MatchID + '</td><td>' + observation.MatchNumber + '</td><td>' + observation.Notes + '</td><td>' + observation.SuperDateTime + '</td></tr>';
+                 $('#teamDataDownloadSuper tbody').append(strTableRowHTML);
+             })
+             $('#teamDataDownloadSuper').DataTable({
+                 dom: 'Bfrtip',
+                 buttons: [
+                     'copy', 'csv','excel', 'pdf'
+                 ]
+             });
+         }
+         
+    })
+
+    $.getJSON('php/getPitDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+        arrObjObservation = result;
+         if(arrObjObservation.length > 0){
+             $('#teamDataDownloadPit tbody').empty();
+             var strCurrent = '';
+             $.each(result,function(i,observation){
+                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.Notes + '</td><td>' + observation.OverBumper + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
+                 $('#teamDataDownloadPit tbody').append(strTableRowHTML);
+             })
+             $('#teamDataDownloadPit').DataTable({
+                 dom: 'Bfrtip',
+                 buttons: [
+                     'copy', 'csv','excel', 'pdf'
+                 ]
+             });
+         }
+         
+    })
 })
