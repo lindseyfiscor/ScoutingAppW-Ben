@@ -19,7 +19,7 @@
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intAutoMissed,$intTeleOpUpperHub,$intTeleOpLowerHub,$intTeleMissed,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin){
+    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed){
         try{
             global $conScouting;
             $strObservationID = guidv4();
@@ -42,7 +42,7 @@
 
             $statScouting = $conScouting->prepare($strQuery);
             // Bind Parameters
-            $statScouting->bind_param('sssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intAutoMissed,$intTeleOpUpperHub,$intTeleOpLowerHub,$intTeleMissed,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID);
+            $statScouting->bind_param('sssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed,$strUserSessionID);
             if($statScouting->execute()){
                 return '{"Outcome":"'.$strObservationID.'"}';
             } else {

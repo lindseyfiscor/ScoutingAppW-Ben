@@ -8,16 +8,16 @@
     $blnAutoTarmacTaxi = $_POST['blnAutoTarmacTaxi'];
     $intAutoUpperHub = $_POST['intAutoUpperHub'];
     $intAutoLowerHub = $_POST['intAutoLowerHub'];
-    $intAutoMissed = $_POST['intAutoMissed'];
     $intTeleOpUpperHub = $_POST['intTeleOpUpperHub'];
     $intTeleOpLowerHub = $_POST['intTeleOpLowerHub'];
-    $intTeleMissed = $_POST['intTeleMissed'];
     $blnTeleOpShootsBalls = $_POST['blnTeleOpShootsBalls'];
     $blnTeleOpPlaysDefense = $_POST['blnTeleOpPlaysDefense'];
     $strEndGameClimbing = $_POST['strEndGameClimbing'];
     $blnMoreQuintet = $_POST['blnMoreQuintet'];
     $blnMoreThan16 = $_POST['blnMoreThan16'];
     $blnMoreWin = $_POST['blnMoreWin'];
+    $intAutoMissed = $_POST['intAutoMissed'];
+    $intTeleMissed = $_POST['intTeleMissed'];
 
     $strUserSessionID = strip_tags($strUserSessionID);
     $intMatch = strip_tags($intMatch);
@@ -27,17 +27,16 @@
     $blnAutoTarmacTaxi = strip_tags($blnAutoTarmacTaxi);
     $intAutoUpperHub = strip_tags($intAutoUpperHub);
     $intAutoLowerHub = strip_tags($intAutoLowerHub);
-    $intAutoMissed = strip_tags($intAutoMissed);
     $intTeleOpUpperHub = strip_tags($intTeleOpUpperHub);
     $intTeleOpLowerHub = strip_tags($intTeleOpLowerHub);
-    $intTeleMissed = strip_tags($intTeleMissed);
     $blnTeleOpShootsBalls = strip_tags($blnTeleOpShootsBalls);
     $blnTeleOpPlaysDefense = strip_tags($blnTeleOpPlaysDefense);
     $strEndGameClimbing = strip_tags($strEndGameClimbing);
     $blnMoreQuintet = strip_tags($blnMoreQuintet);
     $blnMoreThan16 = strip_tags($blnMoreThan16);
     $blnMoreWin = strip_tags($blnMoreWin);
-
+    $intAutoMissed = strip_tags($intAutoMissed);
+    $intTeleMissed = strip_tags($intTeleMissed);
     
   
     echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin);

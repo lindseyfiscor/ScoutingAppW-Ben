@@ -239,7 +239,6 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnAutoTarmacTaxi:blnAutoTarmacTaxi,
         intAutoUpperHub:$('#txtAutoBallsInUpper').text(),
         intAutoLowerHub:$('#txtAutoBallsInLower').text(),
-        intAutoMissed:$('#txtAutoMissed').text(),
         intTeleOpUpperHub:$('#txtTeleBallsInUpper').text(),
         intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
         intTeleMissed:$('#txtTeleMissed').text(),
@@ -248,7 +247,9 @@ $(document).on('click','#btnSubmitObservation', function() {
         strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
         blnMoreQuintet:blnMoreQuintet,
         blnMoreThan16:blnMoreThan16,
-        blnMoreWin:blnMoreWin
+        blnMoreWin:blnMoreWin,
+        intAutoBallsMissed:$('#txtAutoMissed').text(),
+        intTeleBallsMissed:$('#txtTeleMissed').text(),
     }, function(result){
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
@@ -632,7 +633,7 @@ $(document).on('click','#btnRetrieveData',function(){
              $('#teamDataDownload tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.ObservationID + '</td><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.ObservationID + '</td><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleBallsMissed + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownload tbody').append(strTableRowHTML);
              })
              $('#teamDataDownload').DataTable({
