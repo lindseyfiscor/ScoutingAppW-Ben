@@ -564,10 +564,12 @@ $(document).on('click','.btn-more-match-info',function(){
             $('#txtModObservationDetailsTaxi').text(observation.AutoTarmacTaxi);
             $('#txtModObservationDetailsAutoUpperHub').text(observation.AutoUpperHub);
             $('#txtModObservationDetailsAutoLowerHub').text(observation.AutoLowerHub);
+            $('#txtModObservationDetailsAutoMissed').text(observation.AutoMissed);
             $('#txtModObservationDetailsBalls').text(observation.TeleOpShootsBalls);
             $('#txtModObservationDetailsDefense').text(observation.TeleOpPlaysDefense);
             $('#txtModObservationDetailsTeleOpUpperHub').text(observation.TeleOpUpperHub);
             $('#txtModObservationDetailsTeleOpLowerHub').text(observation.TeleOpLowerHub);
+            $('#txtModObservationDetailsTeleMissed').text(observation.TeleMissed);
             
         }
     })
