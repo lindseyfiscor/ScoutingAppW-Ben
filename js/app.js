@@ -239,8 +239,10 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnAutoTarmacTaxi:blnAutoTarmacTaxi,
         intAutoUpperHub:$('#txtAutoBallsInUpper').text(),
         intAutoLowerHub:$('#txtAutoBallsInLower').text(),
+        intAutoMissed:$('#txtAutoMissed').text(),
         intTeleOpUpperHub:$('#txtTeleBallsInUpper').text(),
         intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
+        intTeleMissed:$('#txtTeleMissed').text(),
         blnTeleOpShootsBalls:blnTeleOpShootsBalls,
         blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
         strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
@@ -264,8 +266,10 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('.custom-control-input').prop('checked',false)
                 $('#txtAutoBallsInUpper').text('0');
                 $('#txtAutoBallsInLower').text('0');
+                $('#txtAutoMissed').text('0');
                 $('#txtTeleBallsInUpper').text('0');
                 $('#txtTeleBallsInLower').text('0');
+                $('#txtTeleMissed').text('0');
                 $("#teleRobotShootOpposite").prop('checked',false);
                 $("#teleRobotPlayDefense").prop('checked',false);
                 $("#radClimbing]").prop('checked',false);
@@ -291,8 +295,10 @@ $(document).on('click','#btnSubmitObservation', function() {
     $('.custom-control-input').prop('checked',false)
     $('#txtAutoBallsInUpper').text('0');
     $('#txtAutoBallsInLower').text('0');
+    $('#txtAutoMissed').text('0');
     $('#txtTeleBallsInUpper').text('0');
     $('#txtTeleBallsInLower').text('0');
+    $('#txtTeleMissed').text('0');
     $("#teleRobotShootOpposite").prop('checked',false);
     $("#teleRobotPlayDefense").prop('checked',false);
     $("#radClimbing]").prop('checked',false);

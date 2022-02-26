@@ -8,8 +8,10 @@
     $blnAutoTarmacTaxi = $_POST['blnAutoTarmacTaxi'];
     $intAutoUpperHub = $_POST['intAutoUpperHub'];
     $intAutoLowerHub = $_POST['intAutoLowerHub'];
+    $intAutoMissed = $_POST['intAutoMissed'];
     $intTeleOpUpperHub = $_POST['intTeleOpUpperHub'];
     $intTeleOpLowerHub = $_POST['intTeleOpLowerHub'];
+    $intTeleMissed = $_POST['intTeleMissed'];
     $blnTeleOpShootsBalls = $_POST['blnTeleOpShootsBalls'];
     $blnTeleOpPlaysDefense = $_POST['blnTeleOpPlaysDefense'];
     $strEndGameClimbing = $_POST['strEndGameClimbing'];
@@ -25,8 +27,10 @@
     $blnAutoTarmacTaxi = strip_tags($blnAutoTarmacTaxi);
     $intAutoUpperHub = strip_tags($intAutoUpperHub);
     $intAutoLowerHub = strip_tags($intAutoLowerHub);
+    $intAutoMissed = strip_tags($intAutoMissed);
     $intTeleOpUpperHub = strip_tags($intTeleOpUpperHub);
     $intTeleOpLowerHub = strip_tags($intTeleOpLowerHub);
+    $intTeleMissed = strip_tags($intTeleMissed);
     $blnTeleOpShootsBalls = strip_tags($blnTeleOpShootsBalls);
     $blnTeleOpPlaysDefense = strip_tags($blnTeleOpPlaysDefense);
     $strEndGameClimbing = strip_tags($strEndGameClimbing);
