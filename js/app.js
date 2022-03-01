@@ -28,9 +28,9 @@ function buildNavigation(){
         if(arrRoles.includes('Pit')){
             strNavHTML += '<li class="nav-item" id="navPit"><a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a></li>';
         }
-        if(arrRoles.includes('Super')){
-            strNavHTML += '<li class="nav-item" id="navSuper"><a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a></li>';
-        }
+        //if(arrRoles.includes('Super')){
+        //    strNavHTML += '<li class="nav-item" id="navSuper"><a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a></li>';
+        //s}
         strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
         strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
         strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
@@ -251,6 +251,7 @@ $(document).on('click','#btnSubmitObservation', function() {
         intAutoBallsMissed:$('#txtAutoMissed').text(),
         intTeleBallsMissed:$('#txtTeleMissed').text(),
     }, function(result){
+        console.log = result;
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
             Swal.fire({
@@ -565,11 +566,11 @@ $(document).on('click','.btn-more-match-info',function(){
             $('#txtModObservationDetailsTaxi').text(observation.AutoTarmacTaxi);
             $('#txtModObservationDetailsAutoUpperHub').text(observation.AutoUpperHub);
             $('#txtModObservationDetailsAutoLowerHub').text(observation.AutoLowerHub);
-            $('#txtModObservationDetailsAutoMissed').text(observation.AutoMissed);
             $('#txtModObservationDetailsBalls').text(observation.TeleOpShootsBalls);
             $('#txtModObservationDetailsDefense').text(observation.TeleOpPlaysDefense);
             $('#txtModObservationDetailsTeleOpUpperHub').text(observation.TeleOpUpperHub);
             $('#txtModObservationDetailsTeleOpLowerHub').text(observation.TeleOpLowerHub);
+            $('#txtModObservationDetailsAutoMissed').text(observation.AutoMissed);
             $('#txtModObservationDetailsTeleMissed').text(observation.TeleMissed);
             
         }
