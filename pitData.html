@@ -47,7 +47,7 @@
             </div>
         </div>
         <div id="teamssModal">
-            <div class="modal fade" id="modUserEdit" aria-labelledby="Team Info" aria-hidden="true">
+            <div class="modal fade" id="modPitData" aria-labelledby="Team Info" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -150,7 +150,7 @@
                             $('#teamInfoData tbody').empty();
                             $.each(result,function(i,pit){
                               if(pit.PitTeamNumber != strLastTeamNumber){
-                                let strTableRowHTML = '<tr><td>' + pit.PitTeamNumber + '</td><td>Team Name</td><td>' + pit.EntryDateTime + '</td><td><button class="btn btn-primary btnViewPitDetails" data-teamnumber="' + pit.PitTeamNumber + '"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                                let strTableRowHTML = '<tr><td>' + pit.PitTeamNumber + '</td><td>Team Name</td><td>' + pit.EntryDateTime + '</td><td><button class="btn btn-primary btnViewPitDetails" data-toggle="modal" data-target="#modPitData"  data-teamnumber="' + pit.PitTeamNumber + '"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
                                 $('#teamInfoData tbody').append(strTableRowHTML);
                               }
                               strLastTeamNumber = pit.PitTeamNumber;

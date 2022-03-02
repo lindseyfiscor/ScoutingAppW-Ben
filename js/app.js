@@ -465,7 +465,7 @@ $(document).on('click','#btnSubmitSuperScout', function() {
     $.post('../php/newSuper.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
         intSuperMatch:$('#superMatchNumber').val(),
-        strSuperNotes:$('#superTextBox').text()
+        strSuperNotes:$('#superTextBox').val()
     }, function(result){
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
@@ -625,16 +625,16 @@ $(document).on('click','.btnEditUser',function(){
     
 })
 
-$(document).on('click','#btnRetrieveData',function(){
+function fillDownloadTables(){
     let strAPIKey = $('#txtAPIKey').val();
     let strTeamCode = $('#txtTeamCode').val();
-    $.getJSON('php/getObservationDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+    $.getJSON('php/getObservationDataBySessionID.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
         arrObjObservation = result;
          if(arrObjObservation.length > 0){
              $('#teamDataDownload tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.ObservationID + '</td><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleBallsMissed + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleBallsMissed + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownload tbody').append(strTableRowHTML);
              })
              $('#teamDataDownload').DataTable({
@@ -647,7 +647,7 @@ $(document).on('click','#btnRetrieveData',function(){
          
     })
 
-    $.getJSON('php/getSuperDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+    $.getJSON('php/getSuperDataBySessionID.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
         arrObjObservation = result;
          if(arrObjObservation.length > 0){
              $('#teamDataDownloadSuper tbody').empty();
@@ -666,7 +666,7 @@ $(document).on('click','#btnRetrieveData',function(){
          
     })
 
-    $.getJSON('php/getPitDataByAPIKey.php?strAPIKey=' + strAPIKey + '&strTeamCode=' + strTeamCode,function(result){
+    $.getJSON('php/getPitDataBySessionID.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
         arrObjObservation = result;
          if(arrObjObservation.length > 0){
              $('#teamDataDownloadPit tbody').empty();
@@ -684,4 +684,4 @@ $(document).on('click','#btnRetrieveData',function(){
          }
          
     })
-})
+}

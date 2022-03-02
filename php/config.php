@@ -23,7 +23,7 @@
         try{
             global $conScouting;
             $strObservationID = guidv4();
-            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -42,7 +42,7 @@
 
             $statScouting = $conScouting->prepare($strQuery);
             // Bind Parameters
-            $statScouting->bind_param('sssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed,$strUserSessionID);
+            $statScouting->bind_param('sssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID,$intAutoMissed,$intTeleMissed);
             if($statScouting->execute()){
                 return '{"Outcome":"'.$strObservationID.'"}';
             } else {
@@ -715,6 +715,126 @@
     
              // Bind Parameters
              $statScouting->bind_param('sss', $strTeamCode, $strAPIKey, $strTeamCode);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
+    function getPitDataBySessionID($strSessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblPit.* FROM tblPit LEFT JOIN tblUsers ON tblPit.EnterBy = tblUsers.Email WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('ss', $strSessionID, $strSessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
+    function getSuperDataBySessionID($strSessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblSuper.* FROM tblSuper LEFT JOIN tblUsers ON tblSuper.EnteredBy = tblUsers.Email WHERE EnteredBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('ss', $strSessionID, $strSessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+    }
+
+    function getObservationDataBySessionID($strSessionID){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
+    
+             // Bind Parameters
+             $statScouting->bind_param('ss', $strSessionID, $strSessionID);
              $statScouting->execute();      
              $result = $statScouting->get_result();
              $myArray = array();

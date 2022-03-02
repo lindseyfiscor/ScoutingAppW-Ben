@@ -16,8 +16,8 @@
     $blnMoreQuintet = $_POST['blnMoreQuintet'];
     $blnMoreThan16 = $_POST['blnMoreThan16'];
     $blnMoreWin = $_POST['blnMoreWin'];
-    $intAutoMissed = $_POST['intAutoMissed'];
-    $intTeleMissed = $_POST['intTeleMissed'];
+    $intAutoMissed = $_POST['intAutoBallsMissed'];
+    $intTeleMissed = $_POST['intTeleBallsMissed'];
 
     $strUserSessionID = strip_tags($strUserSessionID);
     $intMatch = strip_tags($intMatch);
