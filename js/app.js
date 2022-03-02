@@ -626,7 +626,7 @@ $(document).on('click','.btnViewPitDetails',function(){
 })
 
 $(document).on('click','#btnTeamKey',function(){
-$.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:'2a2f2543-9e4d-41e0-856e-9a04556c8347'},function(result){
+$.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID')},function(result){
     if(result.length > 0){
         $.each(result, function(i,teamkey){
             Swal.fire({
@@ -714,7 +714,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadPit tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.Notes + '</td><td>' + observation.OverBumper + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.Notes + '</td><td>' + observation.OverBumper + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
                  $('#teamDataDownloadPit tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadPit').DataTable({
