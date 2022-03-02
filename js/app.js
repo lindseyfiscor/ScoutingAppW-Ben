@@ -584,7 +584,7 @@ $(document).on('click','.btnViewPitDetails',function(){
 })
 
 $(document).on('click','#btnTeamKey',function(){
-$.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:'2a2f2543-9e4d-41e0-856e-9a04556c8347'},function(result){
+$.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID')},function(result){
     if(result.length > 0){
         $.each(result, function(i,teamkey){
             Swal.fire({
