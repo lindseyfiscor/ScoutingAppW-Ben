@@ -106,6 +106,10 @@
                                 <input type="checkbox" class="custom-control-input" id="autoTaxiYes"  value="autoTaxiYes">
                                 <label class="custom-control-label" for="autoTaxiYes">Taxis Out of Tarmac</label>
                             </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="autoBallPickUp"  value="autoBallPickUp">
+                                <label class="custom-control-label" for="autoBallPickUp">Picks Up Balls</label>
+                            </div>
                             <div class="row d-flex justify-content-between">
                                 <div class="form-group col-12 col-md-6 col-lg-4">
                                     <div class="row col-12 justify-content-center">
@@ -133,8 +137,9 @@
                                         <h3 class="mt-3 text-center">Missed Shots</h3>
                                     </div>
                                     <div class="row col-12 justify-content-center">
+                                        <button id="btnAutoBallsInMissedMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Missed"><i class="fas fa-minus"></i></button>
                                         <h3 class="mr-3"> <span id="txtAutoMissed" class="txtSum">0</span></h3>
-                                        <button id="btnAutoBallsInMissedPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                                        <button id="btnAutoBallsInMissedPlus" class="btn btn-success btnPlus" aria-label="Add Balls Missed"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +176,9 @@
                                         <h3 class="mt-3 text-center">Missed Shots</h3>
                                     </div>
                                     <div class="row col-12 justify-content-center">
+                                        <button id="btnTeleBallsInMissedMinus" class="btn btn-danger mr-3 btnMinus" aria-label="Minus Balls Missed"><i class="fas fa-minus"></i></button>
                                         <h3 class="mr-3"> <span id="txtTeleMissed" class="txtSum">0</span></h3>
-                                        <button id="btnTeleBallsInMissedPlus" class="btn btn-success btnPlus" aria-label="Add Balls Scored In"><i class="fas fa-plus"></i></button>
+                                        <button id="btnTeleBallsInMissedPlus" class="btn btn-success btnPlus" aria-label="Add Balls Missed"><i class="fas fa-plus"></i></button>
                                     </div>
                                 </div>
                             </div>

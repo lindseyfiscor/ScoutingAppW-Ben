@@ -18,6 +18,7 @@
     $blnMoreWin = $_POST['blnMoreWin'];
     $intAutoMissed = $_POST['intAutoBallsMissed'];
     $intTeleMissed = $_POST['intTeleBallsMissed'];
+    $blnAutoBallPickUp = $_POST['blnAutoBallPickUp'];
 
     $strUserSessionID = strip_tags($strUserSessionID);
     $intMatch = strip_tags($intMatch);
@@ -37,7 +38,7 @@
     $blnMoreWin = strip_tags($blnMoreWin);
     $intAutoMissed = strip_tags($intAutoMissed);
     $intTeleMissed = strip_tags($intTeleMissed);
-    
+    $blnAutoBallPickUp = strip_tags($blnAutoBallPickUp);
   
-    echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed);
+    echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp);
 ?>

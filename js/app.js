@@ -34,6 +34,9 @@ function buildNavigation(){
         strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
         strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
         strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
+        if(arrRoles.includes('Admin')){
+            strNavHTML += '<li class="nav-item" id="navDownloadData"><a class="nav-link" href="downloadData.html"><i class="fas fa-frog mr-2"></i>Download</a></li>';
+        }
         if(arrRoles.includes('Team Owner') || arrRoles.includes('Super Admin')){
             strNavHTML += '<li class="nav-item" id="navAdmin"><a class="nav-link" href="admin.html"><i class="fas fa-tools mr-2"></i>Admin</a></li>';
         }
@@ -193,6 +196,13 @@ $(document).on('click','#btnSubmitObservation', function() {
     } else {
         blnAutoTarmacTaxi = "False";
     };
+
+    let blnAutoBallPickUp;
+    if ($("#autoBallPickUp").prop("checked")) {
+        blnAutoTarmacTaxi = "True";
+    } else {
+        blnAutoTarmacTaxi = "False";
+    };
     
     let blnTeleOpShootsBalls;
     if ($("#teleRobotShootOpposite").prop("checked")) {
@@ -250,6 +260,7 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnMoreWin:blnMoreWin,
         intAutoBallsMissed:$('#txtAutoMissed').text(),
         intTeleBallsMissed:$('#txtTeleMissed').text(),
+        blnAutoBallPickUp:blnAutoBallPickUp,
     }, function(result){
         console.log = result;
         let objResult = JSON.parse(result);
@@ -265,6 +276,7 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('#txtTeamNumScouting').val('');
                 $('#dpdwTeamPosition').val('B1').trigger('change');
                 $("#autoTaxiYes").prop('checked',false);
+                $("#autoBallPickUp").prop('checked',false);
                 $('.custom-control-input').prop('checked',false)
                 $('#txtAutoBallsInUpper').text('0');
                 $('#txtAutoBallsInLower').text('0');
@@ -294,6 +306,7 @@ $(document).on('click','#btnSubmitObservation', function() {
     $('#txtTeamNumScouting').val('');
     $('#dpdwTeamPosition').val('B1').trigger('change');
     $("#autoTaxiYes").prop('checked',false);
+    $("#autoBallPickUp").prop('checked',false);
     $('.custom-control-input').prop('checked',false)
     $('#txtAutoBallsInUpper').text('0');
     $('#txtAutoBallsInLower').text('0');
@@ -581,6 +594,35 @@ $(document).on('click','.btn-more-match-info',function(){
 $(document).on('click','.btnViewPitDetails',function(){
     let strTeamNumber = $(this).attr('data-teamnumber');
     console.log('You clicked Team Number: ' + strTeamNumber);
+    //arrObjObservation = result;
+    //$.each(result,function(i,pit){
+    //    if(pit.pitID == strObservationID){
+    //        $('#txtModObservationDetailsMatch').text(observation.Match);
+    //        $('#txtModObservationDetailsWin').text(observation.MoreWin);
+    //        if(observation.MoreWin == "true") {
+    //            $('#txtModObservationDetailsWin').addClass('text-danger');
+    //            $('#txtModObservationDetailsWin').addClass('text-success');
+    //        } else {
+    //            $('#txtModObservationDetailsWin').addClass('text-success');
+    //            $('#txtModObservationDetailsWin').addClass('text-danger');
+    //        }
+    //        $('#txtModObservationTeam').text(observation.TeamScouting);
+    //        $('#txtModObservationDetailsDriverPosition').text(observation.ScoutingPosition);
+    //        $('#txtModObservationDetailsTarmacPosition').text(observation.TarmacStartingPosition);
+    //        $('#txtModObservationDetailsClimbing').text(observation.EndGameClimbing);
+    //        $('#txtModObservationDetailsQuintet').text(observation.MoreQuintet);
+    //        $('#txtModObservationDetailsTaxi').text(observation.AutoTarmacTaxi);
+    //        $('#txtModObservationDetailsAutoUpperHub').text(observation.AutoUpperHub);
+    //        $('#txtModObservationDetailsAutoLowerHub').text(observation.AutoLowerHub);
+    //        $('#txtModObservationDetailsBalls').text(observation.TeleOpShootsBalls);
+    //        $('#txtModObservationDetailsDefense').text(observation.TeleOpPlaysDefense);
+    //        $('#txtModObservationDetailsTeleOpUpperHub').text(observation.TeleOpUpperHub);
+    //        $('#txtModObservationDetailsTeleOpLowerHub').text(observation.TeleOpLowerHub);
+    //        $('#txtModObservationDetailsAutoMissed').text(observation.AutoMissed);
+    //        $('#txtModObservationDetailsTeleMissed').text(observation.TeleMissed);
+    //        
+    //    }
+    //})
 })
 
 $(document).on('click','#btnTeamKey',function(){
