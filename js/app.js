@@ -472,6 +472,7 @@ $(document).on('click','#btnResetPitForm', function() {
     $('#dpdwDriveTrainType').val('CH').trigger('change');
     $('#dpdwWheelType').val('CH').trigger('change');
     $('#dpdwMotorType').val('CH').trigger('change');
+    $('#dpdwShooterType').val('CH').trigger('change');
     $('#pitTextBox').val('');
 })
 
