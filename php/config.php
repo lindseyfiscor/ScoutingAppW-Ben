@@ -53,6 +53,8 @@
         }
     }
 
+    
+
     function addPitCollect($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes){
         try{
             global $conScouting;
@@ -194,7 +196,7 @@
 
     function getTeamPitData($strUserSessionID){
         global $conScouting;
-        $strQuery = "SELECT * FROM tblPit WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) ORDER BY EntryDateTime DESC";
+        $strQuery = "SELECT tblPit.*, tblStandardTeams.TeamName FROM tblPit LEFT JOIN tblStandardTeams ON tblPit.PitTeamNumber = tblStandardTeams.TeamNumber WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) ORDER BY EntryDateTime DESC";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -889,10 +891,51 @@
         }
         
     }
+
+    function getUserDetailsForAdmin($SessionID,$Email){
+        try{
+            global $conScouting;
+            $strQuery = "SELECT FirstName, LastName, Role, AccessTo FROM tblUsers WHERE Email = ? AND ((SELECT COUNT(*) FROM tblUsers WHERE Role IN (SELECT RoleID FROM tblRoles WHERE Description = 'Team Owner' OR Description = 'Super Admin') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)) > 0)";
+              // Check Connection
+            if ($conScouting->connect_errno) {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->connect_error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+                exit();
+            }
+          
+            if ($conScouting->ping()) {
+            } else {
+                $blnError = "true";
+                $strErrorMessage = $conScouting->error;
+                $arrError = array('error' => $strErrorMessage);
+                echo json_encode($arrError);
+            }
+          
+             $statScouting = $conScouting->prepare($strQuery);
     
+             // Bind Parameters
+             $statScouting->bind_param('ss', $Email, $SessionID);
+             $statScouting->execute();      
+             $result = $statScouting->get_result();
+             $myArray = array();
+    
+             while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                     $myArray[] = $row;
+             }
+             echo json_encode($myArray);
+                
+             $statScouting->close();
+        } catch (exception $e) {
+            echo 'Error: '.$e;
+        }
+        
+    }
+
     function newUserWithCode($strUsername,$FirstName,$LastName,$Password,$TeamCode){
         global $conScouting;
-        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097'),'Scouting'";
+        $strQuery = "INSERT INTO tblUsers VALUES (?,?,?,?,(SELECT TeamID FROM tblTeams WHERE TeamKey = ?),'62C6E982-01B5-41B7-8395-7B2745A6B097','Scouting')";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -917,6 +960,80 @@
          if($statScouting->execute()){
             sendVerificationEmail($strUsername);
             return '{"Outcome":"New User Created"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statScouting->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function selfPasswordReset($strSessionID,$strPassword){
+        global $conScouting;
+        $strQuery = "UPDATE tblUsers SET UserPassword = ? WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ss', $strPassword, $strSessionID);
+         if($statScouting->execute()){
+            sendVerificationEmail($strUsername);
+            return '{"Outcome":"Password Updated"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statScouting->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function adminPasswordReset($strSessionID,$strPassword, $strEmail){
+        global $conScouting;
+        $strQuery = "UPDATE tblUsers SET UserPassword = ? WHERE Email = ? AND ((SELECT COUNT(*) FROM tblUsers WHERE Role IN (SELECT RoleID FROM tblRoles WHERE Description = 'Team Owner' OR Description = 'Super Admin') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)) > 0)";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('sss', $strPassword, $strEmail, $strSessionID);
+         if($statScouting->execute()){
+            sendVerificationEmail($strUsername);
+            return '{"Outcome":"Password Updated"}';
          } else {
             return '{"Outcome":"Error"}';
          }
@@ -1132,6 +1249,45 @@
 
 		 // Bind Parameters
 		 $statScouting->bind_param('ss', $AccessTo, $Email);
+         if($statScouting->execute()){
+            sendVerificationEmail($Email);
+            return '{"Outcome":"User Updated"}';
+         } else {
+            return '{"Outcome":"Error"}';
+         }
+
+         // $result = $statScouting->get_result();
+         
+         // echo json_encode(($result->fetch_assoc()));
+         $statScouting->close();
+    }
+
+    function updateUserAdmin($Email,$FirstName, $LastName, $AccessTo, $Roles, $SessionID){
+        
+        //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
+        global $conScouting;
+        $strQuery = "UPDATE tblUsers SET FirstName = ?, LastName = ?, Role = ?, AccessTo = ? WHERE Email = ? AND ((SELECT COUNT(*) FROM tblUsers WHERE Role IN (SELECT RoleID FROM tblRoles WHERE Description = 'Team Owner' OR Description = 'Super Admin') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)) > 0)";
+      	// Check Connection
+        if ($conScouting->connect_errno) {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->connect_error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+            exit();
+        }
+      
+        if ($conScouting->ping()) {
+        } else {
+            $blnError = "true";
+            $strErrorMessage = $conScouting->error;
+            $arrError = array('error' => $strErrorMessage);
+            echo json_encode($arrError);
+        }
+      
+		 $statScouting = $conScouting->prepare($strQuery);
+
+		 // Bind Parameters
+		 $statScouting->bind_param('ssssss', $FirstName, $LastName, $Role, $AccessTo, $Email, $SessionID);
          if($statScouting->execute()){
             sendVerificationEmail($Email);
             return '{"Outcome":"User Updated"}';

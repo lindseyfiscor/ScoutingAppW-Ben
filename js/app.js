@@ -594,35 +594,7 @@ $(document).on('click','.btn-more-match-info',function(){
     
 })
 
-$(document).on('click','.btnViewPitDetails',function(){
-    let strTeamNumber = $(this).attr('data-teamnumber');
-    console.log('You clicked Team Number: ' + strTeamNumber);
-    //arrObjObservation = result;
-    $.each(result,function(i,pit){
-        if(pit.pitID == strObservationID){
-            $('#txtModPitDetailsTeamNum').text(pit.TeamNum);
-            $('#txtModPitDetailsRobotShape').text(pit.RobotShape);
-            $('#txtModPitDetailsHeight').text(pit.Height);
-            $('#txtModPitDetailsHeightExtend').text(pit.HeightExtend);
-            $('#txtModPitDetailsRobotDriveTrain').text(pit.RobotDriveTrain);
-            $('#txtModPitDetailsDriveTrainMotors').text(pit.DriveTrainMotors);
-            $('#txtModPitDetailsDriveTrainWheels').text(pit.DriveTrainWheels);
-            $('#txtModPitDetailsDriveWheelType').text(pit.DriveWheelType);
-            $('#txtModPitDetailsDriveMotorType').text(pit.DriveMotorType);
-            $('#txtModPitDetailsBallCollection').text(pit.BallCollection);
-            $('#txtModPitDetailsOverBumper').text(pit.OverBumper);
-            $('#txtModPitDetailsThroughBumper').text(pit.ThroughBumper);
-            $('#txtModPitDetailsIntakeExtendable').text(pit.IntakeExtendable);
-            $('#txtModPitDetailsIntakeInternal').text(pit.IntakeInternal);
-            $('#txtModPitDetailsHasShooter').text(pit.HasShooter);
-            $('#txtModPitDetailsShooterType').text(pit.ShooterType);
-            $('#txtModPitDetailsTurret').text(pit.Turret);
-            $('#txtModPitDetailsLimeLight').text(pit.LimeLight);
-            $('#txtModPitDetailsBallCapacity').text(pit.BallCapacity);
-            $('#txtModPitDetailsNotes').text(pit.Notes);
-        }
-    })
-})
+
 
 $(document).on('click','#btnTeamKey',function(){
 $.getJSON('https://lindsey.swollenhippo.com/php/getTeamKey.php',{strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID')},function(result){
@@ -648,22 +620,43 @@ function fillRoles(){
     })
 }
 
+$(document).on('click','#btnResetPassword',function(){
+    Swal.fire({
+        icon: 'warning',
+        title: 'Reset Password',
+        html: '<input class="form-control" id="txtAdminPwdReset">',
+        showCancelButton: true,
+        confirmButtonText: 'Yes'
+    }).then((result) =>{
+        if(result.isConfirmed){
+            $.post('../php/adminPasswordReset.php',{ strEmail: $('#spanEmail').text(), strPassword: $('#txtAdminPwdReset').val(), strSessionID: sessionStorage.getItem('ScoutFRCSessionID')},function(result){
+                console.log(result);
+            })
+        }
+    })
+    
+})
+
 $(document).on('click','#btnUpdateUser',function(){
     let strRole = $('#admRoles').val();
     let strAbleTo = $('#cboAbleToScout').val().join(',');
+    $.post('../php/updateUserAdmin.php',{ strEmail: $('#spanEmail').text(), strFirstName: $('#txtFirstName').val(), strLastName: $('#txtLastName').val(), strAccessTo: $('#cboAbleToScout').val().join(','), strRoles:$('#admRoles').val(), strSessionID: sessionStorage.getItem('ScoutFRCSessionID')},function(result){
+        console.log(result);
+    })
 })
 
 $(document).on('click','.btnEditUser',function(){
     let strEmail = $(this).attr('data-email');
     $('#spanEmail').text(strEmail);
-    $.each(result,function(i,user){
-        $('#teamData tbody').append('<tr><td>' + user.FirstName + ' ' + user.LastName + '</td><td>' + user.Email + '</td><td>' + user.Description + '</td><td><button class="btn btn-primary btn-sm btnEditUser" data-email="' + user.Email + '" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>');
-        $('#txtModPitFirstName').text(user.FirstName);
-        $('#txtModPitLastName').text(user.LastName);
-        $('#txtModPitDescription').text(user.Description);
-        $('#firstName').text(strEmail);
+    $.getJSON('../php/getUserDetailsForAdmin.php',{ strEmail:strEmail, strSessionID: sessionStorage.getItem('ScoutFRCSessionID')}, function(result){
+        $.each(result,function(i,user){
+            $('#teamData tbody').append('<tr><td>' + user.FirstName + ' ' + user.LastName + '</td><td>' + user.Email + '</td><td>' + user.Description + '</td><td><button class="btn btn-primary btn-sm btnEditUser" data-email="' + user.Email + '" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>');
+            $('#txtModPitFirstName').text(user.FirstName);
+            $('#txtModPitLastName').text(user.LastName);
+            $('#txtModPitDescription').text(user.Description);
+            $('#firstName').text(strEmail);
+        })
     })
-    
 })
 
 function fillDownloadTables(){
@@ -675,7 +668,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadStand tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleBallsMissed + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownloadStand tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadStand').DataTable({

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.11.4/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/r-2.2.9/datatables.min.css"/>
     </head>
-    <body >
+    <body class="bg-secondary">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" id="btnTeamKey">Scout<span class="text-bold">FRC</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div id="teamssModal">
-            <div class="modal fade" id="modPitDetails" aria-labelledby="Team Info" aria-hidden="true">
+            <div class="modal fade" id="modPitData" aria-labelledby="Team Info" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -124,7 +124,7 @@
                             $('#teamInfoData tbody').empty();
                             $.each(result,function(i,pit){
                               if(pit.PitTeamNumber != strLastTeamNumber){
-                                let strTableRowHTML = '<tr><td>' + pit.PitTeamNumber + '</td><td>Team Name</td><td>' + pit.EntryDateTime + '</td><td><button class="btn btn-primary btnViewPitDetails" data-toggle="modal" data-target="#modPitData"  data-teamnumber="' + pit.PitTeamNumber + '"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
+                                let strTableRowHTML = '<tr><td>' + pit.PitTeamNumber + '</td><td>' + pit.TeamName + '</td><td>' + pit.EntryDateTime + '</td><td><button class="btn btn-primary btnViewPitDetails" data-toggle="modal" data-target="#modPitData" data-pitid="' + pit.PitID + '" data-teamnumber="' + pit.PitTeamNumber + '"><i class="fas fa-eye mr-2"></i>View</button></td></tr>';
                                 $('#teamInfoData tbody').append(strTableRowHTML);
                               }
                               strLastTeamNumber = pit.PitTeamNumber;
@@ -140,6 +140,37 @@
                        })
                      }
                  })
+
+                 $(document).on('click','.btnViewPitDetails',function(){
+                    let strPitID = $(this).attr('data-pitid');
+                    let strTeamNumber = $(this).attr('data-teamnumber');
+                    console.log('You clicked Team Number: ' + strTeamNumber);
+                        $.each(arrObjObservation,function(i,pit){
+                            if(pit.PitID == strPitID){
+                                $('#txtModPitDetailsTeamNum').text(pit.TeamNum);
+                                $('#txtModPitDetailsRobotShape').text(pit.RobotShape);
+                                $('#txtModPitDetailsHeight').text(pit.Height);
+                                $('#txtModPitDetailsHeightExtend').text(pit.HeightExtend);
+                                $('#txtModPitDetailsRobotDriveTrain').text(pit.RobotDriveTrain);
+                                $('#txtModPitDetailsDriveTrainMotors').text(pit.DriveTrainMotors);
+                                $('#txtModPitDetailsDriveTrainWheels').text(pit.DriveTrainWheels);
+                                $('#txtModPitDetailsDriveWheelType').text(pit.DriveWheelType);
+                                $('#txtModPitDetailsDriveMotorType').text(pit.DriveMotorType);
+                                $('#txtModPitDetailsBallCollection').text(pit.BallCollection);
+                                $('#txtModPitDetailsOverBumper').text(pit.OverBumper);
+                                $('#txtModPitDetailsThroughBumper').text(pit.ThroughBumper);
+                                $('#txtModPitDetailsIntakeExtendable').text(pit.IntakeExtendable);
+                                $('#txtModPitDetailsIntakeInternal').text(pit.IntakeInternal);
+                                $('#txtModPitDetailsHasShooter').text(pit.HasShooter);
+                                $('#txtModPitDetailsShooterType').text(pit.ShooterType);
+                                $('#txtModPitDetailsTurret').text(pit.Turret);
+                                $('#txtModPitDetailsLimeLight').text(pit.LimeLight);
+                                $('#txtModPitDetailsBallCapacity').text(pit.BallCapacity);
+                                $('#txtModPitDetailsNotes').text(pit.Notes);
+                            }
+                        })
+                    
+                })
              }
            </script>
         </body>
