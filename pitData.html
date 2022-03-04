@@ -47,71 +47,45 @@
             </div>
         </div>
         <div id="teamssModal">
-            <div class="modal fade" id="modPitData" aria-labelledby="Team Info" aria-hidden="true">
+            <div class="modal fade" id="modPitDetails" aria-labelledby="Team Info" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">4265 Secret City Wildbots</h5> 
+                    <h5 class="modal-title"><span id="txtModObservationTeam"></span></h5> 
                   </div>
                   <div class="modal-body">
-                    stats from individual teams here and info from pit scouting about them<br>
-                    <div>
-                      <h4><u><b>Integrated Match Data</b></u></h4>
-                        <div>
-
-                          <div><h5>Auto:</h5>
-                            <div class="flex-container">
-                              <div>Any Quintets: Yes</div>
-                              <div>Number of Quintets: XX</div>
-                              <div>Taxied at Least Once: Yes</div>
-                            </div>
-                            <div class="flex-container">
-                              <div>Average Upper Hub: 05</div>
-                              <div>Average Lower Hub: 00</div>
-                            </div>
-                          </div>
-                          <div><h5>TeleOp:</h5>
-                            <div class="flex-container">
-                              <!--div>Only Alliance Color Balls: Yes</div-->
-                              <div>Played Defense At All: No</div>
-                            </div>
-                            <div class="flex-container">
-                              <div>Average Upper Hub: 05</div>
-                              <div>Max Upper: 20</div>
-                              <div>Min Upper: 02</div>
-                            </div>
-                            <div class="flex-container">
-                              <div>Average Lower Hub: 05</div>
-                              <div>Max Lower: 20</div>
-                              <div>Min Lower: 02</div>
-                            </div>
-                          </div>
-                          <div><h5>Climbing</h5>
-                            <div>Did Not Attempt: 00</div>
-                            <div>Failed: 00</div>
-                            <div>Lower Bar: 00</div>
-                            <div>Middle Bar: 00</div>
-                            <div>High Bar: 00</div>
-                            <div>Traversal Bar: 00</div>
-                          </div>
-                          <div><h5># times at each Tarmac Start Point</h5>
-                            <div class="flex-container">
-                              <div>TR1: 00</div>
-                              <div>TR2: 00</div>
-                              <div>TR3: 00</div>
-                            </div>
-                            <div class="flex-container">
-                              <div>TB1: 00</div>
-                              <div>TB2: 00</div>
-                              <div>TB3: 00</div>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Robot Shape: <span id="txtModPitDetailsRobotShape"></span></div>
+                    </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Starting Height: <span id="txtModPitDetailsHeight"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Is Height Extendable: <span id="txtModPitDetailsHeightExtend"></span></div>
+                    </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>DriveTrain Type: <span id="txtModPitDetailsRobotDriveTrain"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>DriveTrain Motor #: <span id="txtModPitDetailsDriveTrainMotors"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>DriveTrain Motor Type: <span id="txtModPitDetailsDriveMotorType"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>DriveTrain Wheel #: <span id="txtModPitDetailsDriveTrainWheels"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>DriveTrain Wheel Type: <span id="txtModPitDetailsDriveWheelType"></span></div>
+                    </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Ball Collection: <span id="txtModPitDetailsBallCollection"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Over Bumper Intake: <span id="txtModPitDetailsOverBumper"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Through Bumper Intake: <span id="txtModPitDetailsThroughBumper"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Internal Intake: <span id="txtModPitDetailsIntakeInternal"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Extendable Intake: <span id="txtModPitDetailsIntakeExtendable"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Ball Capacity: <span id="txtModPitDetailsBallCapacity"></span></div>
+                    </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Has Shooter: <span id="txtModPitDetailsHasShooter"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Shooter Type: <span id="txtModPitDetailsShooterType"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Turret: <span id="txtModPitDetailsTurret"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>LimeLight: <span id="txtModPitDetailsLimeLight"></span></div>
+                    </div>
+                    <div class="flex-container">
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Scouter Notes: <span id="txtModPitDetailsNotes"></span></div>
                     </div>
                     
-                    pics
-                    <br>
-                    <img src="images/4265_Robot.png" alt="robot" width="150" height="150">
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

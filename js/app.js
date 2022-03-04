@@ -598,34 +598,30 @@ $(document).on('click','.btnViewPitDetails',function(){
     let strTeamNumber = $(this).attr('data-teamnumber');
     console.log('You clicked Team Number: ' + strTeamNumber);
     //arrObjObservation = result;
-    //$.each(result,function(i,pit){
-    //    if(pit.pitID == strObservationID){
-    //        $('#txtModObservationDetailsMatch').text(observation.Match);
-    //        $('#txtModObservationDetailsWin').text(observation.MoreWin);
-    //        if(observation.MoreWin == "true") {
-    //            $('#txtModObservationDetailsWin').addClass('text-danger');
-    //            $('#txtModObservationDetailsWin').addClass('text-success');
-    //        } else {
-    //            $('#txtModObservationDetailsWin').addClass('text-success');
-    //            $('#txtModObservationDetailsWin').addClass('text-danger');
-    //        }
-    //        $('#txtModObservationTeam').text(observation.TeamScouting);
-    //        $('#txtModObservationDetailsDriverPosition').text(observation.ScoutingPosition);
-    //        $('#txtModObservationDetailsTarmacPosition').text(observation.TarmacStartingPosition);
-    //        $('#txtModObservationDetailsClimbing').text(observation.EndGameClimbing);
-    //        $('#txtModObservationDetailsQuintet').text(observation.MoreQuintet);
-    //        $('#txtModObservationDetailsTaxi').text(observation.AutoTarmacTaxi);
-    //        $('#txtModObservationDetailsAutoUpperHub').text(observation.AutoUpperHub);
-    //        $('#txtModObservationDetailsAutoLowerHub').text(observation.AutoLowerHub);
-    //        $('#txtModObservationDetailsBalls').text(observation.TeleOpShootsBalls);
-    //        $('#txtModObservationDetailsDefense').text(observation.TeleOpPlaysDefense);
-    //        $('#txtModObservationDetailsTeleOpUpperHub').text(observation.TeleOpUpperHub);
-    //        $('#txtModObservationDetailsTeleOpLowerHub').text(observation.TeleOpLowerHub);
-    //        $('#txtModObservationDetailsAutoMissed').text(observation.AutoMissed);
-    //        $('#txtModObservationDetailsTeleMissed').text(observation.TeleMissed);
-    //        
-    //    }
-    //})
+    $.each(result,function(i,pit){
+        if(pit.pitID == strObservationID){
+            $('#txtModPitDetailsTeamNum').text(pit.TeamNum);
+            $('#txtModPitDetailsRobotShape').text(pit.RobotShape);
+            $('#txtModPitDetailsHeight').text(pit.Height);
+            $('#txtModPitDetailsHeightExtend').text(pit.HeightExtend);
+            $('#txtModPitDetailsRobotDriveTrain').text(pit.RobotDriveTrain);
+            $('#txtModPitDetailsDriveTrainMotors').text(pit.DriveTrainMotors);
+            $('#txtModPitDetailsDriveTrainWheels').text(pit.DriveTrainWheels);
+            $('#txtModPitDetailsDriveWheelType').text(pit.DriveWheelType);
+            $('#txtModPitDetailsDriveMotorType').text(pit.DriveMotorType);
+            $('#txtModPitDetailsBallCollection').text(pit.BallCollection);
+            $('#txtModPitDetailsOverBumper').text(pit.OverBumper);
+            $('#txtModPitDetailsThroughBumper').text(pit.ThroughBumper);
+            $('#txtModPitDetailsIntakeExtendable').text(pit.IntakeExtendable);
+            $('#txtModPitDetailsIntakeInternal').text(pit.IntakeInternal);
+            $('#txtModPitDetailsHasShooter').text(pit.HasShooter);
+            $('#txtModPitDetailsShooterType').text(pit.ShooterType);
+            $('#txtModPitDetailsTurret').text(pit.Turret);
+            $('#txtModPitDetailsLimeLight').text(pit.LimeLight);
+            $('#txtModPitDetailsBallCapacity').text(pit.BallCapacity);
+            $('#txtModPitDetailsNotes').text(pit.Notes);
+        }
+    })
 })
 
 $(document).on('click','#btnTeamKey',function(){
@@ -676,13 +672,13 @@ function fillDownloadTables(){
     $.getJSON('php/getObservationDataBySessionID.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'),function(result){
         arrObjObservation = result;
          if(arrObjObservation.length > 0){
-             $('#teamDataDownload tbody').empty();
+             $('#teamDataDownloadStand tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
                  let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleBallsMissed + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
-                 $('#teamDataDownload tbody').append(strTableRowHTML);
+                 $('#teamDataDownloadStand tbody').append(strTableRowHTML);
              })
-             $('#teamDataDownload').DataTable({
+             $('#teamDataDownloadStand').DataTable({
                  dom: 'Bfrtip',
                  buttons: [
                      'copy', 'csv','excel', 'pdf'
