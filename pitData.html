@@ -58,7 +58,7 @@
                       <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Robot Shape: <span id="txtModPitDetailsRobotShape"></span></div>
                     </div>
                     <div class="flex-container">
-                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Starting Height: <span id="txtModPitDetailsHeight"></span></div>
+                      <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Starting Height: <span id="txtModPitDetailsHeightStart"></span></div>
                       <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Is Height Extendable: <span id="txtModPitDetailsHeightExtend"></span></div>
                     </div>
                     <div class="flex-container">
@@ -81,6 +81,7 @@
                       <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Shooter Type: <span id="txtModPitDetailsShooterType"></span></div>
                       <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Turret: <span id="txtModPitDetailsTurret"></span></div>
                       <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>LimeLight: <span id="txtModPitDetailsLimeLight"></span></div>
+                      <div class="ml-2"><i class="fas fa-plane text-primary text-bold mr-2"></i>Climber: <span id="txtModPitDetailsClimber"></span></div>
                     </div>
                     <div class="flex-container">
                       <div class="ml-2"><i class="fas fa-car text-primary text-bold mr-2"></i>Scouter Notes: <span id="txtModPitDetailsNotes"></span></div>
@@ -149,7 +150,7 @@
                             if(pit.PitID == strPitID){
                                 $('#txtModPitDetailsTeamNum').text(pit.TeamNum);
                                 $('#txtModPitDetailsRobotShape').text(pit.RobotShape);
-                                $('#txtModPitDetailsHeight').text(pit.Height);
+                                $('#txtModPitDetailsHeightStart').text(pit.Height);
                                 $('#txtModPitDetailsHeightExtend').text(pit.HeightExtend);
                                 $('#txtModPitDetailsRobotDriveTrain').text(pit.RobotDriveTrain);
                                 $('#txtModPitDetailsDriveTrainMotors').text(pit.DriveTrainMotors);
@@ -167,6 +168,7 @@
                                 $('#txtModPitDetailsLimeLight').text(pit.LimeLight);
                                 $('#txtModPitDetailsBallCapacity').text(pit.BallCapacity);
                                 $('#txtModPitDetailsNotes').text(pit.Notes);
+                                $('#txtModPitDetailsClimber').text(pit.Climber);
                             }
                         })
                     

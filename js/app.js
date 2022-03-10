@@ -327,72 +327,72 @@ $(document).on('click','#btnSubmitObservation', function() {
   $(document).on('click','#btnSubmitPit', function() {
     let blnRobotHeightExtend;
     if ($("#pitExtendYes").prop("checked")) {
-        blnRobotHeightExtend = true;
+        blnRobotHeightExtend = "True";
     } else {
-        blnRobotHeightExtend = false;
+        blnRobotHeightExtend = "False";
     }
 
     let blnOverBumper;
     if ($("#pitOverBumper").prop("checked")) {
-        blnOverBumper = true;
+        blnOverBumper = "True";
     } else {
-        blnOverBumper = false;
+        blnOverBumper = "False";
     }
 
     let blnThroughBumper;
     if ($("#pitThroughBumper").prop("checked")) {
-        blnThroughBumper = true;
+        blnThroughBumper = "True";
     } else {
-        blnThroughBumper = false;
+        blnThroughBumper = "False";
     }
 
     let blnIntakeExtendable;
     if ($("#pitExtendable").prop("checked")) {
-        blnIntakeExtendable = true;
+        blnIntakeExtendable = "True";
     } else {
-        blnIntakeExtendable = false;
+        blnIntakeExtendable = "False";
     }
 
     let blnIntakeInternal;
     if ($("#pitInternal").prop("checked")) {
-        blnIntakeInternal = true;
+        blnIntakeInternal = "True";
     } else {
-        blnIntakeInternal = false;
+        blnIntakeInternal = "False";
     }
 
     let blnHasShooter;
     if ($("#pitHasShooterYes").prop("checked")) {
-        blnHasShooter = true;
+        blnHasShooter = "True";
     } else {
-        blnHasShooter = false;
+        blnHasShooter = "False";
     }
 
     let blnUpperHab;
     if ($("#pitUpperHab").prop("checked")) {
-        blnUpperHab = true;
+        blnUpperHab = "True";
     } else {
-        blnUpperHab = false;
+        blnUpperHab = "False";
     }
 
     let blnLowerHab;
     if ($("#pitLowerHab").prop("checked")) {
-        blnLowerHab = true;
+        blnLowerHab = "True";
     } else {
-        blnLowerHab = false;
+        blnLowerHab = "False";
     }
 
     let blnTurret;
     if ($("#pitTurretYes").prop("checked")) {
-        blnTurret = true;
+        blnTurret = "True";
     } else {
-        blnTurret = false;
+        blnTurret = "False";
     }
 
     let blnLimeLight;
     if ($("#pitLLYes").prop("checked")) {
-        blnLimeLight = true;
+        blnLimeLight = "True";
     } else {
-        blnLimeLight = false;
+        blnLimeLight = "False";
     }
     $.post('../php/newPitCollect.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
@@ -415,7 +415,8 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnTurret:blnTurret,
         blnLimeLight:blnLimeLight,
         strBallCapacity:$('input[name=pitMaxBalls]:checked').val(),
-        strNotes:$('#pitTextBox').text()
+        strNotes:$('#pitTextBox').text(),
+        strPitClimbing:$('input[name=pitRadClimbing]:checked').val(),
     }, function(result){
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
@@ -424,10 +425,10 @@ $(document).on('click','#btnSubmitObservation', function() {
                 icon: 'success',
                 title: 'Pit observation recorded',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             }).then((result) => {
                     $('#pitTeamNum').val('');
-                    $('.custom-control-input').prop('checked',false)
+                    $('.custom-control-input').prop('checked',false),
                     $('#pitRobotHeight').val('');
                     $("#swRobotHeightExtend").prop('checked',false);
                     $('#txtPitBtnNumDriveMotors').text('0');

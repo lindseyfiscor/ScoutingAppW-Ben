@@ -184,7 +184,7 @@
                             </div>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="teleRobotShootOpposite"  value="teleRobotShootOpposite">
-                                <label class="custom-control-label" for="teleRobotShootOpposite">Robot Only Shoots Alliance Colored Balls</label>
+                                <label class="custom-control-label" for="teleRobotShootOpposite">Robot Only Shoots Alliance Colored Balls Into Goal</label>
                             </div>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="teleRobotPlayDefense"  value="teleRobotPlayDefense">
@@ -241,9 +241,22 @@
                                 <input type="checkbox" class="custom-control-input" id="more16ClimbPts"  value="more16ClimbPts">
                                 <label class="custom-control-label" for="more16ClimbPts">16 pts in Endgame, Alliance Wide</label>
                             </div>
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="moreWinMatch"  value="moreWinMatch">
-                                <label class="custom-control-label" for="moreWinMatch">Alliance Win Match</label>
+                            <div class="form-group col-12 col-md-6 col-lg-4">
+                                <label for="radClimbing">Match Outcome</label> <br>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                      <input type="radio" id="moreWinMatchWin" name="moreWinMatch" class="custom-control-input" value="Win">
+                                      <label class="custom-control-label" for="moreWinMatchWin">Win</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="moreWinMatchTie" name="moreWinMatch" class="custom-control-input" value="Tie">
+                                        <label class="custom-control-label" for="moreWinMatchTie">Tie</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="moreWinMatchLose" name="moreWinMatch" class="custom-control-input" value="Lose">
+                                        <label class="custom-control-label" for="moreWinMatchLose">Lose</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
