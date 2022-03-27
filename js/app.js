@@ -33,7 +33,7 @@ function buildNavigation(){
         }
         strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
         strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
-        strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
+        //strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
         if(arrRoles.includes('Team Owner' || arrRoles.includes('Super Admin'))){
             strNavHTML += '<li class="nav-item" id="navDownloadData"><a class="nav-link" href="downloadData.html"><i class="fas fa-file-download mr-2"></i>Download</a></li>';
         }

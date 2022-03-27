@@ -59,7 +59,7 @@
         try{
             global $conScouting;
             $strObservationID = guidv4(); //new to change strObservationID to strPitID?
-            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,,??,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
+            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE())';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -815,7 +815,7 @@
     function getObservationDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-10 23:53:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
