@@ -57,15 +57,28 @@
                                 <label class="custom-control-label mr-4" for="pitRobotShapeRect">Rectangle</label>
                             </div>
                             <div class="form-group form-check-inline">
-                                <input class="custom-control-input" type="radio" name="pitRobotShape" id="pitRobotShapeTriangle" value="TR">
-                                <label class="custom-control-label mr-4" for="pitRobotShapeTriangle">Triangle</label>
+                                <input class="custom-control-input" type="radio" name="pitRobotShape" id="pitRobotShapeOther" value="OT">
+                                <label class="custom-control-label mr-4" for="pitRobotShapeOther">Other</label>
                             </div>
                             </div>
                               
                           </div>
                           <div class="form-group">
-                            <label for="pitRobotHeight">Starting Robot Height (in.)</label>
-                            <input type="number" class="form-control" id="pitRobotHeight">
+                            <label for="pitRobotHeight">Starting Robot Height</label>
+                            <div class="col-12">
+                              <div class="form-group form-check-inline">
+                              <input class="custom-control-input" type="radio" name="pitRobotHeight" id="pitRobotHeightLow" value="1">
+                              <label class="custom-control-label mr-4" for="pitRobotHeightLow">Low</label>
+                            </div>
+                            <div class="form-group form-check-inline">
+                                <input class="custom-control-input" type="radio" name="pitRobotHeight" id="pitRobotHeightMed" value="2">
+                                <label class="custom-control-label mr-4" for="pitRobotHeightMed">Medium</label>
+                            </div>
+                            <div class="form-group form-check-inline">
+                                <input class="custom-control-input" type="radio" name="pitRobotHeight" id="pitRobotHeightHigh" value="3">
+                                <label class="custom-control-label mr-4" for="pitRobotHeightHigh">High</label>
+                            </div>
+                            </div>
                           </div>
                           <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="swRobotHeightExtend"  value="swRobotHeightExtend">
@@ -216,11 +229,12 @@
                               <label for="dpdwShooterType">Shooter Type</label>
                               <select class="form-control" id="dpdwShooterType">
                                   <option value="CH">Choose</option>
-                                  <option value="NA">No Shooter</option>
-                                  <option value="CO">Cowl</option> 
-                                  <option value="DC">Double Canister</option>
+                                  <option value="SC">Single Canister Cowl</option>
+                                  <option value="DC">Double Canister Cowl</option> 
+                                  <option value="DD">Double Canister</option>
                                   <option value="CA">Catapult</option>
-                                  <option value="SN">Snake</option>
+                                  <option value="CV">Conveyor</option>
+                                  <option value="AR">Arm</option>
                                   <option value="OT">Other</option>
                               </select>
                             </div>

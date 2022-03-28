@@ -735,7 +735,7 @@
     function getPitDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblPit.* FROM tblPit LEFT JOIN tblUsers ON tblPit.EnterBy = tblUsers.Email WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+            $strQuery = "SELECT tblPit.* FROM tblPit LEFT JOIN tblUsers ON tblPit.EnterBy = tblUsers.Email WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND EntryDateTime >= '2022-03-20 23:53:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
@@ -775,7 +775,7 @@
     function getSuperDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblSuper.* FROM tblSuper LEFT JOIN tblUsers ON tblSuper.EnteredBy = tblUsers.Email WHERE EnteredBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
+            $strQuery = "SELECT tblSuper.* FROM tblSuper LEFT JOIN tblUsers ON tblSuper.EnteredBy = tblUsers.Email WHERE EnteredBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND SuperDateTime >= '2022-03-20 23:53:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
@@ -815,7 +815,7 @@
     function getObservationDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-10 23:53:00.000'";
+            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-20 23:53:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
@@ -1117,22 +1117,22 @@
         $statScouting->close();
     }
 
-    function sendVerificationEmail($strEmailAddress){
-        $emailTo = $strEmailAddress;
-        $emailSubject = "Verify New Account for ScoutFRC";
-        $emailHeaders = "MIME-Version: 1.0" . "\r\n";
-        $emailHeaders = $emailHeaders . "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $emailHeaders = $emailHeaders . 'From: <AccountVerification@lindsey.swollenhippo.com>' . "\r\n";
+    //function sendVerificationEmail($strEmailAddress){
+        //$emailTo = $strEmailAddress;
+        //$emailSubject = "Verify New Account for ScoutFRC";
+        //$emailHeaders = "MIME-Version: 1.0" . "\r\n";
+        //$emailHeaders = $emailHeaders . "Content-type:text/html;charset=UTF-8" . "\r\n";
+        //$emailHeaders = $emailHeaders . 'From: <AccountVerification@lindsey.swollenhippo.com>' . "\r\n";
         
-        $message = "<!DOCTYPE html><html lang=\"en\" class=\"\"><head><!DOCTYPE html><html lang=\"en\" class=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><head>
-        <title>Verify Account</title>
-        </head><body>
-        <div class=\"jumbotron\"><h1>Thank you for setting up an account</h1><p>Please click the link below to verify and activate your account. <br> <a href='http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "'>http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "</a></p></div>
-        </body>
-        </html>"; 
+        //$message = "<!DOCTYPE html><html lang=\"en\" class=\"\"><head><!DOCTYPE html><html lang=\"en\" class=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><head>
+        //<title>Verify Account</title>
+        //</head><body>
+        //<div class=\"jumbotron\"><h1>Thank you for setting up an account</h1><p>Please click the link below to verify and activate your account. <br> <a href='http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "'>http://lindsey.swollenhippo.com/verifyAccount.php?UserName=" . $emailTo . "</a></p></div>
+        //</body>
+        //</html>"; 
         
-        mail($emailTo,$emailSubject,$message,$emailHeaders);
-    }
+        //mail($emailTo,$emailSubject,$message,$emailHeaders);
+    //}
 
     function newUser($FirstName,$LastName,$Email,$Password,$Team,$Role){
         if(strlen($FirstName) < 1 || $FirstName == null){

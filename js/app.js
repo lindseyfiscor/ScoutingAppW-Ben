@@ -494,7 +494,7 @@ $(document).on('click','#btnSubmitSuperScout', function() {
                 timer: 1500
             }).then((result) => {
                 $('#superMatchNumber').val('');
-                $('#superTextBox').text('');
+                $('#superTextBox').val('');
             })
         }else {
             Swal.fire({
@@ -508,7 +508,7 @@ $(document).on('click','#btnSubmitSuperScout', function() {
 
 $(document).on('click','#btnResetSuperForm', function() {
     $('#superMatchNumber').val('');
-    $('#superTextBox').text('');
+    $('#superTextBox').val('');
 })  
   
 $(document).on('click','#btnLogin', function() {
