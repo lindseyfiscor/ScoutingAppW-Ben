@@ -213,13 +213,6 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnTeleOpShootsBalls = "False";
     };
     
-    let blnTeleOpPlaysDefense;
-    if ($("#teleRobotPlayDefense").prop("checked")) {
-        blnTeleOpPlaysDefense = "True";
-    } else {
-        blnTeleOpPlaysDefense = "False";
-    };
-    
     let blnMoreQuintet;
     if ($("#moreQuintetInAuto").prop("checked")) {
         blnMoreQuintet = "True";
@@ -234,13 +227,33 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnMoreThan16 = "False";
     };
     
-    let blnMoreWin;
-    if ($("#moreWinMatch").prop("checked")) {
-        blnMoreWin = "True";
+    let swPlayedMatch;
+    if ($("#swPlayedMatch").prop("checked")) {
+        swPlayedMatch = "True";
     } else {
-        blnMoreWin = "False";
+        swPlayedMatch = "False";
     };
-    
+
+    let moreClimbRP;
+    if ($("#moreClimbRP").prop("checked")) {
+        moreClimbRP = "True";
+    } else {
+        moreClimbRP = "False";
+    };
+
+    let moreFlipped;
+    if ($("#moreFlipped").prop("checked")) {
+        moreFlipped = "True";
+    } else {
+        moreFlipped = "False";
+    };
+
+    let moreBricked;
+    if ($("#moreBricked").prop("checked")) {
+        moreBricked = "True";
+    } else {
+        moreBricked = "False";
+    };
     
     $.post('../php/newObservation.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
@@ -255,14 +268,17 @@ $(document).on('click','#btnSubmitObservation', function() {
         intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
         intTeleMissed:$('#txtTeleMissed').text(),
         blnTeleOpShootsBalls:blnTeleOpShootsBalls,
-        blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
+        blnTeleOpPlaysDefense:$('input[name=blnTeleOpPlaysDefense]:checked').val(),
         strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
         blnMoreQuintet:blnMoreQuintet,
-        blnMoreThan16:blnMoreThan16,
-        blnMoreWin:blnMoreWin,
+        moreWinMatch:$('input[name=moreWinMatch]:checked').val(),
         intAutoBallsMissed:$('#txtAutoMissed').text(),
         intTeleBallsMissed:$('#txtTeleMissed').text(),
         blnAutoBallPickUp:blnAutoBallPickUp,
+        swPlayedMatch:swPlayedMatch,
+        moreClimbRP:moreClimbRP,
+        moreFlipped:moreFlipped,
+        moreBricked:moreBricked,
     }, function(result){
         console.log = result;
         let objResult = JSON.parse(result);
@@ -277,6 +293,7 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('#txtMatchNumber').val('');
                 $('#txtTeamNumScouting').val('');
                 $('#dpdwTeamPosition').val('B1').trigger('change');
+                $("#swPlayedMatch").prop('checked',false);
                 $("#autoTaxiYes").prop('checked',false);
                 $("#autoBallPickUp").prop('checked',false);
                 $('.custom-control-input').prop('checked',false)
@@ -287,11 +304,14 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('#txtTeleBallsInLower').text('0');
                 $('#txtTeleMissed').text('0');
                 $("#teleRobotShootOpposite").prop('checked',false);
-                $("#teleRobotPlayDefense").prop('checked',false);
+                $("#blnTeleOpPlaysDefense").prop('checked',false);
                 $("#radClimbing]").prop('checked',false);
                 $("#moreQuintetInAuto").prop('checked',false);
                 $("#more16ClimbPts").prop('checked',false);
                 $("#moreWinMatch").prop('checked',false);
+                $("#moreClimbRP").prop('checked',false);
+                $("#moreFlipped").prop('checked',false);
+                $("#moreBricked").prop('checked',false);
             })
         }else {
             Swal.fire({
@@ -305,23 +325,27 @@ $(document).on('click','#btnSubmitObservation', function() {
 
   $(document).on('click','#btnResetObservationForm', function() {
     $('#txtMatchNumber').val('');
-    $('#txtTeamNumScouting').val('');
-    $('#dpdwTeamPosition').val('B1').trigger('change');
-    $("#autoTaxiYes").prop('checked',false);
-    $("#autoBallPickUp").prop('checked',false);
-    $('.custom-control-input').prop('checked',false)
-    $('#txtAutoBallsInUpper').text('0');
-    $('#txtAutoBallsInLower').text('0');
-    $('#txtAutoMissed').text('0');
-    $('#txtTeleBallsInUpper').text('0');
-    $('#txtTeleBallsInLower').text('0');
-    $('#txtTeleMissed').text('0');
-    $("#teleRobotShootOpposite").prop('checked',false);
-    $("#teleRobotPlayDefense").prop('checked',false);
-    $("#radClimbing]").prop('checked',false);
-    $("#moreQuintetInAuto").prop('checked',false);
-    $("#more16ClimbPts").prop('checked',false);
-    $("#moreWinMatch").prop('checked',false);
+                $('#txtTeamNumScouting').val('');
+                $('#dpdwTeamPosition').val('B1').trigger('change');
+                $("#swPlayedMatch").prop('checked',false);
+                $("#autoTaxiYes").prop('checked',false);
+                $("#autoBallPickUp").prop('checked',false);
+                $('.custom-control-input').prop('checked',false)
+                $('#txtAutoBallsInUpper').text('0');
+                $('#txtAutoBallsInLower').text('0');
+                $('#txtAutoMissed').text('0');
+                $('#txtTeleBallsInUpper').text('0');
+                $('#txtTeleBallsInLower').text('0');
+                $('#txtTeleMissed').text('0');
+                $("#teleRobotShootOpposite").prop('checked',false);
+                $("#blnTeleOpPlaysDefense").prop('checked',false);
+                $("#radClimbing]").prop('checked',false);
+                $("#moreQuintetInAuto").prop('checked',false);
+                $("#more16ClimbPts").prop('checked',false);
+                $("#moreWinMatch").prop('checked',false);
+                $("#moreClimbRP").prop('checked',false);
+                $("#moreFlipped").prop('checked',false);
+                $("#moreBricked").prop('checked',false);
 })
 
   $(document).on('click','#btnSubmitPit', function() {
@@ -418,6 +442,7 @@ $(document).on('click','#btnSubmitObservation', function() {
         strNotes:$('#pitTextBox').text(),
         strPitClimbing:$('input[name=pitRadClimbing]:checked').val(),
     }, function(result){
+        console.log = result;
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
             Swal.fire({
