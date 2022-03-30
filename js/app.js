@@ -663,11 +663,32 @@ $(document).on('click','#btnResetPassword',function(){
     
 })
 
+
 $(document).on('click','#btnUpdateUser',function(){
     let strRole = $('#admRoles').val();
     let strAbleTo = $('#cboAbleToScout').val().join(',');
     $.post('../php/updateUserAdmin.php',{ strEmail: $('#spanEmail').text(), strFirstName: $('#txtFirstName').val(), strLastName: $('#txtLastName').val(), strAccessTo: $('#cboAbleToScout').val().join(','), strRoles:$('#admRoles').val(), strSessionID: sessionStorage.getItem('ScoutFRCSessionID')},function(result){
-        console.log(result);
+        if($.fn.dataTable.isDataTable('#teamData')){
+            $('#teamData').DataTable().destroy();
+        }
+        $('#teamData').empty();
+        $.getJSON('php/getTeamUsersForManagement.php?strUserSessionID=' + sessionStorage.getItem('ScoutFRCSessionID'), function(result){
+            arrObjObservation = result;
+             if(arrObjObservation.length > 0){
+                 $('#teamData tbody').empty();
+                 var strCurrent = '';
+                 $.each(result,function(i,user){
+                   $('#teamData tbody').append('<tr><td>' + user.FirstName + ' ' + user.LastName + '</td><td>' + user.Email + '</td><td>' + user.Description + '</td><td><button class="btn btn-primary btn-sm btnEditUser" data-email="' + user.Email + '" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>');
+                 })
+                 $('#teamData').DataTable({
+                     dom: 'Bfrtip',
+                     buttons: [
+                         'copy', 'csv','excel', 'pdf'
+                     ]
+                 });
+             }
+             
+           })
     })
 })
 
@@ -676,11 +697,10 @@ $(document).on('click','.btnEditUser',function(){
     $('#spanEmail').text(strEmail);
     $.getJSON('../php/getUserDetailsForAdmin.php',{ strEmail:strEmail, strSessionID: sessionStorage.getItem('ScoutFRCSessionID')}, function(result){
         $.each(result,function(i,user){
-            $('#teamData tbody').append('<tr><td>' + user.FirstName + ' ' + user.LastName + '</td><td>' + user.Email + '</td><td>' + user.Description + '</td><td><button class="btn btn-primary btn-sm btnEditUser" data-email="' + user.Email + '" data-toggle="modal" data-target="#modUserEdit"><i class="fas fa-pencil-alt mr-2"></i>Edit</button></td></tr>');
-            $('#txtModPitFirstName').text(user.FirstName);
-            $('#txtModPitLastName').text(user.LastName);
-            $('#txtModPitDescription').text(user.Description);
-            $('#firstName').text(strEmail);
+            $('#txtFirstName').val(user.FirstName);
+            $('#txtLastName').val(user.LastName);
+            $('#admRoles').val(user.Role);
+            $('#cboAbleToScout').val(user.AccessTo);
         })
     })
 })

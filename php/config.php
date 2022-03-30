@@ -919,11 +919,10 @@
              $statScouting->execute();      
              $result = $statScouting->get_result();
              $myArray = array();
-    
              while($row = $result->fetch_array(MYSQLI_ASSOC)) {
                      $myArray[] = $row;
              }
-             echo json_encode($myArray);
+            echo json_encode($myArray);
                 
              $statScouting->close();
         } catch (exception $e) {
@@ -1286,9 +1285,8 @@
 		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statScouting->bind_param('ssssss', $FirstName, $LastName, $Role, $AccessTo, $Email, $SessionID);
+		 $statScouting->bind_param('ssssss', $FirstName, $LastName, $Roles, $AccessTo, $Email, $SessionID);
          if($statScouting->execute()){
-            sendVerificationEmail($Email);
             return '{"Outcome":"User Updated"}';
          } else {
             return '{"Outcome":"Error"}';
