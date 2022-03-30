@@ -486,7 +486,6 @@
         
     }
 
-
     function getUserAccessToBySessionID($SessionID){
         try{
             global $conScouting;
@@ -1184,11 +1183,11 @@
          $statScouting->close();
     }
 
-    function updateUserRoles($Email,$Role){
+    function updateUserRoles($SessionID,$Email,$Role){
         
         //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "UPDATE tblUsers SET Role = ? WHERE Email = ?";
+        $strQuery = "UPDATE tblUsers SET Role = ? WHERE Email = ? AND ((SELECT COUNT(*) FROM tblUsers WHERE Role IN (SELECT RoleID FROM tblRoles WHERE Description = 'Team Owner' OR Description = 'Super Admin') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)) > 0)";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -1209,7 +1208,7 @@
 		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statScouting->bind_param('ss', $Role, $Email);
+		 $statScouting->bind_param('sss', $Role, $Email,$SessionID);
          if($statScouting->execute()){
             sendVerificationEmail($Email);
             return '{"Outcome":"User Updated"}';
@@ -1223,11 +1222,11 @@
          $statScouting->close();
     }
 
-    function updateUserAccessTo($Email,$AccessTo){
+    function updateUserAccessTo($SessionID,$Email,$AccessTo){
         
         //do I do the password check in the same way or there a safer way to keep it more private with php stuff?
         global $conScouting;
-        $strQuery = "UPDATE tblUsers SET AccessTo = ? WHERE Email = ?";
+        $strQuery = "UPDATE tblUsers SET AccessTo = ? WHERE Email = ? AND ((SELECT COUNT(*) FROM tblUsers WHERE Role IN (SELECT RoleID FROM tblRoles WHERE Description = 'Team Owner' OR Description = 'Super Admin') AND Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?)) > 0)";
       	// Check Connection
         if ($conScouting->connect_errno) {
             $blnError = "true";
@@ -1248,7 +1247,7 @@
 		 $statScouting = $conScouting->prepare($strQuery);
 
 		 // Bind Parameters
-		 $statScouting->bind_param('ss', $AccessTo, $Email);
+		 $statScouting->bind_param('sss', $AccessTo, $Email, $SessionID);
          if($statScouting->execute()){
             sendVerificationEmail($Email);
             return '{"Outcome":"User Updated"}';
