@@ -59,7 +59,7 @@
         try{
             global $conScouting;
             $strObservationID = guidv4(); //new to change strObservationID to strPitID?
-            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE()),?';
+            $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;

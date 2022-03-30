@@ -47,6 +47,7 @@
     $strNotes = strip_tags($strNotes);
     $strPitClimbing = strip_tags($strPitClimbing);
 
+
     echo addPitCollect($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes,$strPitClimbing);
 
 ?>
