@@ -268,8 +268,8 @@ $(document).on('click','#btnSubmitObservation', function() {
         intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
         intTeleMissed:$('#txtTeleMissed').text(),
         blnTeleOpShootsBalls:blnTeleOpShootsBalls,
-        blnTeleOpPlaysDefense:$('input[name=teleRobotPlayDefense]:checked').val(),
-        strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
+        blnTeleOpPlaysDefense:$('input[name=blnTeleOpPlaysDefense]:checked').val(),
+        strEndGameClimbing:$('input[name=strEndGameClimbing]:checked').val(),
         blnMoreQuintet:blnMoreQuintet,
         moreWinMatch:$('input[name=moreWinMatch]:checked').val(),
         intAutoBallsMissed:$('#txtAutoMissed').text(),
@@ -281,6 +281,7 @@ $(document).on('click','#btnSubmitObservation', function() {
         moreBricked:moreBricked,
     }, function(result){
         console.log = result;
+        console.dir(result)
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
             Swal.fire({
@@ -305,7 +306,7 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('#txtTeleMissed').text('0');
                 $("#teleRobotShootOpposite").prop('checked',false);
                 $("#teleRobotPlayDefense").prop('checked',false);
-                $("#radClimbing]").prop('checked',false);
+                $("#strEndGameClimbing").prop('checked',false);
                 $("#moreQuintetInAuto").prop('checked',false);
                 $("#more16ClimbPts").prop('checked',false);
                 $("#moreWinMatch").prop('checked',false);

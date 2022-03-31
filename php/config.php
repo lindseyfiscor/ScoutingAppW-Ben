@@ -19,11 +19,12 @@
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$teleRobotPlayDefense,$moreClimbRP,$moreFlipped,$moreBricked){
+    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked){
         try{
             global $conScouting;
             $strObservationID = guidv4();
-            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?,?,?,?,?,?)';
+            #$strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?,?,?,?,?)';
+            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE(),?,?,?,?,?,?,?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -42,11 +43,17 @@
 
             $statScouting = $conScouting->prepare($strQuery);
             // Bind Parameters
-            $statScouting->bind_param('sssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$teleRobotPlayDefense,$moreClimbRP,$moreFlipped,$moreBricked);
-            if($statScouting->execute()){
-                return '{"Outcome":"'.$strObservationID.'"}';
+            
+            if(!$statScouting) {
+                // Query prepare failed, handle here
+                return '{"Outcome":"Error", "Reason": "'.$conScouting->error.'"}';
             } else {
-                return '{"Outcome":"Error"}';
+                $statScouting->bind_param('ssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
+                if($statScouting->execute()){
+                    return '{"Outcome":"'.$strObservationID.'"}';
+                } else {
+                    return '{"Outcome":"Error", "Reason":"'.$statScouting->error.'" }';
+                }
             }
         } catch (exception $e) {
             echo 'Error: '.$e;
