@@ -741,7 +741,7 @@
     function getPitDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblPit.* FROM tblPit LEFT JOIN tblUsers ON tblPit.EnterBy = tblUsers.Email WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND EntryDateTime >= '2022-03-18 23:53:00.000'";
+            $strQuery = "SELECT tblPit.* FROM tblPit LEFT JOIN tblUsers ON tblPit.EnterBy = tblUsers.Email WHERE EnterBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND EntryDateTime >= '2022-03-30 12:00:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
@@ -781,7 +781,7 @@
     function getSuperDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblSuper.* FROM tblSuper LEFT JOIN tblUsers ON tblSuper.EnteredBy = tblUsers.Email WHERE EnteredBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND SuperDateTime >= '2022-03-18 23:53:00.000'";
+            $strQuery = "SELECT tblSuper.* FROM tblSuper LEFT JOIN tblUsers ON tblSuper.EnteredBy = tblUsers.Email WHERE EnteredBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND SuperDateTime >= '2022-03-30 23:00:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";
@@ -821,7 +821,7 @@
     function getObservationDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-18 23:53:00.000'";
+            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-30 12:00:00.000'";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";

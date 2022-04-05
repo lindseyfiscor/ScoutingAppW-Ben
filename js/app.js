@@ -718,12 +718,12 @@ function fillDownloadTables(){
                 let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.PlayedMatch + '</td><td>' + observation.ClimbRP + '</td><td>' + observation.Flipped + '</td><td>' + observation.Bricked + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownloadStand tbody').append(strTableRowHTML);
              })
-             $('#teamDataDownloadStand').DataTable({
-                 dom: 'Bfrtip',
-                 buttons: [
-                     'copy', 'csv','excel', 'pdf'
-                 ]
-             });
+             //$('#teamDataDownloadStand').DataTable({
+            //     dom: 'Bfrtip',
+            //     buttons: [
+            //         'copy', 'csv','excel', 'pdf'
+            //     ]
+            // });
          }
          
     })
@@ -753,7 +753,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadPit tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.Notes + '</td><td>' + observation.OverBumper + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
                  $('#teamDataDownloadPit tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadPit').DataTable({
