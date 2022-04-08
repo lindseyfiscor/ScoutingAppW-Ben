@@ -22,9 +22,7 @@ function buildNavigation(){
         })
         console.log(arrRoles);
         let strNavHTML = '';
-        if(arrRoles.includes('Scouting')){
-            strNavHTML += '<li class="nav-item" id="navHome"><a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>';
-        }
+        strNavHTML += '<li class="nav-item" id="navHome"><a class="nav-link" href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>';
         if(arrRoles.includes('Pit') || arrRoles.includes('Team Owner') || arrRoles.includes('Super Admin')){
             strNavHTML += '<li class="nav-item" id="navPit"><a class="nav-link" href="pit.html"><i class="fas fa-frog mr-2"></i>Pit Scouting</a></li>';
         }

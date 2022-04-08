@@ -23,8 +23,8 @@
         try{
             global $conScouting;
             $strObservationID = guidv4();
-            #$strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?,?,?,?,?)';
-            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE(),?,?,?,?,?,?,?)';
+            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?,?,?,?,?)';
+            //$strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE(),?,?,?,?,?,?,?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -48,7 +48,7 @@
                 // Query prepare failed, handle here
                 return '{"Outcome":"Error", "Reason": "'.$conScouting->error.'"}';
             } else {
-                $statScouting->bind_param('ssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
+                $statScouting->bind_param('ssssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
                 if($statScouting->execute()){
                     return '{"Outcome":"'.$strObservationID.'"}';
                 } else {
