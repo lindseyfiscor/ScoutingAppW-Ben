@@ -19,12 +19,11 @@
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked){
+    function addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp){
         try{
             global $conScouting;
             $strObservationID = guidv4();
-            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?,?,?,?,?)';
-            //$strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,SYSDATE(),?,?,?,?,?,?,?)';
+            $strQuery = 'INSERT INTO tblObservations VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?,?,?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
                 $strErrorMessage = $conScouting->connect_error;
@@ -43,17 +42,11 @@
 
             $statScouting = $conScouting->prepare($strQuery);
             // Bind Parameters
-            
-            if(!$statScouting) {
-                // Query prepare failed, handle here
-                return '{"Outcome":"Error", "Reason": "'.$conScouting->error.'"}';
+            $statScouting->bind_param('ssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp);
+            if($statScouting->execute()){
+                return '{"Outcome":"'.$strObservationID.'"}';
             } else {
-                $statScouting->bind_param('sssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
-                if($statScouting->execute()){
-                    return '{"Outcome":"'.$strObservationID.'"}';
-                } else {
-                    return '{"Outcome":"Error", "Reason":"'.$statScouting->error.'" }';
-                }
+                return '{"Outcome":"Error"}';
             }
         } catch (exception $e) {
             echo 'Error: '.$e;
@@ -821,7 +814,7 @@
     function getObservationDataBySessionID($strSessionID){
         try{
             global $conScouting;
-            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0) AND ObservationDateTime >= '2022-03-30 12:00:00.000'";
+            $strQuery = "SELECT tblObservations.* FROM tblObservations LEFT JOIN tblUsers ON tblObservations.SubmittedBy = tblUsers.Email WHERE SubmittedBy IN (SELECT Email FROM tblUsers WHERE Team = (SELECT TeamID FROM tblCurrentSessions WHERE SessionID = ?)) AND (SELECT COUNT(Email) FROM tblUsers WHERE Email = (SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?) AND Role != (SELECT RoleID FROM tblRoles WHERE Description = 'User' AND Status = '1')  > 0)";
               // Check Connection
             if ($conScouting->connect_errno) {
                 $blnError = "true";

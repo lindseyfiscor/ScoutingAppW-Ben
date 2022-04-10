@@ -199,9 +199,9 @@ $(document).on('click','#btnSubmitObservation', function() {
 
     let blnAutoBallPickUp;
     if ($("#autoBallPickUp").prop("checked")) {
-        blnAutoTarmacTaxi = "True";
+        blnAutoBallPickUp = "True";
     } else {
-        blnAutoTarmacTaxi = "False";
+        blnAutoBallPickUp = "False";
     };
     
     let blnTeleOpShootsBalls;
@@ -209,6 +209,13 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnTeleOpShootsBalls = "True";
     } else {
         blnTeleOpShootsBalls = "False";
+    };
+    
+    let blnTeleOpPlaysDefense;
+    if ($("#teleRobotPlayDefense").prop("checked")) {
+        blnTeleOpPlaysDefense = "True";
+    } else {
+        blnTeleOpPlaysDefense = "False";
     };
     
     let blnMoreQuintet;
@@ -225,33 +232,13 @@ $(document).on('click','#btnSubmitObservation', function() {
         blnMoreThan16 = "False";
     };
     
-    let swPlayedMatch;
-    if ($("#swPlayedMatch").prop("checked")) {
-        swPlayedMatch = "True";
+    let blnMoreWin;
+    if ($("#moreWinMatch").prop("checked")) {
+        blnMoreWin = "True";
     } else {
-        swPlayedMatch = "False";
+        blnMoreWin = "False";
     };
-
-    let moreClimbRP;
-    if ($("#moreClimbRP").prop("checked")) {
-        moreClimbRP = "True";
-    } else {
-        moreClimbRP = "False";
-    };
-
-    let moreFlipped;
-    if ($("#moreFlipped").prop("checked")) {
-        moreFlipped = "True";
-    } else {
-        moreFlipped = "False";
-    };
-
-    let moreBricked;
-    if ($("#moreBricked").prop("checked")) {
-        moreBricked = "True";
-    } else {
-        moreBricked = "False";
-    };
+    
     
     $.post('../php/newObservation.php', {
         strUserSessionID:sessionStorage.getItem('ScoutFRCSessionID'),
@@ -266,20 +253,16 @@ $(document).on('click','#btnSubmitObservation', function() {
         intTeleOpLowerHub:$('#txtTeleBallsInLower').text(),
         intTeleMissed:$('#txtTeleMissed').text(),
         blnTeleOpShootsBalls:blnTeleOpShootsBalls,
-        blnTeleOpPlaysDefense:$('input[name=blnTeleOpPlaysDefense]:checked').val(),
-        strEndGameClimbing:$('input[name=strEndGameClimbing]:checked').val(),
+        blnTeleOpPlaysDefense:blnTeleOpPlaysDefense,
+        strEndGameClimbing:$('input[name=radClimbing]:checked').val(),
         blnMoreQuintet:blnMoreQuintet,
-        moreWinMatch:$('input[name=moreWinMatch]:checked').val(),
+        blnMoreThan16:blnMoreThan16,
+        blnMoreWin:blnMoreWin,
         intAutoBallsMissed:$('#txtAutoMissed').text(),
         intTeleBallsMissed:$('#txtTeleMissed').text(),
         blnAutoBallPickUp:blnAutoBallPickUp,
-        swPlayedMatch:swPlayedMatch,
-        moreClimbRP:moreClimbRP,
-        moreFlipped:moreFlipped,
-        moreBricked:moreBricked,
     }, function(result){
         console.log = result;
-        console.dir(result)
         let objResult = JSON.parse(result);
         if(objResult.Outcome != 'Error'){
             Swal.fire({
@@ -292,41 +275,6 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $('#txtMatchNumber').val('');
                 $('#txtTeamNumScouting').val('');
                 $('#dpdwTeamPosition').val('B1').trigger('change');
-                $("#swPlayedMatch").prop('checked',false);
-                $("#autoTaxiYes").prop('checked',false);
-                $("#autoBallPickUp").prop('checked',false);
-                $('.custom-control-input').prop('checked',false)
-                $('#txtAutoBallsInUpper').text('0');
-                $('#txtAutoBallsInLower').text('0');
-                $('#txtAutoMissed').text('0');
-                $('#txtTeleBallsInUpper').text('0');
-                $('#txtTeleBallsInLower').text('0');
-                $('#txtTeleMissed').text('0');
-                $("#teleRobotShootOpposite").prop('checked',false);
-                $("#teleRobotPlayDefense").prop('checked',false);
-                $("#strEndGameClimbing").prop('checked',false);
-                $("#moreQuintetInAuto").prop('checked',false);
-                $("#more16ClimbPts").prop('checked',false);
-                $("#moreWinMatch").prop('checked',false);
-                $("#moreClimbRP").prop('checked',false);
-                $("#moreFlipped").prop('checked',false);
-                $("#moreBricked").prop('checked',false);
-            })
-        }else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Stand not recorded',
-                html: '<p>Please check your form and try again</p>'
-            })
-        }
-    })
-})
-
-  $(document).on('click','#btnResetObservationForm', function() {
-    $('#txtMatchNumber').val('');
-                $('#txtTeamNumScouting').val('');
-                $('#dpdwTeamPosition').val('B1').trigger('change');
-                $("#swPlayedMatch").prop('checked',false);
                 $("#autoTaxiYes").prop('checked',false);
                 $("#autoBallPickUp").prop('checked',false);
                 $('.custom-control-input').prop('checked',false)
@@ -342,9 +290,36 @@ $(document).on('click','#btnSubmitObservation', function() {
                 $("#moreQuintetInAuto").prop('checked',false);
                 $("#more16ClimbPts").prop('checked',false);
                 $("#moreWinMatch").prop('checked',false);
-                $("#moreClimbRP").prop('checked',false);
-                $("#moreFlipped").prop('checked',false);
-                $("#moreBricked").prop('checked',false);
+            })
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Stand not recorded',
+                html: '<p>Please check your form and try again</p>'
+            })
+        }
+    })
+})
+
+$(document).on('click','#btnResetObservationForm', function() {
+    $('#txtMatchNumber').val('');
+    $('#txtTeamNumScouting').val('');
+    $('#dpdwTeamPosition').val('B1').trigger('change');
+    $("#autoTaxiYes").prop('checked',false);
+    $("#autoBallPickUp").prop('checked',false);
+    $('.custom-control-input').prop('checked',false)
+    $('#txtAutoBallsInUpper').text('0');
+    $('#txtAutoBallsInLower').text('0');
+    $('#txtAutoMissed').text('0');
+    $('#txtTeleBallsInUpper').text('0');
+    $('#txtTeleBallsInLower').text('0');
+    $('#txtTeleMissed').text('0');
+    $("#teleRobotShootOpposite").prop('checked',false);
+    $("#teleRobotPlayDefense").prop('checked',false);
+    $("#radClimbing]").prop('checked',false);
+    $("#moreQuintetInAuto").prop('checked',false);
+    $("#more16ClimbPts").prop('checked',false);
+    $("#moreWinMatch").prop('checked',false);
 })
 
   $(document).on('click','#btnSubmitPit', function() {
@@ -713,15 +688,15 @@ function fillDownloadTables(){
              $('#teamDataDownloadStand tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.PlayedMatch + '</td><td>' + observation.ClimbRP + '</td><td>' + observation.Flipped + '</td><td>' + observation.Bricked + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownloadStand tbody').append(strTableRowHTML);
              })
-             //$('#teamDataDownloadStand').DataTable({
-            //     dom: 'Bfrtip',
-            //     buttons: [
-            //         'copy', 'csv','excel', 'pdf'
-            //     ]
-            // });
+             $('#teamDataDownloadStand').DataTable({
+                 dom: 'Bfrtip',
+                 buttons: [
+                     'copy', 'csv','excel', 'pdf'
+                 ]
+             });
          }
          
     })
