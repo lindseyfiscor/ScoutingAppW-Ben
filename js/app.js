@@ -348,70 +348,56 @@ $(document).on('click','#btnSubmitObservation', function() {
 
   $(document).on('click','#btnSubmitPit', function() {
     let blnRobotHeightExtend;
-    if ($("#pitExtendYes").prop("checked")) {
+    if ($("#swRobotHeightExtend").prop("checked")) {
         blnRobotHeightExtend = "True";
     } else {
         blnRobotHeightExtend = "False";
     }
 
     let blnOverBumper;
-    if ($("#pitOverBumper").prop("checked")) {
+    if ($("#swRobotIntakeOver").prop("checked")) {
         blnOverBumper = "True";
     } else {
         blnOverBumper = "False";
     }
 
     let blnThroughBumper;
-    if ($("#pitThroughBumper").prop("checked")) {
+    if ($("#swRobotIntakeThrough").prop("checked")) {
         blnThroughBumper = "True";
     } else {
         blnThroughBumper = "False";
     }
 
     let blnIntakeExtendable;
-    if ($("#pitExtendable").prop("checked")) {
+    if ($("#swRobotIntakeExtend").prop("checked")) {
         blnIntakeExtendable = "True";
     } else {
         blnIntakeExtendable = "False";
     }
 
     let blnIntakeInternal;
-    if ($("#pitInternal").prop("checked")) {
+    if ($("#swRobotInternal").prop("checked")) {
         blnIntakeInternal = "True";
     } else {
         blnIntakeInternal = "False";
     }
 
     let blnHasShooter;
-    if ($("#pitHasShooterYes").prop("checked")) {
+    if ($("#swHasShooter").prop("checked")) {
         blnHasShooter = "True";
     } else {
         blnHasShooter = "False";
     }
 
-    let blnUpperHab;
-    if ($("#pitUpperHab").prop("checked")) {
-        blnUpperHab = "True";
-    } else {
-        blnUpperHab = "False";
-    }
-
-    let blnLowerHab;
-    if ($("#pitLowerHab").prop("checked")) {
-        blnLowerHab = "True";
-    } else {
-        blnLowerHab = "False";
-    }
-
     let blnTurret;
-    if ($("#pitTurretYes").prop("checked")) {
+    if ($("#swTurret").prop("checked")) {
         blnTurret = "True";
     } else {
         blnTurret = "False";
     }
 
     let blnLimeLight;
-    if ($("#pitLLYes").prop("checked")) {
+    if ($("#swLL").prop("checked")) {
         blnLimeLight = "True";
     } else {
         blnLimeLight = "False";
@@ -448,7 +434,7 @@ $(document).on('click','#btnSubmitObservation', function() {
                 icon: 'success',
                 title: 'Pit observation recorded',
                 showConfirmButton: false,
-                timer: 1500,
+                timer: 1500
             }).then((result) => {
                     $('#pitTeamNum').val('');
                     $('.custom-control-input').prop('checked',false),
@@ -712,7 +698,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadStand tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.EndGameClimbing + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.MoreThan16 + '</td><td>' + observation.MoreWin + '</td><td>' + observation.AutoBallsMissed + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
+                let strTableRowHTML = '<tr><td>' + observation.Match + '</td><td>' + observation.TeamScouting + '</td><td>' + observation.ScoutingPosition + '</td><td>' + observation.TarmacStartingPosition + '</td><td>' + observation.AutoTarmacTaxi + '</td><td>' + observation.AutoBallPickup + '</td><td>' + observation.AutoUpperHub + '</td><td>' + observation.AutoLowerHub + '</td><td>' + observation.AutoBallsMissed+ '</td><td>' + observation.TeleOpUpperHub + '</td><td>' + observation.TeleOpLowerHub + '</td><td>' + observation.TeleOpBallsMissed + '</td><td>' + observation.TeleOpShootsBalls + '</td><td>' + observation.TeleOpPlaysDefense + '</td><td>' + observation.ClimbRP + '</td><td>' + observation.MoreQuintet + '</td><td>' + observation.Flipped + '</td><td>' + observation.Bricked + '</td><td>' + observation.MoreWin + '</td><td>' + observation.SubmittedBy + '</td><td>' + observation.ObservationDateTime + '</td></tr>';
                  $('#teamDataDownloadStand tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadStand').DataTable({
@@ -731,7 +717,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadSuper tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.EnteredBy + '</td><td>' + observation.MatchID + '</td><td>' + observation.MatchNumber + '</td><td>' + observation.Notes + '</td><td>' + observation.SuperDateTime + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.MatchNumber + '</td><td>' + observation.Notes + '</td><td>' + observation.EnteredBy + '</td><td>' + observation.SuperDateTime + '</td></tr>';
                  $('#teamDataDownloadSuper tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadSuper').DataTable({
@@ -750,7 +736,7 @@ function fillDownloadTables(){
              $('#teamDataDownloadPit tbody').empty();
              var strCurrent = '';
              $.each(result,function(i,observation){
-                 let strTableRowHTML = '<tr><td>' + observation.BallCapacity + '</td><td>' + observation.BallCollection + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.EnterBy + '</td><td>' + observation.EntryDateTime + '</td><td>' + observation.HasShooter + '</td><td>' + observation.Height + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.LimeLight + '</td><td>' + observation.PitID + '</td><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.RobotShape + '</td><td>' + observation.ShooterType + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.Turret + '</td></tr>';
+                 let strTableRowHTML = '<tr><td>' + observation.PitTeamNumber + '</td><td>' + observation.RobotDriveTrain + '</td><td>' + observation.ShooterType + '</td><td>' + observation.PitClimbing + '</td><td>' + observation.Notes + '</td><td>' + observation.RobotShape + '</td><td>' + observation.Height + '</td><td>' + observation.RobotHeightExtend + '</td><td>' + observation.DriveTrainMotors + '</td><td>' + observation.DriveMotorType + '</td><td>' + observation.DriveTrainWheels + '</td><td>' + observation.DriveWheelType + '</td><td>' + observation.BallCollection + '</td><td>' + observation.OverBumper + '</td><td>' + observation.ThroughBumpter + '</td><td>' + observation.IntakeExtendable + '</td><td>' + observation.IntakeInternal + '</td><td>' + observation.Turret + '</td><td>' + observation.LimeLight + '</td></tr>';
                  $('#teamDataDownloadPit tbody').append(strTableRowHTML);
              })
              $('#teamDataDownloadPit').DataTable({
