@@ -48,7 +48,7 @@
                 // Query prepare failed, handle here
                 return '{"Outcome":"Error", "Reason": "'.$conScouting->error.'"}';
             } else {
-                $statScouting->bind_param('ssssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
+                $statScouting->bind_param('sssssssssssssssssssssssss', $strObservationID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$strUserSessionID,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
                 if($statScouting->execute()){
                     return '{"Outcome":"'.$strObservationID.'"}';
                 } else {
@@ -65,7 +65,7 @@
     function addPitCollect($strUserSessionID,$intPitTeamNum,$strRobotShape,$intHeight,$blnRobotHeightExtend,$strRobotDriveTrain,$intDriveTrainMotors,$intDriveTrainWheels,$strDriveWheelType,$strDriveMotorType,$strBallCollection,$blnOverBumper,$blnThroughBumper,$blnIntakeExtendable,$blnIntakeInternal,$blnHasShooter,$strShooterType,$blnTurret,$blnLimeLight,$strBallCapacity,$strNotes,$strPitClimbing){
         try{
             global $conScouting;
-            $strObservationID = guidv4(); //new to change strObservationID to strPitID?
+            $strObservationID = guidv4();
             $strQuery = 'INSERT INTO tblPit VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(SELECT UserID FROM tblCurrentSessions WHERE SessionID = ?),SYSDATE(),?)';
             if ($conScouting->connect_errno) {
                 $blnError = "true";
