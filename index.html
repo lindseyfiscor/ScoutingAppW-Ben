@@ -36,7 +36,7 @@
                                     <input type="number" class="form-control" id="txtTeamNumScouting" maxlength="4">
                                 </div>
                                 <div class="form-group">
-                                    <label for="dpdwTeamPosition">Team Scouting Position</label>
+                                    <label for="dpdwTeamPosition">Team Scouting Position (refer to lanyard and big screen for position)</label>
                                     <select class="form-control" id="dpdwTeamPosition">
                                         <option value="B1">Blue Alliance 1</option>
                                         <option value="B2">Blue Alliance 2</option>
@@ -92,8 +92,10 @@
                                     </div>
                                     <img src="images/fieldLayout.png" alt="Map of Tarmac Numbers" style="max-width: 100%;">
                                 </div>
-                                
-                                
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="swPlayedMatch"  value="swPlayedMatch">
+                                    <label class="custom-control-label" for="swPlayedMatch">Showed Up to Match (robot on field)</label>
+                                </div>
                             </div>
                         </div>
                     </div> 
@@ -106,10 +108,10 @@
                                 <input type="checkbox" class="custom-control-input" id="autoTaxiYes"  value="autoTaxiYes">
                                 <label class="custom-control-label" for="autoTaxiYes">Taxis Out of Tarmac</label>
                             </div>
-                            <div class="custom-control custom-switch">
+                            <!--<div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="autoBallPickUp"  value="autoBallPickUp">
                                 <label class="custom-control-label" for="autoBallPickUp">Picks Up Balls</label>
-                            </div>
+                            </div>-->
                             <div class="row d-flex justify-content-between">
                                 <div class="form-group col-12 col-md-6 col-lg-4">
                                     <div class="row col-12 justify-content-center">
@@ -186,10 +188,30 @@
                                 <input type="checkbox" class="custom-control-input" id="teleRobotShootOpposite"  value="teleRobotShootOpposite">
                                 <label class="custom-control-label" for="teleRobotShootOpposite">Robot Only Shoots Alliance Colored Balls Into Goal</label>
                             </div>
-                            <div class="custom-control custom-switch">
+                            <!--<div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="teleRobotPlayDefense"  value="teleRobotPlayDefense">
                                 <label class="custom-control-label" for="teleRobotPlayDefense">Robot Plays Defense</label>
-                            </div>
+                            </div>-->
+                            <label for="radClimbing">Defense</label> <br>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                      <input type="radio" id="teleRobotPlayDefenseNoPlayD" name="blnTeleOpPlaysDefense" class="custom-control-input" value="DA">
+                                      <label class="custom-control-label" for="teleRobotPlayDefenseNoPlayD">Did Not Play</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                      <input type="radio" id="teleRobotPlayDefenseIneffectiveD" name="blnTeleOpPlaysDefense" class="custom-control-input" value="IE">
+                                      <label class="custom-control-label" for="teleRobotPlayDefenseIneffectiveD">Ineffective</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                      <input type="radio" id="teleRobotPlayDefenseEffectiveD" name="blnTeleOpPlaysDefense" class="custom-control-input" value="EF">
+                                      <label class="custom-control-label" for="teleRobotPlayDefenseEffectiveD">Effective</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="teleRobotPlayDefenseShutdownD" name="blnTeleOpPlaysDefense" class="custom-control-input" value="SH">
+                                        <label class="custom-control-label" for="teleRobotPlayDefenseShutdownD">Shutdown</label>
+                                    </div>
+                                </div>
+
                         </div>
                     </div>
                 </div>
@@ -235,11 +257,23 @@
                         <div class="card-body">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="moreQuintetInAuto"  value="moreQuintetInAuto">
-                                <label class="custom-control-label" for="moreQuintetInAuto">Quintet in Auto</label>
+                                <label class="custom-control-label" for="moreQuintetInAuto">Ball Ranking Point (20 balls or 18 if 5 in Auto)</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="moreClimbRP"  value="moreClimbRP">
+                                <label class="custom-control-label" for="moreClimbRP">Climbing Ranking Point (>=16 pts)</label>
                             </div>
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="more16ClimbPts"  value="more16ClimbPts">
                                 <label class="custom-control-label" for="more16ClimbPts">16 pts in Endgame, Alliance Wide</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="moreFlipped"  value="moreFlipped">
+                                <label class="custom-control-label" for="moreFlipped">Robot Flipped</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="moreBricked"  value="moreBricked">
+                                <label class="custom-control-label" for="moreBricked">Robot Bricked (even if for short time)</label>
                             </div>
                             <div class="form-group col-12 col-md-6 col-lg-4">
                                 <label for="radClimbing">Match Outcome</label> <br>
@@ -258,6 +292,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

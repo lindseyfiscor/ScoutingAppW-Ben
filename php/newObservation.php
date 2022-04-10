@@ -15,10 +15,15 @@
     $strEndGameClimbing = $_POST['strEndGameClimbing'];
     $blnMoreQuintet = $_POST['blnMoreQuintet'];
     $blnMoreThan16 = $_POST['blnMoreThan16'];
-    $blnMoreWin = $_POST['blnMoreWin'];
-    $intAutoMissed = $_POST['intAutoBallsMissed'];
-    $intTeleMissed = $_POST['intTeleBallsMissed'];
+    $moreWinMatch = $_POST['moreWinMatch'];
+    $intAutoMissed = $_POST['intAutoMissed'];
+    $intTeleMissed = $_POST['intTeleMissed'];
     $blnAutoBallPickUp = $_POST['blnAutoBallPickUp'];
+    $swPlayedMatch = $_POST['swPlayedMatch'];
+    //$teleRobotPlayDefense = $_POST['teleRobotPlayDefense'];
+    $moreClimbRP = $_POST['moreClimbRP'];
+    $moreFlipped = $_POST['moreFlipped'];
+    $moreBricked = $_POST['moreBricked'];
 
     $strUserSessionID = strip_tags($strUserSessionID);
     $intMatch = strip_tags($intMatch);
@@ -35,10 +40,15 @@
     $strEndGameClimbing = strip_tags($strEndGameClimbing);
     $blnMoreQuintet = strip_tags($blnMoreQuintet);
     $blnMoreThan16 = strip_tags($blnMoreThan16);
-    $blnMoreWin = strip_tags($blnMoreWin);
+    $moreWinMatch = strip_tags($moreWinMatch);
     $intAutoMissed = strip_tags($intAutoMissed);
     $intTeleMissed = strip_tags($intTeleMissed);
     $blnAutoBallPickUp = strip_tags($blnAutoBallPickUp);
+    $swPlayedMatch = strip_tags($swPlayedMatch);
+    //$teleRobotPlayDefense = strip_tags($teleRobotPlayDefense);
+    $moreClimbRP = strip_tags($moreClimbRP);
+    $moreFlipped = strip_tags($moreFlipped);
+    $moreBricked = strip_tags($moreBricked);
   
-    echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$blnMoreWin,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp)
+    echo addObservation($strUserSessionID,$intMatch,$intTeamScouting,$strScoutingPosition,$strTarmacStartingPosition,$blnAutoTarmacTaxi,$intAutoUpperHub,$intAutoLowerHub,$intTeleOpUpperHub,$intTeleOpLowerHub,$blnTeleOpShootsBalls,$blnTeleOpPlaysDefense,$strEndGameClimbing,$blnMoreQuintet,$blnMoreThan16,$moreWinMatch,$intAutoMissed,$intTeleMissed,$blnAutoBallPickUp,$swPlayedMatch,$moreClimbRP,$moreFlipped,$moreBricked);
 ?>
