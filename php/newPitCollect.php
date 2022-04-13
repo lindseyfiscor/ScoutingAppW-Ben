@@ -1,4 +1,4 @@
-'<?php
+<?php
     require('config.php');
     $strUserSessionID = $_POST['strUserSessionID'];
     $intPitTeamNum = $_POST['intPitTeamNum'];
