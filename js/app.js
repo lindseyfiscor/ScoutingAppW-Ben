@@ -103,51 +103,7 @@ $(document).on('click','.btnMinus', function() {
     }
 })
 
-$(document).on('click','#btnNewTeam', function() {
-    Swal.fire({
-        icon: 'question',
-        title: "Are you sure you want to create a new team?",
-        showConfirmButton: true,
-        showCancelButton: true
-    }).then((result)=> {
-        if(result.isConfirmed){
-        $.post('../php/newTeam.php', {
-            strTeamName:$('#txtTeamName').val(),
-            strTeamNumber:$('#txtTeamNumber').val(),
-            strCity:$('#txtCity').val(),
-            strZIP:$('#txtZIP').val(),
-            strState:$('#txtState').val(),
-            strNation:$('#txtNation').val(),
-            strPhone:$('#txtPhone').val(),
-            strFirstName:$('#txtFirstName').val(),
-            strLastName:$('#txtLastName').val(),
-            strEmail:$('#txtEmail').val(),
-            strPassword:$('#txtPassword').val(),
-        },function(result){
-            let objResult = JSON.parse(result);
-            if(objResult.Outcome == 'Error'){
-                Swal.fire({
-                    postion: 'top-end',
-                    icon: 'error',
-                    title: 'New Team Was Not Created',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }else {
-                Swal.fire({
-                postion: 'top-end',
-                icon: 'success',
-                title: 'New Team Created',
-                showConfirmButton: false,
-                timer: 1500
-                }).then((result) => {
-                window.location.href = 'login.html';
-            }) 
-            }
-        })
-    }
-    })
-});
+
 
 $(document).on('click','#btnJoin', function() {
 Swal.fire({
