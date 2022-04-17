@@ -29,8 +29,11 @@ function buildNavigation(){
         if(arrRoles.includes('Super') || arrRoles.includes('Team Owner') || arrRoles.includes('Super Admin')){
             strNavHTML += '<li class="nav-item" id="navSuper"><a class="nav-link" href="superScouting.html"><i class="fas fa-hippo mr-2"></i>Super Scouting</a></li>';
         }
-        strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
-        strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
+        if(arrRoles.includes('Super') || arrRoles.includes('Team Owner') || arrRoles.includes('Super Admin')){
+            strNavHTML += '<li class="nav-item" id="navSuperData"><a class="nav-link" href="superData.html"><i class="fas fa-atom mr-2"></i>Super Data</a></li>';
+        }
+        //strNavHTML += '<li class="nav-item" id="navMatch"><a class="nav-link" href="dataAnalysis.html"><i class="fas fa-database mr-2"></i>Match Info</a></li>';
+        //strNavHTML += '<li class="nav-item" id="navTeam"><a class="nav-link" href="teamInfo.html"><i class="fas fa-robot mr-2"></i>Team Info</a></li>';
         //strNavHTML += '<li class="nav-item" id="navPitData"><a class="nav-link" href="pitData.html"><i class="fas fa-tools mr-2"></i>Pit Data</a></li>';
         if(arrRoles.includes('Team Owner' || arrRoles.includes('Super Admin'))){
             strNavHTML += '<li class="nav-item" id="navDownloadData"><a class="nav-link" href="downloadData.html"><i class="fas fa-file-download mr-2"></i>Download</a></li>';
